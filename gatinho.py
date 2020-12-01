@@ -7,19 +7,20 @@ class Gatinho:
         self.nome = nome
         self.dormindo = False
         self.idade = 0
-        
+        self.fome = 0
+
         self.humores = ['feliz', 'triste', 'agitado', 'cansado', 'quieto', 'brincalhão', 'assustado', 'irritado']
         
         self.humor = self.humores[randint(0, len(self.humores))]
         
-    def comer(self): 
+    def comer(self, geladeira, comida):
         if not self.dormindo:
             # criar a classe comida sei
             pass
         else:
             print(f'{self.nome} está dormindo...')
     
-    def brincar(self):
+    def brincar(self, bau, brinquedo):
         if not self.dormindo:
             # lista de brincadeiras? classe nova?
             pass
