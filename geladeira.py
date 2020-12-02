@@ -12,8 +12,8 @@ class Geladeira:
         except KeyError:
             self.alimentos[comida.nome] = [comida, quantidade]
 
-    def pegar_comida(self, nome, quantidade):
-        self.alimentos[nome][1] -= quantidade
+    def pegar_comida(self, nome):
+        self.alimentos[nome][1] -= 1
 
         if self.alimentos[nome][1] == 0:
             del self.alimentos[nome]

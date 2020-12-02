@@ -7,9 +7,17 @@ class Bau:
         self.brinquedos = brinquedos
 
     def add_brinquedo(self, brinquedo):
-        if brinquedo.nome not in self.brinquedos:
-            self.brinquedos[brinquedo.nome] = brinquedo
-        # se tiver o brinquedo não precisa adicionar (?)
 
-    def pegar_brinquedo(self, nome):
-        return self.brinquedos[nome]
+        try:
+            self.brinquedos[brinquedo.nome].append(brinquedo)
+
+        except KeyError:
+            self.brinquedos[brinquedo.nome] = [brinquedo]
+
+    def remover_brinquedo(self, brinquedo):
+
+        if len(self.brinquedos[brinquedo.nome]) <= 1:
+            del self.brinquedos[brinquedo.nome]
+
+        else:
+            self.brinquedos[brinquedo.nome].remove(brinquedo)

@@ -1,7 +1,9 @@
 class Brinquedo:
 
-    def __init__(self, nome):
+    def __init__(self, nome, alegria, dura=100):
         self.nome = nome
+        self.dura = dura
+        self.alegria = alegria
 
-        # pensei num sistema de uso do item, ai o brinquedo meio que quebra depois de usar algumas vezes
-        # a gente pensa nisso depois
+    def usar(self, valor):
+        self.dura -= valor

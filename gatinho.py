@@ -3,22 +3,27 @@ from random import randint
 
 class Gatinho:
     
-    def __init__(self, nome):
+    def __init__(self, nome, idade, fome, energia, saude):
         self.nome = nome
         self.dormindo = False
-        self.idade = 0
-        self.fome = 0
+        self.idade = idade
+        self.fome = fome
+        self.energia = energia
+        self.saude = saude
 
         self.humores = ['feliz', 'triste', 'agitado', 'cansado', 'quieto', 'brincalhão', 'assustado', 'irritado']
         
         self.humor = self.humores[randint(0, len(self.humores))]
         
     def comer(self, geladeira, comida):
-        if not self.dormindo:
-            # criar a classe comida sei
-            pass
-        else:
-            print(f'{self.nome} está dormindo...')
+
+        geladeira.pegar_comida(comida.nome)
+
+        self.fome -= comida.saciar
+        self.fome = self.atualizar_attr(self.fome)
+
+        self.saude += comida.saude
+        self.saude = self.atualizar_attr(self.saude)
     
     def brincar(self, bau, brinquedo):
         if not self.dormindo:
@@ -62,3 +67,12 @@ class Gatinho:
 
     def crescer(self):
         self.idade += 1
+
+    @staticmethod
+    def atualizar_attr(attr):
+        if attr >= 100:
+            return 100
+        elif attr <= 0:
+            return 0
+        else:
+            return attr

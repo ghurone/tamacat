@@ -1,6 +1,6 @@
 class Comida:
 
-    def __init__(self, nome):
+    def __init__(self, nome, saciar, saude):
         self.nome = nome
-
-        # eu acho que cada comida podia diminuir a fome do gatinho de uma forma diferente, que nem é no stardew
+        self.saciar = saciar
+        self.saude = saude
