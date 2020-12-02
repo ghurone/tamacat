@@ -7,7 +7,8 @@ class Bau:
         self.brinquedos = brinquedos
 
     def add_brinquedo(self, brinquedo):
-        self.brinquedos[brinquedo.nome] = brinquedo
+        if brinquedo.nome not in self.brinquedos:
+            self.brinquedos[brinquedo.nome] = brinquedo
         # se tiver o brinquedo não precisa adicionar (?)
 
     def pegar_brinquedo(self, nome):
