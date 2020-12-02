@@ -16,7 +16,6 @@ class Gatinho:
         self.humor = self.humores[randint(0, len(self.humores))]
         
     def comer(self, geladeira, comida):
-
         geladeira.pegar_comida(comida.nome)
 
         self.fome -= comida.saciar
@@ -45,7 +44,16 @@ class Gatinho:
             print(f'{self.nome} acordou!')
         else:
             print(f'{self.nome} já está acordado!')
-    
+
+    def mostrar_humor(self):
+        print(f'{self.nome} está {self.humor}')
+
+    def mudar_humor(self, i):
+        self.humor = self.humores[i]
+
+    def crescer(self):
+        self.idade += 1
+
     @staticmethod
     def miar():
         print('Miau!')
@@ -58,15 +66,6 @@ class Gatinho:
     @staticmethod
     def ronronar():
         print('rrrRRRRrrrRRr')
-
-    def mostrar_humor(self):
-        print(f'{self.nome} está {self.humor}')
-        
-    def mudar_humor(self, i):
-        self.humor = self.humores[i]
-
-    def crescer(self):
-        self.idade += 1
 
     @staticmethod
     def atualizar_attr(attr):

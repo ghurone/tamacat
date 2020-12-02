@@ -7,7 +7,6 @@ class Bau:
         self.brinquedos = brinquedos
 
     def add_brinquedo(self, brinquedo):
-
         try:
             self.brinquedos[brinquedo.nome].append(brinquedo)
 
@@ -15,7 +14,6 @@ class Bau:
             self.brinquedos[brinquedo.nome] = [brinquedo]
 
     def remover_brinquedo(self, brinquedo):
-
         if len(self.brinquedos[brinquedo.nome]) <= 1:
             del self.brinquedos[brinquedo.nome]
 
