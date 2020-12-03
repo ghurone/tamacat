@@ -12,7 +12,6 @@ class Gatinho:
         self.saude = saude
 
         self.humores = ['feliz', 'triste', 'agitado', 'cansado', 'quieto', 'brincalhão', 'assustado', 'irritado']
-        
         self.humor = self.humores[randint(0, len(self.humores))]
         
     def comer(self, geladeira, comida):
@@ -23,7 +22,7 @@ class Gatinho:
 
         self.saude += comida.saude
         self.saude = self.atualizar_attr(self.saude)
-    
+
     def brincar(self, bau, brinquedo):
         if not self.dormindo:
             # lista de brincadeiras? classe nova?
@@ -68,10 +67,10 @@ class Gatinho:
         print('rrrRRRRrrrRRr')
 
     @staticmethod
-    def atualizar_attr(attr):
-        if attr >= 100:
-            return 100
-        elif attr <= 0:
-            return 0
+    def atualizar_attr(attr, sup=100, inf=0):
+        if attr >= sup:
+            return sup
+        elif attr <= inf:
+            return inf
         else:
             return attr
