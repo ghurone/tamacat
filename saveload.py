@@ -29,3 +29,11 @@ def carregar_jogo():
         return list_objs
     except Exception as e:
         print(e)
+
+
+def deletar_save():
+    try:
+        with open('save.file', 'wb') as file:
+            file.write(bytes(''.encode('utf8')))
+    except Exception as e:
+        print(e)
