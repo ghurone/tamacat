@@ -3,8 +3,9 @@ from random import randint
 
 class Gatinho:
     
-    def __init__(self, nome, idade, fome, energia, saude, humor):
+    def __init__(self, nome, idade, fome, energia, saude, humor, vac=False):
         self.nome = nome
+        self.vacinado = vac
 
         self.dormindo = False
         self.idade = idade
