@@ -3,16 +3,15 @@ from random import randint
 
 class Gatinho:
     
-    def __init__(self, nome, idade, fome, energia, saude):
+    def __init__(self, nome, idade, fome, energia, saude, humor):
         self.nome = nome
+
         self.dormindo = False
         self.idade = idade
         self.fome = fome
         self.energia = energia
         self.saude = saude
-
-        self.humores = ['feliz', 'triste', 'agitado', 'cansado', 'quieto', 'brincalhão', 'assustado', 'irritado']
-        self.humor = self.humores[randint(0, len(self.humores))]
+        self.humor = humor
         
     def comer(self, geladeira, comida):
         geladeira.pegar_comida(comida.nome)
