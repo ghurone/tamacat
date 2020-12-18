@@ -34,13 +34,13 @@ elif escolha in 'Rr':
     idade = randint(0, 180)
 
 else:
-    id = input('Você vai adotar um gato (F)ilhote ou (A)dulto?\n>>> ')
+    i = input('Você vai adotar um gato (F)ilhote ou (A)dulto?\n>>> ')
 
-    while id.lower() != 'f' and id.lower() != 'a':
-        id = input('Você deve digitar F ou A para decidir a faixa etária do gato:\n>>> ')
+    while i.lower() != 'f' and i.lower() != 'a':
+        i = input('Você deve digitar F ou A para decidir a faixa etária do gato:\n>>> ')
     sleep(1)
 
-    if id.lower() == 'f':
+    if i.lower() == 'f':
         idade = randint(3, 12)
     else:
         idade = randint(13, 84)
