@@ -1,0 +1,8 @@
+	- Arquivo com funções gerais (limpar_tela...)
+	- Login e Cadastro (SALVAR O JOGO ONLINE)
+	- Modo Offline (sem login e tals)
+	- Esqueceu sua senha
+	- Fazer mini games para as ações
+	- Raças de gato (Herança?)
+	- Documentar o código!1!!!
+	- deixar o metodo attr foda
