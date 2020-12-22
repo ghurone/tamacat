@@ -18,28 +18,25 @@ def entrar():
             if esc in 'sS':
                 log = login()
             else:
-                break
+                return False
 
-        if len(log) == 1:
-            i = log['id']
+        i = log['id']
 
-            banco = SQL()
-            resp = banco.q_select('gatinho, geladeira, bau', 'saves', f"user_id = '{i}'")
-            banco.close()
+        banco = SQL()
+        resp = banco.carregar_jogo(i)
+        banco.close()
 
-            return resp
-
-        return None
+        return resp
 
     else:
         reg = registrar()
 
-        while reg != 'ok':
+        while not isinstance(reg, dict):
             if reg == 'email':
                 print('Email já cadastrado!')
             elif reg == 'usuario':
                 print('Usuario já cadastrado!')
-            elif reg == 'bobo':
+            else:
                 print('Erro inesperado!!')
 
             esc = input('Deseja tentar se cadastrar novamente? (S)im / (N)ão\n>>> ')
@@ -49,6 +46,6 @@ def entrar():
             if esc in 'sS':
                 reg = registrar()
             else:
-                break
+                return False
 
-        return None
+        return reg

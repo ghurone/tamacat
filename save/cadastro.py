@@ -1,4 +1,4 @@
-from .sql import SQL
+from save.sql import SQL
 from hashlib import md5
 
 
@@ -8,7 +8,7 @@ def login():
     senha_md5 = md5(senha.encode('utf8')).hexdigest()
 
     banco = SQL()
-    resp = banco.q_select('id', 'users', f"usuario = '{user}' and senha = '{senha_md5}'")
+    resp = banco.select('id', 'users', f"usuario = '{user}' and senha = '{senha_md5}'")
     banco.close()
 
     return resp
@@ -20,7 +20,7 @@ def registrar():
     senha = input('Digite a sua senha:\n>>> ')
 
     banco = SQL()
-    resp = banco.q_insert_user(email, user, senha)
+    resp = banco.insert_user(email, user, senha)
     banco.close()
 
     return resp

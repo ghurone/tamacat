@@ -13,7 +13,7 @@ class SQL:
         self.cnx = mycon.connect(**config)
         self.cursor = self.cnx.cursor(buffered=True)
 
-    def q_select(self, columns, table, where):
+    def select(self, columns, table, where):
         query = f'SELECT {columns} FROM {table} WHERE {where};'
         self.query(query)
 
@@ -26,7 +26,7 @@ class SQL:
 
         return dicio
 
-    def q_insert_user(self, e, u, s):
+    def insert_user(self, e, u, s):
         query = f"insert into users (email, usuario, senha) values ('{e}', '{u}', md5('{s}'));"
 
         try:
@@ -46,7 +46,24 @@ class SQL:
         self.query(query)
         self.cnx.commit()
 
-        return 'ok'
+        ide = self.select('id', 'users', f"usuario = '{u}'")
+        resp = self.carregar_jogo(ide['id'])
+
+        return resp
+
+    def salvar_jogo(self, i, gato, gela, b):
+        query = f"UPDATE saves SET gatinho = '{gato}', geladeira = '{gela}', bau = '{b}' WHERE user_id = {i};"
+        self.query(query)
+        self.cnx.commit()
+
+    def carregar_jogo(self, i):
+        game = self.select('gatinho, geladeira, bau', 'saves', f"user_id = '{i}'")
+        return game
+
+    def deletar_save(self, i):
+        query = f"UPDATE saves SET gatinho = null, geladeira = null, bau = null WHERE user_id = {i};"
+        self.query(query)
+        self.cnx.commit()
 
     def query(self, query):
         self.cursor.execute(query)
