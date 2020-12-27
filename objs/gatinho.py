@@ -1,6 +1,3 @@
-from random import randint
-
-
 class Gatinho:
 
     def __init__(self, nome, idade, fome, energia, saude, humor, vac=False):
@@ -15,6 +12,7 @@ class Gatinho:
         self.humor = humor
 
     def comer(self, geladeira, comida):
+        """Diminui a fome e altera a saúde dependendo dos níveis de saúde da Comida."""
         geladeira.pegar_comida(comida.nome)
 
         self.fome -= comida.saciar
@@ -24,6 +22,7 @@ class Gatinho:
         self.saude = self.atualizar_attr(self.saude)
 
     def brincar(self, bau, brinquedo):
+        """?"""
         if not self.dormindo:
             # lista de brincadeiras? classe nova?
             pass
@@ -31,6 +30,7 @@ class Gatinho:
             print(f'{self.nome} está dormindo, acorde-o para brincar!')
 
     def dormir(self):
+        """Muda o estado do gato para dormindo."""
         if not self.dormindo:
             self.dormindo = True
             print('zzZzZzzzz')
@@ -38,6 +38,7 @@ class Gatinho:
             print(f'{self.nome} já está dormindo!')
 
     def acordar(self):
+        """Acorda o gato se ele estiver dormindo."""
         if self.dormindo:
             self.dormindo = False
             print(f'{self.nome} acordou!')
@@ -45,12 +46,14 @@ class Gatinho:
             print(f'{self.nome} já está acordado!')
 
     def mostrar_humor(self):
+        """Imprime o humor atual do gato."""
         print(f'{self.nome} está {self.humor}')
 
     def mudar_humor(self, i):
         self.humor = self.humores[i]
 
     def crescer(self):
+        """Aumenta a idade."""
         self.idade += 1
 
     @staticmethod

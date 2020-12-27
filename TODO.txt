@@ -1,12 +1,14 @@
 # FAZER AGORA!!!!!!
 	- Ordenar brinquedos por durabilidade
 	- Ordenar comidas por saciar
-	- Documentar o código!!!!
+	- Documentar o código!!!! OK
+	- Arquivo com funções gerais (limpar_tela...)
 
 # FAZER DEPOIS
-	- Arquivo com funções gerais (limpar_tela...)
 	- Login e Cadastro (SALVAR O JOGO ONLINE)
 	- Modo Offline (sem login e tals)
 	- Esqueceu sua senha
 	- Fazer mini games para as ações
+	- Função brincar
+	- Funcionamento do humor
 	- Raças de gato (Herança?) VERSAO 2.0 MT FODA-SE AGR

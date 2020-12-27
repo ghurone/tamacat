@@ -19,6 +19,7 @@ def limpar_tela():
 
 
 def novo_gato():
+    """Retorna um Gatinho, Geladeira e Bau para um gato inicial."""
     limpar_tela()
 
     print('Você está pensando em ter um gato.')
@@ -94,6 +95,7 @@ def novo_gato():
 
 
 def mostrar_gato(cat):
+    """Imprime as características do gato."""
     print('Nome:', cat.nome)
     print('Idade:', cat.mostrar_idade())
     print('Fome:', cat.fome)
