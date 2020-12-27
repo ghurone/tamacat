@@ -1,0 +1,26 @@
+Comprado:
+
+	idade: 2-12
+	fome: 0
+	energia: 75-100
+	saude: 100
+	humor: aleatorio
+	vacinado: True
+
+Resgatado
+
+	idade: 0-180 meses
+	fome: 0-90
+	energia: 10-90
+	saude: 10-50
+	humor: assustado
+	vacinado: True(50%)-False(50%)
+
+Adotado:
+	
+	idade: depende
+	fome: 0-40
+	energia: 70-100
+	saude: 70-90
+	humor: aleatorio
+	vacinado: True(60%)-False(40%)
