@@ -2,7 +2,7 @@ from random import randint
 
 
 class Gatinho:
-    
+
     def __init__(self, nome, idade, fome, energia, saude, humor, vac=False):
         self.nome = nome
         self.vacinado = vac
@@ -13,7 +13,7 @@ class Gatinho:
         self.energia = energia
         self.saude = saude
         self.humor = humor
-        
+
     def comer(self, geladeira, comida):
         geladeira.pegar_comida(comida.nome)
 
@@ -29,14 +29,14 @@ class Gatinho:
             pass
         else:
             print(f'{self.nome} está dormindo, acorde-o para brincar!')
-    
+
     def dormir(self):
         if not self.dormindo:
             self.dormindo = True
             print('zzZzZzzzz')
         else:
             print(f'{self.nome} já está dormindo!')
-        
+
     def acordar(self):
         if self.dormindo:
             self.dormindo = False
@@ -74,3 +74,28 @@ class Gatinho:
             return inf
         else:
             return attr
+
+
+class Adotado(Gatinho):
+    def __init__(self, nome, idade, fome, energia, saude, humor, vac):
+        super().__init__(nome, idade, fome, energia, saude, humor, vac)
+
+    def mostrar_idade(self):
+        return self.idade
+
+
+class Comprado(Gatinho):
+    def __init__(self, nome, idade, fome, energia, saude, humor, vac):
+        super().__init__(nome, idade, fome, energia, saude, humor, vac)
+
+    def mostrar_idade(self):
+        return self.idade
+
+
+class Resgatado(Gatinho):
+    def __init__(self, nome, idade, fome, energia, saude, humor, vac):
+        super().__init__(nome, idade, fome, energia, saude, humor, vac)
+
+    @staticmethod
+    def mostrar_idade():
+        return '?'

@@ -4,3 +4,6 @@ class Comida:
         self.nome = nome
         self.saciar = saciar
         self.saude = saude
+
+    def __str__(self):
+        return f'{self.nome} - Saciar: {self.saciar} - Saude: {self.saude}'
