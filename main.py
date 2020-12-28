@@ -3,6 +3,8 @@ from objs.geladeira import Geladeira
 from objs.bau import Bau
 from objs.brinquedo import Brinquedo
 from objs.comida import Comida
+from save.client import entrar
+from save.sql import SQL
 
 from time import sleep
 from os import system, name as osname
@@ -18,9 +20,15 @@ def limpar_tela():
         system('clear')
 
 
+def salvar_jogo(ide, gato, geladeira, bau):
+    banco = SQL()
+    banco.salvar_jogo(ide, gato, geladeira, bau)
+    banco.close()
+
+
 def novo_gato():
     """Retorna um Gatinho, Geladeira e Bau para um gato inicial."""
-    limpar_tela()
+    #limpar_tela()
 
     print('Você está pensando em ter um gato.')
     #sleep(2)
@@ -36,7 +44,7 @@ def novo_gato():
             and escolha.lower() != 'comprar' and escolha.lower() != 'resgatar' and escolha.lower() != 'adotar':
         escolha = input('Você deseja (C)omprar, (R)esgatar ou (A)dotar o gato?\n>>> ')
 
-    limpar_tela()
+    #limpar_tela()
 
     if escolha[0] in 'Cc':
         print('Você conversou com o conhecido do seu amigo e comprou o gatinho!')
@@ -106,23 +114,16 @@ def mostrar_gato(cat):
 
 
 if __name__ == '__main__':
-    save = False
+    objetos = entrar()
+    user_id = objetos['user_id']
 
-    if save:
-        pass
+    if objetos['gato'] is not None:
+        gato = objetos['gato']
+        gela = objetos['gela']
+        bau = objetos['bau']
+
     else:
         gato, gela, bau = novo_gato()
-
-    pexito = Comida('Pexito', 12, 31)
-    choco = Comida('CHOCO', 76, 23)
-
-    carro = Brinquedo('Carro', 12, 34)
-
-    gela.add_comida(pexito, 12)
-    gela.add_comida(choco, 201)
-
-    bau.add_brinquedo(carro)
+        salvar_jogo(user_id, gato, gela, bau)
 
     mostrar_gato(gato)
-    print(gela)
-    print(bau)

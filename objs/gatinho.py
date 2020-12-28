@@ -1,6 +1,6 @@
 class Gatinho:
 
-    def __init__(self, nome, idade, fome, energia, saude, humor, vac=False):
+    def __init__(self, nome, idade, fome, energia, saude, feliz, vac=False):
         self.nome = nome
         self.vacinado = vac
 
@@ -9,7 +9,7 @@ class Gatinho:
         self.fome = fome
         self.energia = energia
         self.saude = saude
-        self.humor = humor
+        self.feliz = feliz
 
     def comer(self, geladeira, comida):
         """Diminui a fome e altera a saúde dependendo dos níveis de saúde da Comida."""
@@ -45,13 +45,6 @@ class Gatinho:
         else:
             print(f'{self.nome} já está acordado!')
 
-    def mostrar_humor(self):
-        """Imprime o humor atual do gato."""
-        print(f'{self.nome} está {self.humor}')
-
-    def mudar_humor(self, i):
-        self.humor = self.humores[i]
-
     def crescer(self):
         """Aumenta a idade."""
         self.idade += 1
@@ -80,24 +73,24 @@ class Gatinho:
 
 
 class Adotado(Gatinho):
-    def __init__(self, nome, idade, fome, energia, saude, humor, vac):
-        super().__init__(nome, idade, fome, energia, saude, humor, vac)
+    def __init__(self, nome, idade, fome, energia, saude, feliz, vac):
+        super().__init__(nome, idade, fome, energia, saude, feliz, vac)
 
     def mostrar_idade(self):
         return self.idade
 
 
 class Comprado(Gatinho):
-    def __init__(self, nome, idade, fome, energia, saude, humor, vac):
-        super().__init__(nome, idade, fome, energia, saude, humor, vac)
+    def __init__(self, nome, idade, fome, energia, saude, feliz, vac):
+        super().__init__(nome, idade, fome, energia, saude, feliz, vac)
 
     def mostrar_idade(self):
         return self.idade
 
 
 class Resgatado(Gatinho):
-    def __init__(self, nome, idade, fome, energia, saude, humor, vac):
-        super().__init__(nome, idade, fome, energia, saude, humor, vac)
+    def __init__(self, nome, idade, fome, energia, saude, feliz, vac):
+        super().__init__(nome, idade, fome, energia, saude, feliz, vac)
 
     @staticmethod
     def mostrar_idade():

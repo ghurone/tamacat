@@ -1,5 +1,5 @@
 import mysql.connector as mycon
-
+from pickle import dumps, loads
 
 class SQL:
     def __init__(self):
@@ -20,9 +20,9 @@ class SQL:
         colunas = tuple(columns.replace(' ', '').split(","))
         dicio = {}
 
-        for col in self.cursor:
+        for row in self.cursor:
             for i in range(len(colunas)):
-                dicio[colunas[i]] = col[i]
+                dicio[colunas[i]] = row[i]
 
         return dicio
 
@@ -51,17 +51,25 @@ class SQL:
 
         return resp
 
-    def salvar_jogo(self, i, gato, gela, b):
-        query = f"UPDATE saves SET gatinho = '{gato}', geladeira = '{gela}', bau = '{b}' WHERE user_id = {i};"
+    def salvar_jogo(self, i, gato, gela, bau):
+        gatinho = dumps(gato)
+        geladeira = dumps(gela)
+        b = dumps(bau)
+        query = f"UPDATE saves SET gato = '{gatinho}', gela = '{geladeira}', bau = '{b}' WHERE user_id = {i};"
         self.query(query)
         self.cnx.commit()
 
     def carregar_jogo(self, i):
-        game = self.select('gatinho, geladeira, bau', 'saves', f"user_id = '{i}'")
+        game = self.select('user_id, gato, gela, bau', 'saves', f"user_id = '{i}'")
+
+        for i, key in enumerate(game):
+            if i != 0 and game[key] is not None:
+                game[key] = loads(game[key])
+
         return game
 
     def deletar_save(self, i):
-        query = f"UPDATE saves SET gatinho = null, geladeira = null, bau = null WHERE user_id = {i};"
+        query = f"UPDATE saves SET gato = null, gela = null, bau = null WHERE user_id = {i};"
         self.query(query)
         self.cnx.commit()
 

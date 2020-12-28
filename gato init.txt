@@ -1,26 +1,71 @@
-Comprado:
+GATOS
 
-	idade: 2-12
-	fome: 0
-	energia: 75-100
-	saude: 100
-	humor: aleatorio
-	vacinado: True
+    Comprado:
 
-Resgatado
+        idade: 2-12
+        fome: 0
+        energia: 75-100
+        saude: 100
+        humor: aleatorio
+        vacinado: True
 
-	idade: 0-180 meses
-	fome: 0-90
-	energia: 10-90
-	saude: 10-50
-	humor: assustado
-	vacinado: True(50%)-False(50%)
+    Resgatado
 
-Adotado:
-	
-	idade: depende
-	fome: 0-40
-	energia: 70-100
-	saude: 70-90
-	humor: aleatorio
-	vacinado: True(60%)-False(40%)
+        idade: 0-180 meses
+        fome: 0-90
+        energia: 10-90
+        saude: 10-50
+        humor: assustado
+        vacinado: True(50%)-False(50%)
+
+    Adotado:
+
+        idade: depende
+        fome: 0-40
+        energia: 70-100
+        saude: 70-90
+        humor: aleatorio
+        vacinado: True(60%)-False(40%)
+
+COMIDAS
+
+    Salgado:
+        Sardinha, atum, salmão     | saciar: 10, 20, 30 felicidade: 15, 20, 30 saude: 10, 15, 20
+        Ração comum                | saciar: 15         felicidade: 0          saude: 15
+        Ração carne, frango, peixe | saciar: 15         felicidade: 5, 10, 20  saude: 10
+        Sushi                      | saciar: 50         felicidade: 80         saude: 30
+
+    Bebidas:
+        Água                             | saciar: 1  felicidade: 0          saude: 25
+        Leite                            | saciar: 10 felicidade: 20         saude: 0
+        Suco de limão, melancia, laranja | saciar: 5  felicidade: 10, 15, 25 saude: 10
+        Cerveja                          | saciar: 5  felicidade: 25         saude: -40
+
+    Doce:
+        Chocolate                          | saciar: 15 felicidade: 15         saude: -5
+        Bolo de coco, morango, chocolate   | saciar: 10 felicidade: 15, 20, 30 saude: -10
+        Torta de morango, limão, holandesa | saciar: 15 felicidade: 15, 20, 30 saude: -15
+        Sorvete chocolate, flocos, morango | saciar: 5  felicidade: 20, 25, 35 saude: -15
+
+    Frutas:
+        Laranja   | saciar: 7  felicidade: 10 saude: 20
+        Maçã      | saciar: 5  felicidade: 0  saude: 40
+        Banana    | saciar: 10 felicidade: 0  saude: 20
+        Abacaxi   | saciar: 9  felicidade: 5  saude: 30
+        Uva       | saciar: 6  felicidade: 5  saude: 20
+        Morango   | saciar: 8  felicidade: 5  saude: 25
+        Tangerina | saciar: 7  felicidade: 10 saude: 30
+
+BRINQUEDOS
+
+    Bolinha de papel, borracha, lã    | felicidade: 15, 20, 35 durabilidade: 1, 3, 2
+    Bola de vôlei, basquete, futebol  | felicidade: 20, 25, 30 durabilidade: 2
+    Caixa de papelão                  | felicidade: 50         durabilidade: 1
+    Vara com cordinha                 | felicidade: 25         durabilidade: 2
+    Arranhador pegueno, médio, grande | felicidade: 15         durabilidade: 2, 3, 4
+    Torre pequena, média, grande      | felicidade: 10, 20, 30 durabilidade: 4, 3, 2
+    Nave espacial                     | felicidade: 40         durabilidade: 1
+    Cubo mágico                       | felicidade: 5          durabilidade: 6
+    Iôiô                              | felicidade: 15         durabilidade: 2
+    Ratinho                           | felicidade: 10         durabilidade: 2
+    Pião                              | felicidade: 20         durabilidade: 2

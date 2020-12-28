@@ -1,14 +1,14 @@
 class Brinquedo:
 
-    def __init__(self, nome, alegria, dura=100):
+    def __init__(self, nome, feliz, dura):
         self.nome = nome
+        self.feliz = feliz
         self.dura = dura
-        self.alegria = alegria
 
     @property
     def __str__(self):
         return f'{self.nome} - Durabilidade: {self.dura} - Alegria: {self.alegria}'
 
-    def usar(self, valor):
+    def usar(self):
         """ Diminui a durabilidade do brinquedo."""
-        self.dura -= valor
+        self.dura -= 1

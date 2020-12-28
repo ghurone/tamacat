@@ -10,5 +10,6 @@
 	- Esqueceu sua senha
 	- Fazer mini games para as ações
 	- Função brincar
-	- Funcionamento do humor
 	- Raças de gato (Herança?) VERSAO 2.0 MT FODA-SE AGR
+	- Computador
+	- Comida favorita
