@@ -11,7 +11,9 @@ def salvar_jogo(*objs):
 
             with open('save.file', t) as file:
                 dump(objs[i], file)
-                file.write(bytes('\n'.encode('utf8')))
+                file.write(bytes('_pE_dRo_'.encode('utf8')))
+
+        print('Jogo salvo!')
 
     except Exception as e:
         print(e)
@@ -20,18 +22,23 @@ def salvar_jogo(*objs):
 def carregar_jogo():
     try:
         with open('save.file', 'rb') as file:
-            objs = file.readlines()
+            objs = file.read()
+            objs = objs.split('_pE_dRo_'.encode('utf8'))
 
         list_objs = []
-        for obj in objs:
-            list_objs.append(loads(obj[:-1]))
+        for obj in objs[:-1]:
+            list_objs.append(loads(obj))
+
+        print('Jogo carregado! :)')
 
         return list_objs
-    except Exception as e:
-        print(e)
+
+    except FileNotFoundError:
+        print('Não existe nenhum jogo salvo.')
+        return False
 
 
-def deletar_save():
+def deletar_jogo():
     try:
         remove('save.file')
     except Exception as e:

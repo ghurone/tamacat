@@ -5,6 +5,7 @@ from objs.brinquedo import Brinquedo
 from objs.comida import Comida
 from save.client import entrar
 from save.sql import SQL
+from saveload import salvar_jogo, carregar_jogo, deletar_jogo
 
 from time import sleep
 from os import system, name as osname
@@ -18,12 +19,6 @@ def limpar_tela():
         system('cls')
     else:
         system('clear')
-
-
-def salvar_jogo(ide, gato, geladeira, bau):
-    banco = SQL()
-    banco.salvar_jogo(ide, gato, geladeira, bau)
-    banco.close()
 
 
 def novo_gato():
@@ -109,21 +104,18 @@ def mostrar_gato(cat):
     print('Fome:', cat.fome)
     print('Energia:', cat.energia)
     print('Saude:', cat.saude)
-    print('Humor:', cat.humor)
     print('Vac:', cat.vacinado)
 
 
 if __name__ == '__main__':
-    objetos = entrar()
-    user_id = objetos['user_id']
 
-    if objetos['gato'] is not None:
-        gato = objetos['gato']
-        gela = objetos['gela']
-        bau = objetos['bau']
+    if carregar_jogo():
+        gato, gela, bau = carregar_jogo()
 
     else:
         gato, gela, bau = novo_gato()
-        salvar_jogo(user_id, gato, gela, bau)
+        salvar_jogo(gato, gela, bau)
 
     mostrar_gato(gato)
+
+
