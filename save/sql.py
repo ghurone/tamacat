@@ -52,9 +52,10 @@ class SQL:
         return resp
 
     def salvar_jogo(self, i, gato, gela, bau):
-        gatinho = dumps(gato)
-        geladeira = dumps(gela)
-        b = dumps(bau)
+        gatinho = str(dumps(gato)).encode('utf8')
+        geladeira = str(dumps(gela)).encode('utf8')
+        b = str(dumps(bau)).encode('utf8')
+
         query = f"UPDATE saves SET gato = '{gatinho}', gela = '{geladeira}', bau = '{b}' WHERE user_id = {i};"
         self.query(query)
         self.cnx.commit()
@@ -64,7 +65,7 @@ class SQL:
 
         for i, key in enumerate(game):
             if i != 0 and game[key] is not None:
-                game[key] = loads(game[key])
+                game[key] = loads(bytes(game[key].decode('utf8')))
 
         return game
 

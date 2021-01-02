@@ -71,21 +71,36 @@ class Gatinho:
         else:
             return attr
 
+    def mostrar_idade(self):
+        mes = self.idade % 12
+        ano = self.idade // 12
+
+        if ano == 0:
+            return f'{mes} meses'
+
+        elif mes == 0:
+            if ano == 1:
+                return '1 ano'
+            else:
+                return f'{ano} anos'
+
+        elif mes == 1:
+            if ano == 1:
+                return f'1 ano e 1 mês'
+            else:
+                return f'{ano} anos e 1 mês'
+
+        return f'{ano} anos e {mes} meses'
+
 
 class Adotado(Gatinho):
     def __init__(self, nome, idade, fome, energia, saude, feliz, vac):
         super().__init__(nome, idade, fome, energia, saude, feliz, vac)
 
-    def mostrar_idade(self):
-        return self.idade
-
 
 class Comprado(Gatinho):
     def __init__(self, nome, idade, fome, energia, saude, feliz, vac):
         super().__init__(nome, idade, fome, energia, saude, feliz, vac)
-
-    def mostrar_idade(self):
-        return self.idade
 
 
 class Resgatado(Gatinho):

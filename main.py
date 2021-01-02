@@ -1,45 +1,33 @@
 from objs.gatinho import Adotado, Comprado, Resgatado
 from objs.geladeira import Geladeira
 from objs.bau import Bau
-from objs.brinquedo import Brinquedo
-from objs.comida import Comida
-from save.client import entrar
-from save.sql import SQL
-from saveload import salvar_jogo, carregar_jogo, deletar_jogo
+from config.saveload import salvar_jogo, carregar_jogo
+from config.funcoes import limpar_tela
 
-from time import sleep
-from os import system, name as osname
 from random import randint, choice
 
 humores = ['feliz', 'triste', 'quieto', 'brincalhão', 'carinhoso', 'assustado', 'irritado']
 
 
-def limpar_tela():
-    if 'nt' in osname:
-        system('cls')
-    else:
-        system('clear')
-
-
 def novo_gato():
     """Retorna um Gatinho, Geladeira e Bau para um gato inicial."""
-    #limpar_tela()
+    # limpar_tela()
 
     print('Você está pensando em ter um gato.')
-    #sleep(2)
+    # sleep(2)
     print('\nUm amigo seu conhece alguém que está vendendo um gato bonitininho.')
-    #sleep(3)
+    # sleep(3)
     print('Mas também tem um gato que sempre têm andado pela vizinhança, e ele parece muito simpático.')
-    #sleep(3.5)
+    # sleep(3.5)
     print('Por outro lado, também existe um abrigo de gatos perto da sua casa.')
-    #sleep(3)
+    # sleep(3)
 
     escolha = input('\nVocê deseja (C)omprar, (R)esgatar ou (A)dotar o gato?\n>>> ')
-    while escolha.lower() != 'c' and escolha.lower() != 'r' and escolha.lower() != 'a'\
+    while escolha.lower() != 'c' and escolha.lower() != 'r' and escolha.lower() != 'a' \
             and escolha.lower() != 'comprar' and escolha.lower() != 'resgatar' and escolha.lower() != 'adotar':
         escolha = input('Você deseja (C)omprar, (R)esgatar ou (A)dotar o gato?\n>>> ')
 
-    #limpar_tela()
+    # limpar_tela()
 
     if escolha[0] in 'Cc':
         print('Você conversou com o conhecido do seu amigo e comprou o gatinho!')
@@ -48,10 +36,10 @@ def novo_gato():
         fome = 0
         energia = randint(75, 100)
         saude = 100
-        humor = choice(humores)
+        feliz = randint(80, 100)
         vac = True
 
-        ga = Comprado('', idade, fome, energia, saude, humor, vac)
+        ga = Comprado('', idade, fome, energia, saude, feliz, vac)
 
     elif escolha[0] in 'Rr':
         print('Você resgatou o gatinho. Agora ele tem um dono!')
@@ -60,17 +48,17 @@ def novo_gato():
         fome = randint(0, 90)
         energia = randint(10, 90)
         saude = randint(10, 50)
-        humor = 'assustado'
+        feliz = randint(10, 90)
         vac = choice([True, False])
 
-        ga = Resgatado('', idade, fome, energia, saude, humor, vac)
+        ga = Resgatado('', idade, fome, energia, saude, feliz, vac)
 
     else:
         i = input('Você vai adotar um gato (F)ilhote ou (A)dulto?\n>>> ')
 
         while i.lower() != 'f' and i.lower() != 'a' and i.lower() != 'filhote' and i.lower() != 'adulto':
             i = input('Você vai adotar um gato (F)ilhote ou (A)dulto?\n>>> ')
-        #sleep(1)
+        # sleep(1)
 
         print('Você foi até o abrigo e escolheu o seu gatinho. Ou será que foi ele quem te escolheu?')
 
@@ -82,12 +70,12 @@ def novo_gato():
         fome = randint(0, 40)
         energia = randint(70, 100)
         saude = randint(70, 90)
-        humor = choice(humores)
+        feliz = randint(80, 100)
         vac = choice([True, True, True, False, False])  # True: 60%, False: 40%
 
-        ga = Adotado('', idade, fome, energia, saude, humor, vac)
+        ga = Adotado('', idade, fome, energia, saude, feliz, vac)
 
-    #sleep(2)
+    # sleep(2)
     nome = input('Hora de uma decisão difícil... Qual vai ser o nome do seu gato?\n>>> ')
 
     ga.nome = nome
@@ -97,25 +85,65 @@ def novo_gato():
     return ga, ge, ba
 
 
-def mostrar_gato(cat):
+def menu(cat):
     """Imprime as características do gato."""
-    print('Nome:', cat.nome)
-    print('Idade:', cat.mostrar_idade())
-    print('Fome:', cat.fome)
-    print('Energia:', cat.energia)
-    print('Saude:', cat.saude)
-    print('Vac:', cat.vacinado)
+    if cat.vacinado:
+        vac = 'Sim'
+    else:
+        vac = 'Não'
+
+    gato = [' ,_     _        ',
+            ' |\\\\_,-//        ',
+            ' / _  _ |    ,--. ',
+            '(  @  @ )   / ,-\'',
+            ' \  _T_/-._( (    ',
+            ' /         `. \\  ',
+            '|         _  \\ | ',
+            ' \ \ ,  /      |  ',
+            '  || |-_\__   /   ',
+            ' ((_/`(____,-\'   '
+            ]
+
+    acoes = ['(1) - Ver geladeira',
+             '(2) - Comer', '',
+             '(3) - Ver bau',
+             '(4) - Brincar', '',
+             '', '', '', '',
+             '(5) - Salvar o jogo',
+             '(6) - Abandonar o gato :(',
+             '(7) - Sair'
+             ]
+
+    s = '+' + '-' * 30 + '+' + '-' * 49 + '+\n'
+    s += '|' + 'TAMACAT'.center(30) + '|' + ' ' * 49 + '|\n'
+
+    for i in range(10):
+        s += '|' + acoes[i].ljust(30) + '|' + gato[i].center(49) + '|\n'  # geral
+
+    s += '|' + ' ' * 30 + '|' + ' ' * 49 + '|\n'
+    s += '|' + ' ' * 30 + '+' + '-' * 49 + '+\n'
+    s += '|' + ' ' * 30 + '|' + f'Nome: {cat.nome}'.ljust(49) + '|\n'
+    s += '|' + ' ' * 30 + '|' + f'Idade: {cat.mostrar_idade()}'.ljust(49) + '|\n'
+    s += '|' + ' ' * 30 + '|' + f'Vacinado: {vac}'.ljust(49) + '|\n'
+    s += '|' + '-' * 30 + '|' + ('Fome:      ' + '(' + ('∎' * (cat.fome // 5)).ljust(20) + ')').ljust(49) + '|\n'
+    s += '|' + acoes[-3].ljust(30) + '|' + ('Energia:   ' + '(' + ('∎' * (cat.energia // 5)).ljust(20) + ')').ljust(49) + '|\n'
+    s += '|' + acoes[-2].ljust(30) + '|' + ('Saude:     ' + '(' + ('∎' * (cat.saude // 5)).ljust(20) + ')').ljust(49) + '|\n'
+    s += '|' + acoes[-1].ljust(30) + '|' + ('Felcidade: ' + '(' + ('∎' * (cat.feliz // 5)).ljust(20) + ')').ljust(49) + '|\n'
+
+    s += '+' + '-' * 30 + '+' + '-' * 49 + '+'
+
+    print(s)
 
 
 if __name__ == '__main__':
 
     if carregar_jogo():
         gato, gela, bau = carregar_jogo()
+        print('Jogo carregado! :)')
 
     else:
         gato, gela, bau = novo_gato()
         salvar_jogo(gato, gela, bau)
 
-    mostrar_gato(gato)
-
-
+    limpar_tela()
+    menu(gato)
