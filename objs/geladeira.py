@@ -12,13 +12,12 @@ class Geladeira:
 
         self.alimentos = alimentos
 
-    @property
     def __str__(self):
         s = ''
 
         for i, nome in enumerate(self.alimentos):
             f = self.alimentos[nome]
-            s += f'{f[1]}x {f[0]}\n'
+            s += '|' + f'{f[1]}'.center(6) + '|' + str(f[0]) + '|\n'
 
         return s
 

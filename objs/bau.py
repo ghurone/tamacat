@@ -13,13 +13,12 @@ class Bau:
 
         self.brinquedos = brinquedos
 
-    @property
     def __str__(self):
         s = ''
 
         for i, nome in enumerate(self.brinquedos):
             for brinqs in self.brinquedos[nome]:
-                s += str(brinqs)
+                s += '|' + str(brinqs) + '|\n'
 
         return s
 
@@ -50,3 +49,12 @@ class Bau:
         else:
             for brinqs in self.brinquedos[brinq.nome]:
                 print(brinqs)
+
+    def numero_de_brinquedos(self):
+        n = 0
+
+        for i, k in enumerate(self.brinquedos):
+            for j in self.brinquedos[k]:
+                n += 1
+
+        return n

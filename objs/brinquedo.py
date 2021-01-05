@@ -5,9 +5,8 @@ class Brinquedo:
         self.feliz = feliz
         self.dura = dura
 
-    @property
     def __str__(self):
-        return f'{self.nome} - Durabilidade: {self.dura} - Alegria: {self.alegria}'
+        return self.nome.center(32) + '|' + f'{self.feliz}'.center(22) + '|' + f'{self.dura}'.center(22)
 
     def usar(self):
         """ Diminui a durabilidade do brinquedo."""

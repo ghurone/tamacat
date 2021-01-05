@@ -1,8 +1,7 @@
 # FAZER AGORA!!!!!!
 	- Ordenar brinquedos por durabilidade
 	- Ordenar comidas por saciar
-	- Documentar o código!!!! OK
-	- Arquivo com funções gerais (limpar_tela...)
+	- Documentar o código!!!!
 
 # FAZER DEPOIS
 	- Login e Cadastro (SALVAR O JOGO ONLINE)
@@ -13,7 +12,8 @@
 	- Raças de gato (Herança?) VERSAO 2.0 MT FODA-SE AGR
 	- Computador
 	- Comida favorita
-
+	- CTRL + C -> Fechar o jogo (msg)
+    - Redimensionar a janelinha (80x24)
 
  ,_     _
  |\\_,-//

@@ -9,7 +9,7 @@ def salvar_jogo(*objs):
             if i == 0:
                 t = 'wb'
 
-            with open('../save.file', t) as file:
+            with open('./save.file', t) as file:
                 dump(objs[i], file)
                 file.write(bytes('_pE_dRo_'.encode('utf8')))
 
@@ -21,7 +21,7 @@ def salvar_jogo(*objs):
 
 def carregar_jogo():
     try:
-        with open('../save.file', 'rb') as file:
+        with open('./save.file', 'rb') as file:
             objs = file.read()
             objs = objs.split('_pE_dRo_'.encode('utf8'))
 
@@ -38,6 +38,6 @@ def carregar_jogo():
 
 def deletar_jogo():
     try:
-        remove('../save.file')
+        remove('./save.file')
     except Exception as e:
         print(e)

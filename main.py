@@ -1,10 +1,13 @@
 from objs.gatinho import Adotado, Comprado, Resgatado
 from objs.geladeira import Geladeira
 from objs.bau import Bau
+from objs.brinquedo import Brinquedo
+from objs.comida import Comida
 from config.saveload import salvar_jogo, carregar_jogo
-from config.funcoes import limpar_tela
+from config.funcoes import limpar_tela, sair, deletar, verificar_nome
 
 from random import randint, choice
+from time import sleep
 
 humores = ['feliz', 'triste', 'quieto', 'brincalhão', 'carinhoso', 'assustado', 'irritado']
 
@@ -78,6 +81,9 @@ def novo_gato():
     # sleep(2)
     nome = input('Hora de uma decisão difícil... Qual vai ser o nome do seu gato?\n>>> ')
 
+    while not verificar_nome(nome):
+        nome = input('Insira um nome com um tamanho menor que 43:\n>>> ')
+
     ga.nome = nome
     ge = Geladeira()
     ba = Bau()
@@ -114,25 +120,102 @@ def menu(cat):
              '(7) - Sair'
              ]
 
-    s = '+' + '-' * 30 + '+' + '-' * 49 + '+\n'
-    s += '|' + 'TAMACAT'.center(30) + '|' + ' ' * 49 + '|\n'
+    s = '+' + '-' * 29 + '+' + '-' * 48 + '+\n'
+    s += '|' + 'TAMACAT'.center(29) + '|' + ' ' * 48 + '|\n'
 
     for i in range(10):
-        s += '|' + acoes[i].ljust(30) + '|' + gato[i].center(49) + '|\n'  # geral
+        s += '|' + acoes[i].ljust(29) + '|' + gato[i].center(48) + '|\n'  # geral
 
-    s += '|' + ' ' * 30 + '|' + ' ' * 49 + '|\n'
-    s += '|' + ' ' * 30 + '+' + '-' * 49 + '+\n'
-    s += '|' + ' ' * 30 + '|' + f'Nome: {cat.nome}'.ljust(49) + '|\n'
-    s += '|' + ' ' * 30 + '|' + f'Idade: {cat.mostrar_idade()}'.ljust(49) + '|\n'
-    s += '|' + ' ' * 30 + '|' + f'Vacinado: {vac}'.ljust(49) + '|\n'
-    s += '|' + '-' * 30 + '|' + ('Fome:      ' + '[' + ('■' * (cat.fome // 5)).ljust(20) + ']').ljust(49) + '|\n'
-    s += '|' + acoes[-3].ljust(30) + '|' + ('Energia:   ' + '[' + ('■' * (cat.energia // 5)).ljust(20) + ']').ljust(49) + '|\n'
-    s += '|' + acoes[-2].ljust(30) + '|' + ('Saude:     ' + '[' + ('■' * (cat.saude // 5)).ljust(20) + ']').ljust(49) + '|\n'
-    s += '|' + acoes[-1].ljust(30) + '|' + ('Felcidade: ' + '[' + ('■' * (cat.feliz // 5)).ljust(20) + ']').ljust(49) + '|\n'
+    s += '|' + ' ' * 29 + '|' + ' ' * 48 + '|\n'
+    s += '|' + ' ' * 29 + '+' + '-' * 48 + '+\n'
+    s += '|' + ' ' * 29 + '|' + f'Nome: {cat.nome}'.ljust(48) + '|\n'
+    s += '|' + ' ' * 29 + '|' + f'Idade: {cat.mostrar_idade()}'.ljust(48) + '|\n'
+    s += '|' + ' ' * 29 + '|' + f'Vacinado: {vac}'.ljust(48) + '|\n'
+    s += '|' + '-' * 29 + '|' + ('Fome:      ' + '[' + ('■' * (cat.fome // 5)).ljust(20) + ']').ljust(48) + '|\n'
+    s += '|' + acoes[-3].ljust(29) + '|' + ('Energia:   ' + '[' + ('■' * (cat.energia // 5)).ljust(20) + ']').ljust(
+        48) + '|\n'
+    s += '|' + acoes[-2].ljust(29) + '|' + ('Saude:     ' + '[' + ('■' * (cat.saude // 5)).ljust(20) + ']').ljust(
+        48) + '|\n'
+    s += '|' + acoes[-1].ljust(29) + '|' + ('Felcidade: ' + '[' + ('■' * (cat.feliz // 5)).ljust(20) + ']').ljust(
+        48) + '|\n'
 
-    s += '+' + '-' * 30 + '+' + '-' * 49 + '+'
+    s += '+' + '-' * 29 + '+' + '-' * 48 + '+'
 
     print(s)
+
+
+def mostrar_bau(bau):
+    tam_bau = bau.numero_de_brinquedos()
+
+    s = '+' + '-' * 32 + '+' + '-' * 22 + '+' + '-' * 22 + '+\n'
+    s += '|' + 'Nome'.center(32) + '|' + 'Felicidade'.center(22) + '|' + 'Usos restantes'.center(22) + '|\n'
+    s += '+' + '-' * 32 + '+' + '-' * 22 + '+' + '-' * 22 + '+\n'
+
+    cabeca = s
+
+    if tam_bau <= 19:
+
+        s += str(bau)
+
+        for i in range(19 - tam_bau):
+            s += '|' + ' '*32 + '|' + ' '*22 + '|' + ' '*22 + '|\n'
+
+        s += '+' + '-' * 32 + '+' + '-' * 22 + '+' + '-' * 22 + '+'
+        print(s)
+        input('Pressione ENTER para sair...')
+
+    else:
+        bau_str = str(bau).split('\n')[:-1]
+
+        for i in range(tam_bau // 19 + 1):
+            s = cabeca
+            for j in range(i*19, 19*(i+1)):
+                try:
+                    s += bau_str[j] + '\n'
+                except IndexError:
+                    s += '|' + ' ' * 32 + '|' + ' ' * 22 + '|' + ' ' * 22 + '|\n'
+
+            s += '+' + '-' * 32 + '+' + '-' * 22 + '+' + '-' * 22 + '+'
+
+            print(s)
+            input(f'(Pagina {i+1}/{tam_bau//19 + 1}) Pressione ENTER para continuar...')
+
+            limpar_tela()
+
+
+def mostra_gela(gela):
+    tam_gela = len(gela.alimentos)
+
+    s = '+' + '-'*6 + '+' +'-'*29 + '+' + '-'*13 + '+' + '-'*13 + '+' + '-'*13 + '+\n'
+    s += '|' + 'QTE.'.center(6) + '|' + 'Nome'.center(29) + '|' + 'Fome'.center(13) + '|' + 'Saude'.center(13) + '|' + 'Felicidade'.center(13) + '|\n'
+    s += '+' + '-' * 6 + '+' + '-' * 29 + '+' + '-' * 13 + '+' + '-' * 13 + '+' + '-' * 13 + '+\n'
+
+    cabeca = s
+
+    if tam_gela <= 19:
+        s += str(gela)
+
+        for i in range(19 - tam_gela):
+            s += '|' + ' ' * 6 + '|' + ' ' * 29 + '|' + ' ' * 13 + '|' + ' ' * 13 + '|' + ' ' * 13 + '|\n'
+
+        s += '+' + '-'*6 + '+' +'-'*29 + '+' + '-'*13 + '+' + '-'*13 + '+' + '-'*13 + '+'
+        print(s)
+        input('Pressione ENTER para continuar...')
+
+    else:
+        gela_str = str(gela).split('\n')[:-1]
+
+        for i in range(tam_gela // 19 + 1):
+            s = cabeca
+            for j in range(i*19, 19*(i+1)):
+                try:
+                    s += gela_str[j]
+                except IndexError:
+                    s += '|' + ' ' * 6 + '|' + ' ' * 29 + '|' + ' ' * 13 + '|' + ' ' * 13 + '|' + ' ' * 13 + '|\n'
+            s += '+' + '-' * 6 + '+' + '-' * 29 + '+' + '-' * 13 + '+' + '-' * 13 + '+' + '-' * 13 + '+'
+            print(s)
+            input(f'(Pagina {i+1}/{tam_gela// 19 + 1}) Pressione ENTER para continuar...')
+            limpar_tela()
 
 
 if __name__ == '__main__':
@@ -145,5 +228,47 @@ if __name__ == '__main__':
         gato, gela, bau = novo_gato()
         salvar_jogo(gato, gela, bau)
 
-    limpar_tela()
-    menu(gato)
+    salvo = True
+
+    while True:
+        limpar_tela()
+        menu(gato)
+
+        esc = input('>>> ')
+
+        if esc in ['2', '4']:
+            salvo = False
+
+        if esc == '1':
+            limpar_tela()
+            mostra_gela(gela)
+
+        elif esc == '3':
+            # Mostrar bau
+            limpar_tela()
+            mostrar_bau(bau)
+
+        elif esc == '5':
+            # Salvar jogo
+            salvo = True
+            limpar_tela()
+            salvar_jogo(gato, gela, bau)
+            sleep(1)
+
+        elif esc == '6':
+            # Deletar jogo
+            limpar_tela()
+            if deletar():
+                break
+
+        elif esc == '7':
+            # Sair do jogo
+            limpar_tela()
+            if sair(salvo):
+                break
+
+        else:
+            menu(gato)
+            esc = input('>>> ')
+
+    print('Tchau!!')
