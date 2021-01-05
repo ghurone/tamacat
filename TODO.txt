@@ -2,6 +2,7 @@
 	- Ordenar brinquedos por durabilidade
 	- Ordenar comidas por saciar
 	- Documentar o código!!!!
+	- Bug estranho esc
 
 # FAZER DEPOIS
 	- Login e Cadastro (SALVAR O JOGO ONLINE)
