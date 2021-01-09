@@ -16,8 +16,8 @@ class Bau:
     def __str__(self):
         s = ''
 
-        for i, nome in enumerate(self.brinquedos):
-            for brinqs in self.brinquedos[nome]:
+        for brinquedo in self.brinquedosort():
+            for brinqs in sorted(self.brinquedos[brinquedo.nome]):
                 s += '|' + str(brinqs) + '|\n'
 
         return s
@@ -42,14 +42,6 @@ class Bau:
         """Verifica se o Brinquedo está no baú."""
         return brinquedo.nome in self.brinquedos.keys()
 
-    def mostrar_brinquedos(self, brinq=None):
-        """Imprime Brinquedos de um determinado tipo, ou todos os Brinquedos do baú."""
-        if not brinq:
-            print(self)
-        else:
-            for brinqs in self.brinquedos[brinq.nome]:
-                print(brinqs)
-
     def numero_de_brinquedos(self):
         n = 0
 
@@ -58,3 +50,14 @@ class Bau:
                 n += 1
 
         return n
+
+    def brinquedosort(self):
+
+        brinquedos = [valor[0] for valor in self.brinquedos.values()]
+
+        for brinquedo in range(len(brinquedos) - 1, 0, -1):
+            for i in range(brinquedo):
+                if brinquedos[i].lt(brinquedos[i + 1]):
+                    brinquedos[i], brinquedos[i + 1] = brinquedos[i + 1], brinquedos[i]
+
+        return brinquedos

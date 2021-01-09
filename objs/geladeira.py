@@ -15,13 +15,15 @@ class Geladeira:
     def __str__(self):
         s = ''
 
-        for i, nome in enumerate(self.alimentos):
-            f = self.alimentos[nome]
+        comidas = sorted([valor[0] for valor in self.alimentos.values()], reverse=True)
+
+        for comida in comidas:
+            f = self.alimentos[comida.nome]
             s += '|' + f'{f[1]}'.center(6) + '|' + str(f[0]) + '|\n'
 
         return s
 
-    def add_comida(self, comida, quantidade):
+    def add_comida(self, comida, quantidade=1):
         """Adiciona uma determinada quantidade da Comida."""
         try:
             self.alimentos[comida.nome][1] += quantidade

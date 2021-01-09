@@ -195,7 +195,7 @@ def mostra_gela(gela):
         for i in range(19 - tam_gela):
             s += '|' + ' ' * 6 + '|' + ' ' * 29 + '|' + ' ' * 13 + '|' + ' ' * 13 + '|' + ' ' * 13 + '|\n'
 
-        s += '+' + '-'*6 + '+' +'-'*29 + '+' + '-'*13 + '+' + '-'*13 + '+' + '-'*13 + '+'
+        s += '+' + '-'*6 + '+' + '-'*29 + '+' + '-'*13 + '+' + '-'*13 + '+' + '-'*13 + '+'
         print(s)
         input('Pressione ENTER para continuar...')
 
@@ -265,7 +265,6 @@ if __name__ == '__main__':
                 break
 
         else:
-            menu(gato)
-            esc = input('>>> ')
+            continue
 
     print('Tchau!!')

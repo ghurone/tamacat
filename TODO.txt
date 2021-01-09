@@ -1,13 +1,7 @@
 # FAZER AGORA!!!!!!
-	- Ordenar brinquedos por durabilidade
-	- Ordenar comidas por saciar
 	- Documentar o código!!!!
-	- Bug estranho esc
 
 # FAZER DEPOIS
-	- Login e Cadastro (SALVAR O JOGO ONLINE)
-	- Modo Offline (sem login e tals)
-	- Esqueceu sua senha
 	- Fazer mini games para as ações
 	- Função brincar
 	- Raças de gato (Herança?) VERSAO 2.0 MT FODA-SE AGR
@@ -15,6 +9,7 @@
 	- Comida favorita
 	- CTRL + C -> Fechar o jogo (msg)
     - Redimensionar a janelinha (80x24)
+    - Corzinhas
 
  ,_     _
  |\\_,-//
