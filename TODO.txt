@@ -8,7 +8,7 @@
 	- Computador
 	- Comida favorita
 	- CTRL + C -> Fechar o jogo (msg)
-    - Redimensionar a janelinha (80x24)
+    - Redimensionar a janelinha (80x24)  # mode con: cols=80 lines=24
     - Corzinhas
 
  ,_     _
