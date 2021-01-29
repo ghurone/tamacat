@@ -142,6 +142,10 @@ def menu(cat):
 
 
 def mostrar_bau(bau):
+    """Mostra todos os brinquedos do baú.
+    Tipos diferentes: ordem decrescente, por felicidade.
+    Mesmo tipo: ordem crescente, por durabilidade."""
+
     tam_bau = bau.numero_de_brinquedos()
 
     s = '+' + '-' * 32 + '+' + '-' * 22 + '+' + '-' * 22 + '+\n'
@@ -150,7 +154,7 @@ def mostrar_bau(bau):
 
     cabeca = s
 
-    if tam_bau <= 19:
+    if tam_bau <= 19:  # verificar se vai precisar de mais de uma página
 
         s += str(bau)
 
@@ -181,6 +185,8 @@ def mostrar_bau(bau):
 
 
 def mostra_gela(gela):
+    """Mostra todos os alimentos da geladeira, em ordem decrescente de magnitude do saciamento."""
+
     tam_gela = len(gela.alimentos)
 
     s = '+' + '-'*6 + '+' +'-'*29 + '+' + '-'*13 + '+' + '-'*13 + '+' + '-'*13 + '+\n'
@@ -189,7 +195,7 @@ def mostra_gela(gela):
 
     cabeca = s
 
-    if tam_gela <= 19:
+    if tam_gela <= 19:  # verificar se vai precisar de mais de uma página
         s += str(gela)
 
         for i in range(19 - tam_gela):
@@ -233,15 +239,16 @@ if __name__ == '__main__':
 
         esc = input('>>> ')
 
-        if esc in ['2', '4']:
+        if esc in ['2', '4']:  # comer, brincar
             salvo = False
 
         if esc == '1':
+            # Ver geladeira
             limpar_tela()
             mostra_gela(gela)
 
         elif esc == '3':
-            # Mostrar bau
+            # Ver bau
             limpar_tela()
             mostrar_bau(bau)
 
@@ -253,7 +260,7 @@ if __name__ == '__main__':
             sleep(1)
 
         elif esc == '6':
-            # Deletar jogo
+            # Deletar jogo (abandonar gato)
             limpar_tela()
             if deletar():
                 break

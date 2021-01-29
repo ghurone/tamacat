@@ -52,6 +52,7 @@ class Bau:
         return n
 
     def brinquedosort(self):
+        """Retorna uma lista de brinquedos ordenados por felicidade."""
 
         brinquedos = [valor[0] for valor in self.brinquedos.values()]
 
