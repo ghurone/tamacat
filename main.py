@@ -131,9 +131,9 @@ def menu(cat):
     s += '|' + ' ' * 29 + '|' + f'Nome: {cat.nome}'.ljust(48) + '|\n'
     s += '|' + ' ' * 29 + '|' + f'Idade: {cat.mostrar_idade()}'.ljust(48) + '|\n'
     s += '|' + ' ' * 29 + '|' + f'Vacinado: {vac}'.ljust(48) + '|\n'
-    s += '|' + '-' * 29 + '|' + ('Fome:      ' + '[' + ('■' * (cat.fome // 5)).ljust(20) + ']').ljust(48) + '|\n'
-    s += '|' + acoes[-3].ljust(29) + '|' + ('Energia:   ' + '[' + ('■' * (cat.energia // 5)).ljust(20) + ']').ljust(48) + '|\n'
-    s += '|' + acoes[-2].ljust(29) + '|' + ('Saude:     ' + '[' + ('■' * (cat.saude // 5)).ljust(20) + ']').ljust(48) + '|\n'
+    s += '|' + '-' * 29 + '|' + ('Fome:       ' + '[' + ('■' * (cat.fome // 5)).ljust(20) + ']').ljust(48) + '|\n'
+    s += '|' + acoes[-3].ljust(29) + '|' + ('Energia:    ' + '[' + ('■' * (cat.energia // 5)).ljust(20) + ']').ljust(48) + '|\n'
+    s += '|' + acoes[-2].ljust(29) + '|' + ('Saude:      ' + '[' + ('■' * (cat.saude // 5)).ljust(20) + ']').ljust(48) + '|\n'
     s += '|' + acoes[-1].ljust(29) + '|' + ('Felicidade: ' + '[' + ('■' * (cat.feliz // 5)).ljust(20) + ']').ljust(48) + '|\n'
 
     s += '+' + '-' * 29 + '+' + '-' * 48 + '+'
