@@ -77,7 +77,7 @@ def bolinhas():
         esc = input('>>> ')
         t = time() - t0
 
-        if t > 1 or esc != str(n):
+        if t > 1.5 or esc != str(n):
             print('perdeu otario')
             return False
 
