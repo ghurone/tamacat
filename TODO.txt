@@ -1,14 +1,16 @@
 # FAZER AGORA!!!!!!
 	- Documentar o código!!!! OK
+	- Função brincar
+	- Fazer mini games para as ações
+	- CTRL + C -> Fechar o jogo (msg)
+    - Redimensionar a janelinha (80x24)  # mode con: cols=80 lines=24
 
 # FAZER DEPOIS
-	- Fazer mini games para as ações
-	- Função brincar
+	- Função comer
+	- Sistema de dinheiro
 	- Raças de gato (Herança?) VERSAO 2.0 MT FODA-SE AGR
 	- Computador
 	- Comida favorita
-	- CTRL + C -> Fechar o jogo (msg)
-    - Redimensionar a janelinha (80x24)  # mode con: cols=80 lines=24
     - Corzinhas
 
  ,_     _
@@ -23,7 +25,21 @@
  ((_/`(____,-'
 
 
- +------------------------------------------------------------------------------+
- +-----------------------------+------------------------------------------------+
- |                                                                              |
- |(1) - Ver geladeira          |                ,_     _                        |
+               ____
+          .-'""p 8o""`-.
+       .-'8888P'Y.`Y[ ' `-.
+     ,']88888b.J8oo_      '`.
+   ,' ,88888888888["        Y`.
+  /   8888888888P            Y8\
+ /    Y8888888P'             ]88\
+:     `Y88'   P              `888:
+:       Y8.oP '- >            Y88:
+|          `Yb  __             `'|
+:            `'d8888bo.          :
+:             d88888888ooo.      ;
+ \            Y88888888888P     /
+  \            `Y88888888P     /
+   `.            d88888P'    ,'
+     `.          888PP'    ,'
+       `-.      d8P'    ,-'
+          `-.,,_'__,,.-'

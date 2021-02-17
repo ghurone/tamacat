@@ -58,7 +58,7 @@ COMIDAS
 
 BRINQUEDOS
 
-    Bolinha de papel, borracha, lã    | felicidade: 15, 20, 35 durabilidade: 1, 3, 2  | bolinha aleatoria na tela
+    Bolinha de papel, borracha, lã    | felicidade: 15, 20, 35 durabilidade: 1, 3, 2  | bolinha aleatoria na tela (FEITO 99%)
     Bola de vôlei, basquete, futebol  | felicidade: 20, 25, 30 durabilidade: 2        |
     Caixa de papelão                  | felicidade: 50         durabilidade: 1        |
     Vara com cordinha                 | felicidade: 25         durabilidade: 2        | jogo da varinha
