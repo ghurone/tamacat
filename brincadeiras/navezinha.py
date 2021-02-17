@@ -99,11 +99,11 @@ def printar_tela(gato_name, tipo, r, m):
                 linha.append('|')
             elif j == 79:
                 linha.append('|\n')
-            elif i == 16 and 46 < j < 76:
-                linha.append(G[j-47])
             elif i == 17 and 46 < j < 76:
-                linha.append(raio[j-47])
+                linha.append(G[j-47])
             elif i == 18 and 46 < j < 76:
+                linha.append(raio[j-47])
+            elif i == 19 and 46 < j < 76:
                 linha.append(massa[j-47])
             elif j <= col:
                 linha.append(nave[i][j-1])
@@ -111,6 +111,14 @@ def printar_tela(gato_name, tipo, r, m):
                 linha.append(' ')
 
         miolo.append(linha)
+
+    for _ in range(20):
+
+        xn, yn = randint(1, 15), randint(2, 77)
+        while miolo[xn][yn] != ' ' or (xn == 1 and yn == 26):
+            xn, yn = randint(1, 15), randint(2, 77)
+
+        miolo[xn][yn] = choice(['*', '*', '.'])
 
     tela = '+' + '-' * 78 + '+\n'
     tela += faz_matriz(miolo)
@@ -152,3 +160,6 @@ def jogo_nave(gato_name):
         input('Tempo esgotado! Pressione ENTER para sair...')
 
     return False
+
+
+jogo_nave('Erick')

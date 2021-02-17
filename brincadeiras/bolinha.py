@@ -44,7 +44,7 @@ def print_tela(n):
         if k != n:
             xn, yn = randint(1, 18), randint(3, 76)
 
-            while meio_x - 2 <= xn <= meio_x + 2 and meio_y - 1 <= yn <= meio_y + 1 and miolo[xn][yn] != ' ':
+            while (meio_x - 2 <= xn <= meio_x + 2 and meio_y - 1 <= yn <= meio_y + 1) or miolo[xn][yn] != ' ':
                 xn, yn = randint(1, 18), randint(3, 76)
 
             miolo[xn][yn] = str(k)
