@@ -4,7 +4,7 @@ from objs.bau import Bau
 from objs.brinquedo import Brinquedo
 from objs.comida import Comida
 from config.saveload import salvar_jogo, carregar_jogo
-from config.funcoes import limpar_tela, sair, deletar, verificar_nome
+from config.funcoes import limpar_tela, sair, deletar, verificar_nome, ajustes_iniciais
 
 from random import randint, choice
 from time import sleep
@@ -222,6 +222,8 @@ def mostra_gela(gela):
 
 
 if __name__ == '__main__':
+
+    ajustes_iniciais()
 
     if carregar_jogo():
         gato, gela, bau = carregar_jogo()

@@ -9,6 +9,13 @@ def limpar_tela():
         system('clear')
 
 
+def ajustes_iniciais():
+    if 'nt' in name:
+        system('color f0')
+        system('mode con: cols=81 lines=24')
+        system('TITLE Tamacat')
+
+
 def verificar_nome(nome):
     if len(nome) > 32 or nome == '_pE_dRo_':
         return False
