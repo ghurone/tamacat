@@ -1,9 +1,8 @@
 # FAZER AGORA!!!!!!
 	- Documentar o código!!!! OK
-	- Função brincar
 	- Fazer mini games para as ações
 	- CTRL + C -> Fechar o jogo (msg)
-    - Redimensionar a janelinha (80x24)  # mode con: cols=80 lines=24
+	- Fazer como jogar
 
 # FAZER DEPOIS
 	- Função comer

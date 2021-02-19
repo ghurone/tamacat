@@ -1,7 +1,7 @@
 from objs.gatinho import Adotado, Comprado, Resgatado
 from objs.geladeira import Geladeira
 from objs.bau import Bau
-from objs.brinquedo import Brinquedo
+from objs.brinquedo import Bola, Nave
 from objs.comida import Comida
 from config.saveload import salvar_jogo, carregar_jogo
 from config.funcoes import limpar_tela, sair, deletar, verificar_nome, ajustes_iniciais
@@ -141,6 +141,43 @@ def menu(cat):
     print(s)
 
 
+def mostra_gela(gela):
+    """Mostra todos os alimentos da geladeira, em ordem decrescente de magnitude do saciamento."""
+
+    tam_gela = len(gela.alimentos)
+
+    s = '+' + '-'*6 + '+' +'-'*29 + '+' + '-'*13 + '+' + '-'*13 + '+' + '-'*13 + '+\n'
+    s += '|' + 'QTE.'.center(6) + '|' + 'Nome'.center(29) + '|' + 'Fome'.center(13) + '|' + 'Saude'.center(13) + '|' + 'Felicidade'.center(13) + '|\n'
+    s += '+' + '-' * 6 + '+' + '-' * 29 + '+' + '-' * 13 + '+' + '-' * 13 + '+' + '-' * 13 + '+\n'
+
+    cabeca = s
+
+    if tam_gela <= 19:  # verificar se vai precisar de mais de uma página
+        s += str(gela)
+
+        for i in range(19 - tam_gela):
+            s += '|' + ' ' * 6 + '|' + ' ' * 29 + '|' + ' ' * 13 + '|' + ' ' * 13 + '|' + ' ' * 13 + '|\n'
+
+        s += '+' + '-'*6 + '+' + '-'*29 + '+' + '-'*13 + '+' + '-'*13 + '+' + '-'*13 + '+'
+        print(s)
+        input('Pressione ENTER para continuar...')
+
+    else:
+        gela_str = str(gela).split('\n')[:-1]
+
+        for i in range(tam_gela // 19 + 1):
+            s = cabeca
+            for j in range(i*19, 19*(i+1)):
+                try:
+                    s += gela_str[j]
+                except IndexError:
+                    s += '|' + ' ' * 6 + '|' + ' ' * 29 + '|' + ' ' * 13 + '|' + ' ' * 13 + '|' + ' ' * 13 + '|\n'
+            s += '+' + '-' * 6 + '+' + '-' * 29 + '+' + '-' * 13 + '+' + '-' * 13 + '+' + '-' * 13 + '+'
+            print(s)
+            input(f'(Pagina {i+1}/{tam_gela// 19 + 1}) Pressione ENTER para continuar...')
+            limpar_tela()
+
+
 def mostrar_bau(bau):
     """Mostra todos os brinquedos do baú.
     Tipos diferentes: ordem decrescente, por felicidade.
@@ -184,41 +221,40 @@ def mostrar_bau(bau):
             limpar_tela()
 
 
-def mostra_gela(gela):
-    """Mostra todos os alimentos da geladeira, em ordem decrescente de magnitude do saciamento."""
+def brincar(cat, bau):
 
-    tam_gela = len(gela.alimentos)
+    s = '+' + '-' * 4 + '+' + '-' * 58 + '+' + '-' * 14 + '+\n'
+    s += '|' + '##'.center(4) + '|' + 'Nome'.center(58) + '|' + 'Felicidade'.center(14) + '|\n'
+    s += '+' + '-' * 4 + '+' + '-' * 58 + '+' + '-' * 14 + '+\n'
 
-    s = '+' + '-'*6 + '+' +'-'*29 + '+' + '-'*13 + '+' + '-'*13 + '+' + '-'*13 + '+\n'
-    s += '|' + 'QTE.'.center(6) + '|' + 'Nome'.center(29) + '|' + 'Fome'.center(13) + '|' + 'Saude'.center(13) + '|' + 'Felicidade'.center(13) + '|\n'
-    s += '+' + '-' * 6 + '+' + '-' * 29 + '+' + '-' * 13 + '+' + '-' * 13 + '+' + '-' * 13 + '+\n'
+    brinqs = bau.brinquedosort()
 
-    cabeca = s
+    for i in range(19):
 
-    if tam_gela <= 19:  # verificar se vai precisar de mais de uma página
-        s += str(gela)
+        try:
+            s += '|' + f'{i+1}'.center(4) + '|' + f'{brinqs[i].nome}'.center(58) + '|' + f'{brinqs[i].feliz}'.center(14) + '|\n'
+        except IndexError:
+            s += '|' + ' '*4 + '|' + ' '*58 + '|' + ' '*14 + '|\n'
 
-        for i in range(19 - tam_gela):
-            s += '|' + ' ' * 6 + '|' + ' ' * 29 + '|' + ' ' * 13 + '|' + ' ' * 13 + '|' + ' ' * 13 + '|\n'
+    s += '+' + '-' * 4 + '+' + '-' * 58 + '+' + '-' * 14 + '+'
 
-        s += '+' + '-'*6 + '+' + '-'*29 + '+' + '-'*13 + '+' + '-'*13 + '+' + '-'*13 + '+'
+    print(s)
+
+    brinq = input('Digite o número do brinquedo para jogar (ENTER para sair): ')
+    while brinq != '' and (not brinq.isnumeric() or int(brinq) > len(brinqs)):
+        limpar_tela()
         print(s)
-        input('Pressione ENTER para continuar...')
+        if not brinq.isnumeric():
+            brinq = input('Digite um valor numérico (ENTER para sair): ')
+        else:
+            brinq = input('Digite um número válido (ENTER para sair): ')
 
-    else:
-        gela_str = str(gela).split('\n')[:-1]
+    if brinq != '':
 
-        for i in range(tam_gela // 19 + 1):
-            s = cabeca
-            for j in range(i*19, 19*(i+1)):
-                try:
-                    s += gela_str[j]
-                except IndexError:
-                    s += '|' + ' ' * 6 + '|' + ' ' * 29 + '|' + ' ' * 13 + '|' + ' ' * 13 + '|' + ' ' * 13 + '|\n'
-            s += '+' + '-' * 6 + '+' + '-' * 29 + '+' + '-' * 13 + '+' + '-' * 13 + '+' + '-' * 13 + '+'
-            print(s)
-            input(f'(Pagina {i+1}/{tam_gela// 19 + 1}) Pressione ENTER para continuar...')
-            limpar_tela()
+        limpar_tela()
+
+        menor_dura = min(bau.brinquedos[brinqs[int(brinq)-1].nome])
+        cat.brincar(bau, menor_dura)
 
 
 if __name__ == '__main__':
@@ -241,7 +277,7 @@ if __name__ == '__main__':
 
         esc = input('>>> ')
 
-        if esc in ['2', '4']:  # comer, brincar
+        if esc in ['2']:  # comer
             salvo = False
 
         if esc == '1':
@@ -253,6 +289,10 @@ if __name__ == '__main__':
             # Ver bau
             limpar_tela()
             mostrar_bau(bau)
+
+        elif esc == '4':
+            limpar_tela()
+            brincar(gato, bau)
 
         elif esc == '5':
             # Salvar jogo

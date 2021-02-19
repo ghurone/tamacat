@@ -59,14 +59,11 @@ COMIDAS
 BRINQUEDOS
 
     Bolinha de papel, borracha, lã    | felicidade: 15, 20, 35 durabilidade: 1, 3, 2  | bolinha aleatoria na tela (FEITO 99%)
-    Bola de vôlei, basquete, futebol  | felicidade: 20, 25, 30 durabilidade: 2        |
-    Caixa de papelão                  | felicidade: 50         durabilidade: 1        |
+    Bola de vôlei, basquete, futebol  | felicidade: 20, 25, 30 durabilidade: 2        | bolinha aleatoria na tela (FEITO 99%)
+    Caixa de papelão                  | felicidade: 50         durabilidade: 1        | animação
     Vara com cordinha                 | felicidade: 25         durabilidade: 2        | jogo da varinha
-    Arranhador pegueno, médio, grande | felicidade: 15         durabilidade: 2, 3, 4  |
-    Torre pequena, média, grande      | felicidade: 10, 20, 30 durabilidade: 4, 3, 2  | Escalada
-    Nave espacial                     | felicidade: 40         durabilidade: 1        | calcular a velocidade de escape
-    Cubo mágico                       | felicidade: 5          durabilidade: 6        |
-    Iôiô                              | felicidade: 15         durabilidade: 2        |
-    Ratinho                           | felicidade: 10         durabilidade: 2        |
-    Pião                              | felicidade: 20         durabilidade: 2        |
-
+    Arranhador pegueno, médio, grande | felicidade: 15         durabilidade: 2, 3, 4  | jogo da garra
+    Torre pequena, média, grande      | felicidade: 10, 20, 30 durabilidade: 4, 3, 2  | escalada
+    Nave espacial                     | felicidade: 40         durabilidade: 1        | calcular a v_escape (FEITO 99%)
+    Iôiô                              | felicidade: 15         durabilidade: 2        | animação
+    Ratinho                           | felicidade: 10         durabilidade: 2        | forca de rato

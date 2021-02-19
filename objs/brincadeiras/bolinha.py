@@ -1,4 +1,4 @@
-from func import faz_matriz
+from objs.brincadeiras.func import faz_matriz
 
 from time import time
 from random import randint
@@ -58,11 +58,12 @@ def print_tela(n):
     print(tela)
 
 
-def jogo_bolinhas():
+def jogo_bolinhas(feli):
 
     # COMO JOGAR
+    dif = feli//4
 
-    for i in range(5):
+    for i in range(dif):
 
         n = randint(0, 9)
         print_tela(n)

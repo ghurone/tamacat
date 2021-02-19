@@ -1,5 +1,6 @@
-from func import faz_matriz
+from objs.brincadeiras.func import faz_matriz
 
+from os import system
 from random import randint, choice
 from time import time
 
@@ -130,6 +131,7 @@ def printar_tela(gato_name, tipo, r, m):
 def jogo_nave(gato_name):
 
     # COMO JOGAR
+    system('color 0f')
 
     raio = float('6.' + str(randint(0, 999)))
     massa = choice([float('5.' + str(randint(500, 999))), float('6.' + str(randint(0, 499)))])
@@ -149,6 +151,7 @@ def jogo_nave(gato_name):
     if t <= 60 and (result - 0.001 <= resp <= result + 0.001):
         printar_tela(gato_name, 1, raio, massa)
         input('Pressione ENTER para sair...')
+        system('color f0')
         return True
 
     elif t <= 60 and not (result - 0.001 <= resp <= result + 0.001):
@@ -159,7 +162,5 @@ def jogo_nave(gato_name):
         printar_tela(gato_name, 0, raio, massa)
         input('Tempo esgotado! Pressione ENTER para sair...')
 
+    system('color f0')
     return False
-
-
-jogo_nave('Erick')

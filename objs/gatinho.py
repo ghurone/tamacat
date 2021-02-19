@@ -23,11 +23,15 @@ class Gatinho:
 
     def brincar(self, bau, brinquedo):
         """?"""
-        if not self.dormindo:
-            # lista de brincadeiras? classe nova?
-            pass
-        else:
-            print(f'{self.nome} está dormindo, acorde-o para brincar!')
+        res = brinquedo.brincadeira(self)
+
+        if res:
+            self.feliz += brinquedo.feliz
+            self.feliz = self.atualizar_attr(self.feliz)
+
+        brinquedo.usar()
+        if brinquedo.quebrou():
+            bau.remover_brinquedo(brinquedo)
 
     def dormir(self):
         """Muda o estado do gato para dormindo."""
