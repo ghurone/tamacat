@@ -28,4 +28,4 @@ def como_jogar(titulo, conteudo):
     s += '+' + '-' * 78 + '+'
 
     print(s)
-    input('PRESSIONE ENTER PARA JOGAR!')
+    input('Pressione ENTER para jogar!')
