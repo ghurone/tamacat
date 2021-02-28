@@ -9,3 +9,23 @@ def faz_matriz(matriz):
             s += matriz[i][j]
 
     return s
+
+
+def como_jogar(titulo, conteudo):
+    s = '+' + '-'*78 + '+\n'
+    s += '|' + f'{titulo.upper()}'.center(78) + '|\n'
+    s += '|' + ' ' * 78 + '|\n'
+    s += '|' + '  - INSTRUÇÕES:'.ljust(78) + '|\n'
+    s += '|' + ' ' * 78 + '|\n'
+
+    for i in range(17):
+        try:
+            linha = conteudo[i]
+            s += '|' + linha.ljust(78) + '|\n'
+        except IndexError:
+            s += '|' + ' ' * 78 + '|\n'
+
+    s += '+' + '-' * 78 + '+'
+
+    print(s)
+    input('PRESSIONE ENTER PARA JOGAR!')

@@ -1,5 +1,6 @@
 from objs.brincadeiras.bolinha import jogo_bolinhas
 from objs.brincadeiras.navezinha import jogo_nave
+from objs.brincadeiras.func import como_jogar
 
 
 class Brinquedo:
@@ -62,6 +63,7 @@ class Bola(Brinquedo):
 
     def brincadeira(self, gato):
         # como jogar
+        como_jogar('Jogo da Bolinha', ['JOGO', 'BOLINHA'])
         return jogo_bolinhas(self.feliz)
 
 

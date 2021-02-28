@@ -1,8 +1,8 @@
 # FAZER AGORA!!!!!!
-	- Documentar o código!!!! OK
+	- Documentar o código!!!!
 	- Fazer mini games para as ações
-	- CTRL + C -> Fechar o jogo (msg)
 	- Fazer como jogar
+    - CTRL + C -> Fechar o jogo (msg)
 
 # FAZER DEPOIS
 	- Função comer

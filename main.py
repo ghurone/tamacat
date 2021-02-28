@@ -127,6 +127,7 @@ def menu(cat):
         s += '|' + acoes[i].ljust(29) + '|' + gato[i].center(48) + '|\n'  # geral
 
     s += '|' + ' ' * 29 + '|' + ' ' * 48 + '|\n'
+    s += '|' + ' ' * 29 + '|' + ' ' * 48 + '|\n'
     s += '|' + ' ' * 29 + '+' + '-' * 48 + '+\n'
     s += '|' + ' ' * 29 + '|' + f'Nome: {cat.nome}'.ljust(48) + '|\n'
     s += '|' + ' ' * 29 + '|' + f'Idade: {cat.mostrar_idade()}'.ljust(48) + '|\n'
