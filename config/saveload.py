@@ -1,5 +1,7 @@
 from pickle import dump, loads
-from os import remove
+from os import remove, path
+
+path_save = path.join(path.expanduser('~'), 'tamacat.save')
 
 
 def salvar_jogo(*objs):
@@ -9,11 +11,9 @@ def salvar_jogo(*objs):
             if i == 0:
                 t = 'wb'
 
-            with open('./save.file', t) as file:
+            with open(path_save, t) as file:
                 dump(objs[i], file)
                 file.write(bytes('_pE_dRo_'.encode('utf8')))
-
-        print('Jogo salvo!')
 
     except Exception as e:
         print(e)
@@ -21,7 +21,7 @@ def salvar_jogo(*objs):
 
 def carregar_jogo():
     try:
-        with open('./save.file', 'rb') as file:
+        with open(path_save, 'rb') as file:
             objs = file.read()
             objs = objs.split('_pE_dRo_'.encode('utf8'))
 
@@ -32,12 +32,11 @@ def carregar_jogo():
         return list_objs
 
     except FileNotFoundError:
-        print('Não existe nenhum jogo salvo.')
         return False
 
 
 def deletar_jogo():
     try:
-        remove('./save.file')
+        remove(path_save)
     except Exception as e:
         print(e)

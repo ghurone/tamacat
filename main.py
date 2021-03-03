@@ -9,28 +9,64 @@ from config.funcoes import limpar_tela, sair, deletar, verificar_nome, ajustes_i
 from random import randint, choice
 from time import sleep
 
+from keyboard import wait
+
 humores = ['feliz', 'triste', 'quieto', 'brincalhão', 'carinhoso', 'assustado', 'irritado']
+
+
+def tela_inicial():
+    fonte = ['                                    /)                              ',
+             '                            |\\---/|((                              ',
+             "                            | ° ° | ))                              ",
+             '                             \\_T_/_//                               ',
+             ' ________  _______  _____ _{_}_  {_}____  ______  _______  ________ ',
+             '|_      _||   _   ||    | |    ||   _   ||   ___||   _   ||_      _|',
+             '  |    |  |  |_|  ||     -     ||  |_|  ||  |    |  |_|  |  |    |  ',
+             '  |    |  |   _   ||   _   _   ||   _   ||  |___ |   _   |  |    |  ',
+             '  |____|  |__| |__||__| |_| |__||__| |__||______||__| |__|  |____|  ']
+
+    botao = ['.-----------------------------.',
+             '| Pressione ENTER para jogar! |',
+             "'-----------------------------'"]
+
+    s = '+' + '-'*78 + '+\n'
+
+    for i in range(21):
+        if 1 <= i <= 9:
+            s += '|' + fonte[i-1].center(78) + '|\n'
+        elif i == 11:
+            s += '|' + 'O MELHOR JOGO DO MUNDO!'.center(78) + '|\n'
+        elif 16 <= i <= 18:
+            s += '|' + botao[i-16].center(78) + '|\n'
+        elif i == 20:
+            s += '|' + '© RaGhu 2021 '.rjust(78) + '|\n'
+        else:
+            s += '|' + ' '*78 + '|\n'
+
+    s += '+' + '-' * 78 + '+'
+    print(s)
+    input(wait('enter'))
 
 
 def novo_gato():
     """Retorna um Gatinho, Geladeira e Bau para um gato inicial."""
-    # limpar_tela()
+    limpar_tela()
 
     print('Você está pensando em ter um gato.')
-    # sleep(2)
+    sleep(2)
     print('\nUm amigo seu conhece alguém que está vendendo um gato bonitininho.')
-    # sleep(3)
+    sleep(3)
     print('Mas também tem um gato que sempre têm andado pela vizinhança, e ele parece muito simpático.')
-    # sleep(3.5)
+    sleep(3.5)
     print('Por outro lado, também existe um abrigo de gatos perto da sua casa.')
-    # sleep(3)
+    sleep(3)
 
     escolha = input('\nVocê deseja (C)omprar, (R)esgatar ou (A)dotar o gato?\n>>> ')
     while escolha.lower() != 'c' and escolha.lower() != 'r' and escolha.lower() != 'a' \
             and escolha.lower() != 'comprar' and escolha.lower() != 'resgatar' and escolha.lower() != 'adotar':
         escolha = input('Você deseja (C)omprar, (R)esgatar ou (A)dotar o gato?\n>>> ')
 
-    # limpar_tela()
+    limpar_tela()
 
     if escolha[0] in 'Cc':
         print('Você conversou com o conhecido do seu amigo e comprou o gatinho!')
@@ -61,7 +97,7 @@ def novo_gato():
 
         while i.lower() != 'f' and i.lower() != 'a' and i.lower() != 'filhote' and i.lower() != 'adulto':
             i = input('Você vai adotar um gato (F)ilhote ou (A)dulto?\n>>> ')
-        # sleep(1)
+        sleep(1)
 
         print('Você foi até o abrigo e escolheu o seu gatinho. Ou será que foi ele quem te escolheu?')
 
@@ -78,7 +114,7 @@ def novo_gato():
 
         ga = Adotado('', idade, fome, energia, saude, feliz, vac)
 
-    # sleep(2)
+    sleep(2)
     nome = input('Hora de uma decisão difícil... Qual vai ser o nome do seu gato?\n>>> ')
 
     while not verificar_nome(nome):
@@ -261,16 +297,20 @@ def brincar(cat, bau):
 if __name__ == '__main__':
 
     ajustes_iniciais()
+    tela_inicial()
+    limpar_tela()
 
     if carregar_jogo():
         gato, gela, bau = carregar_jogo()
-        print('Jogo carregado! :)')
+        print('Jogo carregado! :)'.center(81))
+        sleep(1)
 
     else:
         gato, gela, bau = novo_gato()
         salvar_jogo(gato, gela, bau)
 
     salvo = True
+
 
     while True:
         limpar_tela()
