@@ -1,4 +1,5 @@
 from objs.gatinho import Adotado, Resgatado, Comprado
+from objs.brinquedo import *
 from objs.bau import Bau
 from objs.geladeira import Geladeira
 from objs.comida import Comida
@@ -138,12 +139,7 @@ class AppWindow:
         else:
             self.gato_aba.SonoCheck.deselect()
 
-        if isinstance(gato, Resgatado):
-            self.gato_aba.Tipo.current(2)
-        elif isinstance(gato, Comprado):
-            self.gato_aba.Tipo.current(1)
-        elif isinstance(gato, Adotado):
-            self.gato_aba.Tipo.current(0)
+        self.gato_aba.Tipo.current(self.gato_aba.list_gato.index(self.bau_aba.tipo_brinq(gato)))
 
     def set_gela(self, gela):
         comidas = [(i[1], i[0].nome, i[0].saciar, i[0].saude, i[0].feliz) for i in gela.alimentos.values()]

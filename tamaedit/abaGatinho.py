@@ -5,6 +5,7 @@ from tkinter import ttk
 class AbaGatinho:
 
     def __init__(self, app):
+        self.list_gato = ['Adotado', 'Comprado', 'Resgatado']
         self.frame = tk.Frame(app.window, background="#68BCED")
 
         self.secondFrame = tk.Frame(self.frame)
@@ -213,7 +214,7 @@ class AbaGatinho:
         self.Tipo.place(x=170, y=40, height=21, width=143)
         self.Tipo.configure(font="-family {Small Fonts} -size 10")
         self.Tipo.configure(takefocus="")
-        self.Tipo.configure(values=['Adotado', 'Comprado', 'Resgatado'])
+        self.Tipo.configure(values=self.list_gato)
         self.Tipo.configure(state='readonly')
 
     def del_inputs(self):
