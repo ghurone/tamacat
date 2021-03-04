@@ -311,7 +311,6 @@ if __name__ == '__main__':
 
     salvo = True
 
-
     while True:
         limpar_tela()
         menu(gato)

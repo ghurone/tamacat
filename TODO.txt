@@ -1,5 +1,6 @@
 # FAZER AGORA!!!!!!
 	- Documentar o código!!!!
+	- Reformular o NOVO JOGADOR
 	- Fazer mini games para as ações
 	- Fazer como jogar
     - CTRL + C -> Fechar o jogo (msg)
