@@ -2,7 +2,6 @@ from objs.gatinho import Adotado, Resgatado, Comprado
 from objs.bau import Bau
 from objs.geladeira import Geladeira
 from objs.comida import Comida
-from objs.brinquedo import Bola, Caixa, Varinha, Arranhador, Torre, Nave, Ioio, Ratinho
 
 from tamaedit.abaGatinho import AbaGatinho
 from tamaedit.abaGeladeira import AbaGeladeira
@@ -185,7 +184,6 @@ class AppWindow:
     def salvar(self):
         gela = Geladeira()
         bau = Bau()
-        gato = None
 
         # Criando o objeto Gato
 
@@ -197,12 +195,7 @@ class AppWindow:
         feliz = int(self.gato_aba.FelizScale.get())
         vac = True if self.gato_aba.Vac.get() == 1 else False
 
-        if self.gato_aba.Tipo.get() == 'Comprado':
-            gato = Comprado(nome, idade, fome, energ, saude, feliz, vac)
-        elif self.gato_aba.Tipo.get() == 'Resgatado':
-            gato = Resgatado(nome, idade, fome, energ, saude, feliz, vac)
-        elif self.gato_aba.Tipo.get() == 'Adotado':
-            gato = Adotado(nome, idade, fome, energ, saude, feliz, vac)
+        gato = eval(self.gato_aba.Tipo.get())(nome, idade, fome, energ, saude, feliz, vac)
 
         if self.gato_aba.Sono.get() == 1:
             gato.dormindo = True

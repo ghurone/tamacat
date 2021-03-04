@@ -271,7 +271,15 @@ class AbaGeladeira:
         new_values = [self.QuantInput.get(), self.NameInput.get(), self.SaciarInput.get(), self.SaudeInput.get(),
                       self.FelizInput.get()]
 
-        self.Table.item(item, text='', values=new_values)
+        deboa = True
+        for i in new_values:
+            if i == '':
+                deboa = False
+
+        if deboa:
+            self.Table.item(item, text='', values=new_values)
+        else:
+            messagebox.showerror('Erro!!', 'Ops, você deixou algum campo vazio.')
 
     def button_row_del(self):
         item = self.Table.selection()[0]
