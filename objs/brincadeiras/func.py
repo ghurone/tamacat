@@ -1,4 +1,6 @@
 def faz_matriz(matriz):
+    """Representa uma matriz como string."""
+
     col = len(matriz[0])
     lin = len(matriz)
 
@@ -12,6 +14,8 @@ def faz_matriz(matriz):
 
 
 def como_jogar(titulo, conteudo):
+    """Cria a tela de "como jogar" para um jogo, recebendo o título e as instruções daquele jogo."""
+
     s = '+' + '-'*78 + '+\n'
     s += '|' + f'{titulo.upper()}'.center(78) + '|\n'
     s += '|' + ' ' * 78 + '|\n'

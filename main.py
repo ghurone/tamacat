@@ -15,6 +15,8 @@ humores = ['feliz', 'triste', 'quieto', 'brincalhão', 'carinhoso', 'assustado',
 
 
 def tela_inicial():
+    """`Printa a tela inicial do jogo."""
+
     fonte = ['                                    /)                              ',
              '                            |\\---/|((                              ',
              "                            | ° ° | ))                              ",
@@ -45,11 +47,12 @@ def tela_inicial():
 
     s += '+' + '-' * 78 + '+'
     print(s)
-    input(wait('enter'))
+    input(wait('enter'))  # para não dar para digitar nada no input além de enter
 
 
 def novo_gato():
     """Retorna um Gatinho, Geladeira e Bau para um gato inicial."""
+
     limpar_tela()
 
     print('Você está pensando em ter um gato.')
@@ -129,6 +132,7 @@ def novo_gato():
 
 def menu(cat):
     """Imprime as características do gato."""
+
     if cat.vacinado:
         vac = 'Sim'
     else:
@@ -259,11 +263,13 @@ def mostrar_bau(bau):
 
 
 def brincar(cat, bau):
+    """Ações principais da ação brincar no menu."""
 
     s = '+' + '-' * 4 + '+' + '-' * 58 + '+' + '-' * 14 + '+\n'
     s += '|' + '##'.center(4) + '|' + 'Nome'.center(58) + '|' + 'Felicidade'.center(14) + '|\n'
     s += '+' + '-' * 4 + '+' + '-' * 58 + '+' + '-' * 14 + '+\n'
 
+    # imprime os brinquedos disponíveis para brincar em ordem de felicidade
     brinqs = bau.brinquedosort()
 
     for i in range(19):
@@ -290,7 +296,9 @@ def brincar(cat, bau):
 
         limpar_tela()
 
+        # seleciona o brinquedo com menor durabilidade dentre os do tipo escolhido para brincar
         menor_dura = min(bau.brinquedos[brinqs[int(brinq)-1].nome])
+
         cat.brincar(bau, menor_dura)
 
 

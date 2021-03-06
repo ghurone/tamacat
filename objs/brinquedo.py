@@ -15,6 +15,7 @@ class Brinquedo:
 
     def usar(self, valor=1):
         """ Diminui a durabilidade do brinquedo."""
+
         self.dura -= valor
 
     def quebrou(self):
@@ -62,6 +63,7 @@ class Bola(Brinquedo):
         super().__init__(nome, feliz, dura)
 
     def brincadeira(self, gato):
+
         cont = ['  A tela será preenchida com todos os algarismos de 0 a 9, e um deles',
                 ' estará dentro da bolinha.', '',
                 '  Pegue a bolinha ao teclar o algarismo contido nela, o mais',
@@ -69,6 +71,7 @@ class Bola(Brinquedo):
                 ' tipo de bolinha escolhida.', '',
                 '  Caso digite o algarismo errado ou seja muito lento, perderá o jogo.']
         como_jogar('Jogo da Bolinha', cont)
+
         return jogo_bolinhas(self.feliz)
 
 
@@ -114,6 +117,7 @@ class Nave(Brinquedo):
 
     @staticmethod
     def brincadeira(gato):
+
         cont = ['  Você é um gatinho astronauta!', '',
                 '  Para viajar à Lua, calcule corretamente a velocidade de escape necessária',
                 ' para a nave decolar, usando os seguintes dados fornecidos:', '',
@@ -129,6 +133,7 @@ class Nave(Brinquedo):
                 '                                    \\/     R',
                 ]
         como_jogar('Jogo da Nave', cont)
+
         return jogo_nave(gato.nome)
 
 
@@ -148,4 +153,3 @@ class Ratinho(Brinquedo):
     def brincadeira(self, gato):
         # como jogar
         pass
-

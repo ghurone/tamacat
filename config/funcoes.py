@@ -11,9 +11,9 @@ def limpar_tela():
 
 def ajustes_iniciais():
     if 'nt' in name:
-        system('color f0')
-        system('mode con: cols=81 lines=24')
-        system('TITLE Tamacat')
+        system('color f0')  # define a cor do terminal (branco)
+        system('mode con: cols=81 lines=24')  # ajuda o tamanho do terminal
+        system('TITLE Tamacat')  # define o título do terminal como Tamacat
 
 
 def verificar_nome(nome):

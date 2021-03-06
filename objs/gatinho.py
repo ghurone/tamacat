@@ -22,7 +22,9 @@ class Gatinho:
         self.saude = self.atualizar_attr(self.saude)
 
     def brincar(self, bau, brinquedo):
-        """?"""
+        """Realiza as ações resultantes da brincadeira no objeto gatinho, no baú e no próprio brinquedo."""
+
+        # resultado da brincadeira (se ganhou ou perdeu)
         res = brinquedo.brincadeira(self)
 
         if res:
@@ -35,6 +37,7 @@ class Gatinho:
 
     def dormir(self):
         """Muda o estado do gato para dormindo."""
+
         if not self.dormindo:
             self.dormindo = True
             print('zzZzZzzzz')
@@ -43,6 +46,7 @@ class Gatinho:
 
     def acordar(self):
         """Acorda o gato se ele estiver dormindo."""
+
         if self.dormindo:
             self.dormindo = False
             print(f'{self.nome} acordou!')
@@ -51,6 +55,7 @@ class Gatinho:
 
     def crescer(self):
         """Aumenta a idade."""
+
         self.idade += 1
 
     @staticmethod
@@ -68,6 +73,9 @@ class Gatinho:
 
     @staticmethod
     def atualizar_attr(attr, sup=100, inf=0):
+        """Não permite que um atributo exceda seus limites superior
+         ou inferior ao ser atualizado."""
+
         if attr >= sup:
             return sup
         elif attr <= inf:
@@ -76,6 +84,8 @@ class Gatinho:
             return attr
 
     def mostrar_idade(self):
+        """Firulas para printar a idade bonitinha."""
+
         mes = self.idade % 12
         ano = self.idade // 12
 
