@@ -15,11 +15,9 @@ class Gatinho:
         """Diminui a fome e altera a saúde dependendo dos níveis de saúde da Comida."""
         geladeira.pegar_comida(comida.nome)
 
-        self.fome -= comida.saciar
-        self.fome = self.atualizar_attr(self.fome)
+        self.fome = self.atualizar_attr(self.fome, comida.saciar, sinal=-1)
 
-        self.saude += comida.saude
-        self.saude = self.atualizar_attr(self.saude)
+        self.saude = self.atualizar_attr(self.saude, comida.saude)
 
     def brincar(self, bau, brinquedo):
         """Realiza as ações resultantes da brincadeira no objeto gatinho, no baú e no próprio brinquedo."""
@@ -28,8 +26,7 @@ class Gatinho:
         res = brinquedo.brincadeira(self)
 
         if res:
-            self.feliz += brinquedo.feliz
-            self.feliz = self.atualizar_attr(self.feliz)
+            self.feliz = self.atualizar_attr(self.feliz, brinquedo.feliz)
 
         brinquedo.usar()
         if brinquedo.quebrou():
@@ -72,9 +69,11 @@ class Gatinho:
         print('rrrRRRRrrrRRr')
 
     @staticmethod
-    def atualizar_attr(attr, sup=100, inf=0):
-        """Não permite que um atributo exceda seus limites superior
-         ou inferior ao ser atualizado."""
+    def atualizar_attr(attr, valor, sinal=1, sup=100, inf=0):
+        """Atualiza um atributo, não permitindo que ele exceda
+        seus limites superior ou inferior ao ser atualizado."""
+
+        attr += valor*sinal
 
         if attr >= sup:
             return sup

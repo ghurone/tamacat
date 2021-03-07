@@ -64,7 +64,7 @@ def print_tela(n):
         k += 1
 
     tela = '+' + '-' * 78 + '+\n'
-    tela += faz_matriz(miolo)
+    tela += bfunc.faz_matriz(miolo)
     tela += '+' + '-' * 78 + '+'
 
     print(tela)

@@ -1,10 +1,8 @@
-from objs.gatinho import Adotado, Comprado, Resgatado
-from objs.geladeira import Geladeira
-from objs.bau import Bau
-from objs.brinquedo import Bola, Nave
-from objs.comida import Comida
-from config.saveload import salvar_jogo, carregar_jogo
-from config.funcoes import limpar_tela, sair, deletar, verificar_nome, ajustes_iniciais
+import config.funcoes as cfunc
+import config.saveload as csave
+import objs.gatinho as ogato
+import objs.geladeira as ogela
+import objs.bau as obau
 
 from random import randint, choice
 from time import sleep
@@ -31,19 +29,19 @@ def tela_inicial():
              '| Pressione ENTER para jogar! |',
              "'-----------------------------'"]
 
-    s = '+' + '-'*78 + '+\n'
+    s = '+' + '-' * 78 + '+\n'
 
     for i in range(21):
         if 1 <= i <= 9:
-            s += '|' + fonte[i-1].center(78) + '|\n'
+            s += '|' + fonte[i - 1].center(78) + '|\n'
         elif i == 11:
             s += '|' + 'O MELHOR JOGO DO MUNDO!'.center(78) + '|\n'
         elif 16 <= i <= 18:
-            s += '|' + botao[i-16].center(78) + '|\n'
+            s += '|' + botao[i - 16].center(78) + '|\n'
         elif i == 20:
             s += '|' + '© RaGhu 2021 '.rjust(78) + '|\n'
         else:
-            s += '|' + ' '*78 + '|\n'
+            s += '|' + ' ' * 78 + '|\n'
 
     s += '+' + '-' * 78 + '+'
     print(s)
@@ -53,7 +51,7 @@ def tela_inicial():
 def novo_gato():
     """Retorna um Gatinho, Geladeira e Bau para um gato inicial."""
 
-    limpar_tela()
+    cfunc.limpar_tela()
 
     print('Você está pensando em ter um gato.')
     sleep(2)
@@ -69,7 +67,7 @@ def novo_gato():
             and escolha.lower() != 'comprar' and escolha.lower() != 'resgatar' and escolha.lower() != 'adotar':
         escolha = input('Você deseja (C)omprar, (R)esgatar ou (A)dotar o gato?\n>>> ')
 
-    limpar_tela()
+    cfunc.limpar_tela()
 
     if escolha[0] in 'Cc':
         print('Você conversou com o conhecido do seu amigo e comprou o gatinho!')
@@ -120,7 +118,7 @@ def novo_gato():
     sleep(2)
     nome = input('Hora de uma decisão difícil... Qual vai ser o nome do seu gato?\n>>> ')
 
-    while not verificar_nome(nome):
+    while not cfunc.verificar_nome(nome):
         nome = input('Insira um nome com um tamanho menor que 43:\n>>> ')
 
     ga.nome = nome
@@ -173,9 +171,12 @@ def menu(cat):
     s += '|' + ' ' * 29 + '|' + f'Idade: {cat.mostrar_idade()}'.ljust(48) + '|\n'
     s += '|' + ' ' * 29 + '|' + f'Vacinado: {vac}'.ljust(48) + '|\n'
     s += '|' + '-' * 29 + '|' + ('Fome:       ' + '[' + ('■' * (cat.fome // 5)).ljust(20) + ']').ljust(48) + '|\n'
-    s += '|' + acoes[-3].ljust(29) + '|' + ('Energia:    ' + '[' + ('■' * (cat.energia // 5)).ljust(20) + ']').ljust(48) + '|\n'
-    s += '|' + acoes[-2].ljust(29) + '|' + ('Saude:      ' + '[' + ('■' * (cat.saude // 5)).ljust(20) + ']').ljust(48) + '|\n'
-    s += '|' + acoes[-1].ljust(29) + '|' + ('Felicidade: ' + '[' + ('■' * (cat.feliz // 5)).ljust(20) + ']').ljust(48) + '|\n'
+    s += '|' + acoes[-3].ljust(29) + '|' + ('Energia:    ' + '[' + ('■' * (cat.energia // 5)).ljust(20) + ']').ljust(
+        48) + '|\n'
+    s += '|' + acoes[-2].ljust(29) + '|' + ('Saude:      ' + '[' + ('■' * (cat.saude // 5)).ljust(20) + ']').ljust(
+        48) + '|\n'
+    s += '|' + acoes[-1].ljust(29) + '|' + ('Felicidade: ' + '[' + ('■' * (cat.feliz // 5)).ljust(20) + ']').ljust(
+        48) + '|\n'
 
     s += '+' + '-' * 29 + '+' + '-' * 48 + '+'
 
@@ -187,8 +188,9 @@ def mostra_gela(gela):
 
     tam_gela = len(gela.alimentos)
 
-    s = '+' + '-'*6 + '+' +'-'*29 + '+' + '-'*13 + '+' + '-'*13 + '+' + '-'*13 + '+\n'
-    s += '|' + 'QTE.'.center(6) + '|' + 'Nome'.center(29) + '|' + 'Fome'.center(13) + '|' + 'Saude'.center(13) + '|' + 'Felicidade'.center(13) + '|\n'
+    s = '+' + '-' * 6 + '+' + '-' * 29 + '+' + '-' * 13 + '+' + '-' * 13 + '+' + '-' * 13 + '+\n'
+    s += '|' + 'QTE.'.center(6) + '|' + 'Nome'.center(29) + '|' + 'Fome'.center(13) + '|' + 'Saude'.center(
+        13) + '|' + 'Felicidade'.center(13) + '|\n'
     s += '+' + '-' * 6 + '+' + '-' * 29 + '+' + '-' * 13 + '+' + '-' * 13 + '+' + '-' * 13 + '+\n'
 
     cabeca = s
@@ -199,7 +201,7 @@ def mostra_gela(gela):
         for i in range(19 - tam_gela):
             s += '|' + ' ' * 6 + '|' + ' ' * 29 + '|' + ' ' * 13 + '|' + ' ' * 13 + '|' + ' ' * 13 + '|\n'
 
-        s += '+' + '-'*6 + '+' + '-'*29 + '+' + '-'*13 + '+' + '-'*13 + '+' + '-'*13 + '+'
+        s += '+' + '-' * 6 + '+' + '-' * 29 + '+' + '-' * 13 + '+' + '-' * 13 + '+' + '-' * 13 + '+'
         print(s)
         input('Pressione ENTER para continuar...')
 
@@ -208,15 +210,15 @@ def mostra_gela(gela):
 
         for i in range(tam_gela // 19 + 1):
             s = cabeca
-            for j in range(i*19, 19*(i+1)):
+            for j in range(i * 19, 19 * (i + 1)):
                 try:
                     s += gela_str[j]
                 except IndexError:
                     s += '|' + ' ' * 6 + '|' + ' ' * 29 + '|' + ' ' * 13 + '|' + ' ' * 13 + '|' + ' ' * 13 + '|\n'
             s += '+' + '-' * 6 + '+' + '-' * 29 + '+' + '-' * 13 + '+' + '-' * 13 + '+' + '-' * 13 + '+'
             print(s)
-            input(f'(Pagina {i+1}/{tam_gela// 19 + 1}) Pressione ENTER para continuar...')
-            limpar_tela()
+            input(f'(Pagina {i + 1}/{tam_gela // 19 + 1}) Pressione ENTER para continuar...')
+            cfunc.limpar_tela()
 
 
 def mostrar_bau(bau):
@@ -237,7 +239,7 @@ def mostrar_bau(bau):
         s += str(bau)
 
         for i in range(19 - tam_bau):
-            s += '|' + ' '*32 + '|' + ' '*22 + '|' + ' '*22 + '|\n'
+            s += '|' + ' ' * 32 + '|' + ' ' * 22 + '|' + ' ' * 22 + '|\n'
 
         s += '+' + '-' * 32 + '+' + '-' * 22 + '+' + '-' * 22 + '+'
         print(s)
@@ -248,7 +250,7 @@ def mostrar_bau(bau):
 
         for i in range(tam_bau // 19 + 1):
             s = cabeca
-            for j in range(i*19, 19*(i+1)):
+            for j in range(i * 19, 19 * (i + 1)):
                 try:
                     s += bau_str[j] + '\n'
                 except IndexError:
@@ -257,9 +259,9 @@ def mostrar_bau(bau):
             s += '+' + '-' * 32 + '+' + '-' * 22 + '+' + '-' * 22 + '+'
 
             print(s)
-            input(f'(Pagina {i+1}/{tam_bau//19 + 1}) Pressione ENTER para continuar...')
+            input(f'(Pagina {i + 1}/{tam_bau // 19 + 1}) Pressione ENTER para continuar...')
 
-            limpar_tela()
+            cfunc.limpar_tela()
 
 
 def brincar(cat, bau):
@@ -275,9 +277,10 @@ def brincar(cat, bau):
     for i in range(19):
 
         try:
-            s += '|' + f'{i+1}'.center(4) + '|' + f'{brinqs[i].nome}'.center(58) + '|' + f'{brinqs[i].feliz}'.center(14) + '|\n'
+            s += '|' + f'{i + 1}'.center(4) + '|' + f'{brinqs[i].nome}'.center(58) + '|' + f'{brinqs[i].feliz}'.center(
+                14) + '|\n'
         except IndexError:
-            s += '|' + ' '*4 + '|' + ' '*58 + '|' + ' '*14 + '|\n'
+            s += '|' + ' ' * 4 + '|' + ' ' * 58 + '|' + ' ' * 14 + '|\n'
 
     s += '+' + '-' * 4 + '+' + '-' * 58 + '+' + '-' * 14 + '+'
 
@@ -285,7 +288,7 @@ def brincar(cat, bau):
 
     brinq = input('Digite o número do brinquedo para jogar (ENTER para sair): ')
     while brinq != '' and (not brinq.isnumeric() or int(brinq) > len(brinqs)):
-        limpar_tela()
+        cfunc.limpar_tela()
         print(s)
         if not brinq.isnumeric():
             brinq = input('Digite um valor numérico (ENTER para sair): ')
@@ -293,34 +296,33 @@ def brincar(cat, bau):
             brinq = input('Digite um número válido (ENTER para sair): ')
 
     if brinq != '':
-
-        limpar_tela()
+        cfunc.limpar_tela()
 
         # seleciona o brinquedo com menor durabilidade dentre os do tipo escolhido para brincar
-        menor_dura = min(bau.brinquedos[brinqs[int(brinq)-1].nome])
+        menor_dura = min(bau.brinquedos[brinqs[int(brinq) - 1].nome])
 
         cat.brincar(bau, menor_dura)
 
 
 if __name__ == '__main__':
 
-    ajustes_iniciais()
+    cfunc.ajustes_iniciais()
     tela_inicial()
-    limpar_tela()
+    cfunc.limpar_tela()
 
-    if carregar_jogo():
-        gato, gela, bau = carregar_jogo()
+    if csave.carregar_jogo():
+        gato, gela, bau = csave.carregar_jogo()
         print('Jogo carregado! :)'.center(81))
         sleep(1)
 
     else:
         gato, gela, bau = novo_gato()
-        salvar_jogo(gato, gela, bau)
+        csave.salvar_jogo(gato, gela, bau)
 
     salvo = True
 
     while True:
-        limpar_tela()
+        cfunc.limpar_tela()
         menu(gato)
 
         esc = input('>>> ')
@@ -330,35 +332,35 @@ if __name__ == '__main__':
 
         if esc == '1':
             # Ver geladeira
-            limpar_tela()
+            cfunc.limpar_tela()
             mostra_gela(gela)
 
         elif esc == '3':
             # Ver bau
-            limpar_tela()
+            cfunc.limpar_tela()
             mostrar_bau(bau)
 
         elif esc == '4':
-            limpar_tela()
+            cfunc.limpar_tela()
             brincar(gato, bau)
 
         elif esc == '5':
             # Salvar jogo
             salvo = True
-            limpar_tela()
-            salvar_jogo(gato, gela, bau)
+            cfunc.limpar_tela()
+            csave.salvar_jogo(gato, gela, bau)
             sleep(1)
 
         elif esc == '6':
             # Deletar jogo (abandonar gato)
-            limpar_tela()
-            if deletar():
+            cfunc.limpar_tela()
+            if cfunc.deletar():
                 break
 
         elif esc == '7':
             # Sair do jogo
-            limpar_tela()
-            if sair(salvo):
+            cfunc.limpar_tela()
+            if cfunc.sair(salvo):
                 break
 
         else:

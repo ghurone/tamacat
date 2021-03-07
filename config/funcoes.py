@@ -1,5 +1,5 @@
+import config.saveload as csave
 from os import name, system
-from config.saveload import deletar_jogo
 
 
 def limpar_tela():
@@ -48,8 +48,18 @@ def deletar():
         isc = input('Você quer mesmo abandonar o seu gato??? (S)im / (N)ão\n>>> ')
 
     if isc.lower() == 's':
-        deletar_jogo()
+        csave.deletar_jogo()
 
         return True
 
     return False
+
+
+def criar_janela(n=21):
+    janela = ['+' + '-' + '+\n']
+
+    for i in range(n):
+        janela.append('|' + ' ' * 78 + '|\n')
+    janela.append('+' + '-' + '+')
+
+    return janela

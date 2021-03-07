@@ -1,6 +1,9 @@
-from objs.brincadeiras.bolinha import jogo_bolinhas
-from objs.brincadeiras.navezinha import jogo_nave
-from objs.brincadeiras.func import como_jogar
+import os
+import sys
+
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
+import brincadeiras as brinca
 
 
 class Brinquedo:
@@ -63,16 +66,15 @@ class Bola(Brinquedo):
         super().__init__(nome, feliz, dura)
 
     def brincadeira(self, gato):
-
         cont = ['  A tela será preenchida com todos os algarismos de 0 a 9, e um deles',
                 ' estará dentro da bolinha.', '',
                 '  Pegue a bolinha ao teclar o algarismo contido nela, o mais',
                 ' rápido que puder! Isso acontecerá repetidas vezes, dependendo do',
                 ' tipo de bolinha escolhida.', '',
                 '  Caso digite o algarismo errado ou seja muito lento, perderá o jogo.']
-        como_jogar('Jogo da Bolinha', cont)
+        brinca.func.como_jogar('Jogo da Bolinha', cont)
 
-        return jogo_bolinhas(self.feliz)
+        return brinca.bolinha.jogo_bolinhas(self.feliz)
 
 
 class Caixa(Brinquedo):
@@ -117,7 +119,6 @@ class Nave(Brinquedo):
 
     @staticmethod
     def brincadeira(gato):
-
         cont = ['  Você é um gatinho astronauta!', '',
                 '  Para viajar à Lua, calcule corretamente a velocidade de escape necessária',
                 ' para a nave decolar, usando os seguintes dados fornecidos:', '',
