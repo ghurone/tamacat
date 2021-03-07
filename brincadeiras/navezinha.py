@@ -1,4 +1,4 @@
-from objs.brincadeiras.func import faz_matriz
+import brincadeiras.func as bfunc
 
 from os import system
 from random import randint, choice
@@ -127,7 +127,7 @@ def printar_tela(gato_name, tipo, r, m):
         miolo[xn][yn] = choice(['*', '*', '.'])
 
     tela = '+' + '-' * 78 + '+\n'
-    tela += faz_matriz(miolo)
+    tela += bfunc.faz_matriz(miolo)
     tela += '+' + '-' * 78 + '+'
 
     print(tela)
@@ -149,7 +149,7 @@ def jogo_nave(gato_name):
 
     try:
         resp = float(input('>>> '))
-    except ValueError:
+    except ValueError:  # caso não seja possível converter para float
         resp = 0.0
 
     t = time() - t0

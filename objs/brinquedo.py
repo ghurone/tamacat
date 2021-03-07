@@ -132,9 +132,9 @@ class Nave(Brinquedo):
                 ' v = _  / ―――――――'.center(78),
                 '                                    \\/     R',
                 ]
-        como_jogar('Jogo da Nave', cont)
+        brinca.func.como_jogar('Jogo da Nave', cont)
 
-        return jogo_nave(gato.nome)
+        return brinca.navezinha.jogo_nave(gato.nome)
 
 
 class Ioio(Brinquedo):

@@ -1,4 +1,4 @@
-from objs.brincadeiras.func import faz_matriz
+import brincadeiras.func as bfunc
 
 from time import time
 from random import randint

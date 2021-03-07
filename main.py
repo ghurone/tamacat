@@ -81,7 +81,7 @@ def novo_gato():
         feliz = randint(80, 100)
         vac = True
 
-        ga = Comprado('', idade, fome, energia, saude, feliz, vac)
+        ga = ogato.Comprado('', idade, fome, energia, saude, feliz, vac)
 
     elif escolha[0] in 'Rr':
         print('Você resgatou o gatinho. Agora ele tem um dono!')
@@ -93,7 +93,7 @@ def novo_gato():
         feliz = randint(10, 90)
         vac = choice([True, False])
 
-        ga = Resgatado('', idade, fome, energia, saude, feliz, vac)
+        ga = ogato.Resgatado('', idade, fome, energia, saude, feliz, vac)
 
     else:
         i = input('Você vai adotar um gato (F)ilhote ou (A)dulto?\n>>> ')
@@ -115,7 +115,7 @@ def novo_gato():
         feliz = randint(80, 100)
         vac = choice([True, True, True, False, False])  # True: 60%, False: 40%
 
-        ga = Adotado('', idade, fome, energia, saude, feliz, vac)
+        ga = ogato.Adotado('', idade, fome, energia, saude, feliz, vac)
 
     sleep(2)
     nome = input('Hora de uma decisão difícil... Qual vai ser o nome do seu gato?\n>>> ')
@@ -124,8 +124,8 @@ def novo_gato():
         nome = input('Insira um nome com um tamanho menor que 43:\n>>> ')
 
     ga.nome = nome
-    ge = Geladeira()
-    ba = Bau()
+    ge = ogela.Geladeira()
+    ba = obau.Bau()
 
     return ga, ge, ba
 
