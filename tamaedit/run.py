@@ -14,6 +14,7 @@ from tamaedit.abaGeladeira import AbaGeladeira
 from tamaedit.abaBau import AbaBau
 
 import tkinter as tk
+from tkinter.messagebox import showinfo
 
 from pickle import loads, dump
 from tkinter import ttk
@@ -224,6 +225,8 @@ class AppWindow:
             with open(self.save_path, t) as file:
                 dump(objs[i], file)
                 file.write(bytes('_pE_dRo_'.encode('utf8')))
+
+        showinfo('Sucesso', 'Arquivo salvo.')
 
 
 if __name__ == '__main__':
