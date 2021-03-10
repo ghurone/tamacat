@@ -21,7 +21,21 @@ class Janela:
     def __setitem__(self, linha, conteudo):
         self.janela[linha] = conteudo + '\n' if linha != 22 else conteudo
 
-    def muda_linha(self, i, miolo):
+    def muda_topo(self, conteudo):
+        self.janela[0] = '+' + conteudo + '+\n'
+
+    def muda_base(self, conteudo):
+        self.janela[-1] = '+' + conteudo + '+'
+
+    def muda_linha(self, i, miolo, alin='center'):
+
+        if alin == 'center':
+            miolo = miolo.center(78)
+        elif alin == 'rjust':
+            miolo = miolo.rjust(78)
+        elif alin == 'ljust':
+            miolo = miolo.ljust(78)
+
         self.janela[i] = '|' + miolo + '|\n'
 
 
@@ -34,7 +48,7 @@ class JanelaTable:
         self.linha_top = ''
         self.cabeca = self.__criar_cabeca()
 
-    def mostrar_janela(self):
+    def mostrar_janela(self, show_input=True):
         s = self.cabeca
 
         if len(self.itens) <= 19:
@@ -52,7 +66,9 @@ class JanelaTable:
                     s += '|\n'
 
             print(s + self.linha_top)
-            input('Pressione ENTER para sair...')
+
+            if show_input:
+                input('Pressione ENTER para sair...')
 
         else:
             for i in range(len(self.itens) // 19 + 1):
@@ -74,6 +90,7 @@ class JanelaTable:
                 input(f'(Pagina {i + 1}/{len(self.itens) // 19 + 1}) Pressione ENTER para continuar...')
 
     def add_linha(self, lista):
+        lista = [str(i) for i in lista]
         self.itens.append(lista)
 
     def __criar_cabeca(self):

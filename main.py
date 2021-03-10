@@ -73,7 +73,7 @@ def novo_gato():
         print('Você conversou com o conhecido do seu amigo e comprou o gatinho!')
 
         idade = randint(2, 12)
-        fome = 0
+        fome = 100
         energia = randint(75, 100)
         saude = 100
         feliz = randint(80, 100)
@@ -85,7 +85,7 @@ def novo_gato():
         print('Você resgatou o gatinho. Agora ele tem um dono!')
 
         idade = randint(0, 180)
-        fome = randint(0, 90)
+        fome = randint(10, 100)
         energia = randint(10, 90)
         saude = randint(10, 50)
         feliz = randint(10, 90)
@@ -107,7 +107,7 @@ def novo_gato():
         else:
             idade = randint(13, 84)
 
-        fome = randint(0, 40)
+        fome = randint(60, 100)
         energia = randint(70, 100)
         saude = randint(70, 90)
         feliz = randint(80, 100)
@@ -267,20 +267,12 @@ def mostrar_bau(bau):
 def brincar(cat, bau):
     """Ações principais da ação brincar no menu."""
 
-    s = '+' + '-' * 4 + '+' + '-' * 58 + '+' + '-' * 14 + '+\n'
-    s += '|' + '##'.center(4) + '|' + 'Nome'.center(58) + '|' + 'Felicidade'.center(14) + '|\n'
-    s += '+' + '-' * 4 + '+' + '-' * 58 + '+' + '-' * 14 + '+\n'
+    janela = cjane.JanelaTable({'##': 4, 'Nome': 58, 'Felicidade': 14})
 
     # imprime os brinquedos disponíveis para brincar em ordem de felicidade
     brinqs = bau.brinquedosort()
-
-    for i in range(19):
-
-        try:
-            s += '|' + f'{i + 1}'.center(4) + '|' + f'{brinqs[i].nome}'.center(58) + '|' + f'{brinqs[i].feliz}'.center(
-                14) + '|\n'
-        except IndexError:
-            s += '|' + ' ' * 4 + '|' + ' ' * 58 + '|' + ' ' * 14 + '|\n'
+    for i in range(len(brinqs)):
+        janela.add_linha([i+1, brinqs[i].nome, brinqs[i].feliz])
 
     s += '+' + '-' * 4 + '+' + '-' * 58 + '+' + '-' * 14 + '+'
 

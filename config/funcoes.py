@@ -53,13 +53,3 @@ def deletar():
         return True
 
     return False
-
-
-def criar_janela(n=21):
-    janela = ['+' + '-' + '+\n']
-
-    for i in range(n):
-        janela.append('|' + ' ' * 78 + '|\n')
-    janela.append('+' + '-' + '+')
-
-    return janela

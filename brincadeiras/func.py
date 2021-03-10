@@ -16,20 +16,16 @@ def faz_matriz(matriz):
 def como_jogar(titulo, conteudo):
     """Cria a tela de "como jogar" para um jogo, recebendo o título e as instruções daquele jogo."""
 
-    s = '+' + '-'*78 + '+\n'
-    s += '|' + f'{titulo.upper()}'.center(78) + '|\n'
-    s += '|' + ' ' * 78 + '|\n'
-    s += '|' + '  - INSTRUÇÕES:'.ljust(78) + '|\n'
-    s += '|' + ' ' * 78 + '|\n'
+    janela = cjane.Janela()
+    janela.muda_linha(1, titulo.upper())
+    janela.muda_linha(3, '  - INSTRUÇÕES:', alin='ljust')
 
-    for i in range(17):
+    for i in range(5, 22):
         try:
-            linha = conteudo[i]
-            s += '|' + linha.ljust(78) + '|\n'
+            linha = conteudo[i-5]
+            janela.muda_linha(i, linha, alin='ljust')
         except IndexError:
-            s += '|' + ' ' * 78 + '|\n'
+            pass
 
-    s += '+' + '-' * 78 + '+'
-
-    print(s)
+    print(janela)
     input('Pressione ENTER para jogar!')

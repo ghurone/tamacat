@@ -2,8 +2,9 @@
 	- Documentar o código!!!!
 	- Reformular o NOVO JOGADOR
 	- Fazer mini games para as ações
-	- Fazer como jogar
     - CTRL + C -> Fechar o jogo (msg)
+    - Classe JanelaMain
+    - Reformular a janela dos jogos
 
 # FAZER DEPOIS
 	- Função comer
@@ -12,6 +13,7 @@
 	- Computador
 	- Comida favorita
     - Corzinhas
+    - Interagir com outros gatos do jogo
 
  ,_     _
  |\\_,-//
