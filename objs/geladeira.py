@@ -23,6 +23,9 @@ class Geladeira:
 
         return s
 
+    def __getitem__(self, name):
+        return self.alimentos[name]
+
     def add_comida(self, comida, quantidade=1):
         """Adiciona uma determinada quantidade da Comida."""
         try:

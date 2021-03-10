@@ -1,5 +1,6 @@
 import config.funcoes as cfunc
 import config.saveload as csave
+import config.janela as cjane
 import objs.gatinho as ogato
 import objs.geladeira as ogela
 import objs.bau as obau
@@ -29,22 +30,19 @@ def tela_inicial():
              '| Pressione ENTER para jogar! |',
              "'-----------------------------'"]
 
-    s = '+' + '-' * 78 + '+\n'
+    janela = cjane.Janela()
 
-    for i in range(21):
-        if 1 <= i <= 9:
-            s += '|' + fonte[i - 1].center(78) + '|\n'
-        elif i == 11:
-            s += '|' + 'O MELHOR JOGO DO MUNDO!'.center(78) + '|\n'
-        elif 16 <= i <= 18:
-            s += '|' + botao[i - 16].center(78) + '|\n'
-        elif i == 20:
-            s += '|' + '© RaGhu 2021 '.rjust(78) + '|\n'
-        else:
-            s += '|' + ' ' * 78 + '|\n'
+    for i in range(len(fonte)):
+        janela.muda_linha(i+1, fonte[i])
+        try:
+            janela.muda_linha(i+16, botao[i])
+        except IndexError:
+            pass
 
-    s += '+' + '-' * 78 + '+'
-    print(s)
+    janela.muda_linha(11, 'O MELHOR JOGO DO MUNDO!')
+    janela.muda_linha(20, '© RaGhu 2021 ', alin='rjust')
+
+    print(janela)
     input(wait('enter'))  # para não dar para digitar nada no input além de enter
 
 
@@ -131,10 +129,7 @@ def novo_gato():
 def menu(cat):
     """Imprime as características do gato."""
 
-    if cat.vacinado:
-        vac = 'Sim'
-    else:
-        vac = 'Não'
+    vac = 'Sim' if cat.vacinado else 'Não'
 
     gato = [' ,_     _        ',
             ' |\\\\_,-//        ',
@@ -186,39 +181,13 @@ def menu(cat):
 def mostra_gela(gela):
     """Mostra todos os alimentos da geladeira, em ordem decrescente de magnitude do saciamento."""
 
-    tam_gela = len(gela.alimentos)
+    janela = cjane.JanelaTable({'QTE.': 6, 'Nome': 29, 'Fome': 13, 'Saúde': 13, 'Felicidade': 13})
 
-    s = '+' + '-' * 6 + '+' + '-' * 29 + '+' + '-' * 13 + '+' + '-' * 13 + '+' + '-' * 13 + '+\n'
-    s += '|' + 'QTE.'.center(6) + '|' + 'Nome'.center(29) + '|' + 'Fome'.center(13) + '|' + 'Saude'.center(
-        13) + '|' + 'Felicidade'.center(13) + '|\n'
-    s += '+' + '-' * 6 + '+' + '-' * 29 + '+' + '-' * 13 + '+' + '-' * 13 + '+' + '-' * 13 + '+\n'
+    for name in gela.alimentos.keys():
+        comida = [gela[name][1], name, gela[name][0].saciar, gela[name][0].saude, gela[name][0].feliz]
+        janela.add_linha(comida)
 
-    cabeca = s
-
-    if tam_gela <= 19:  # verificar se vai precisar de mais de uma página
-        s += str(gela)
-
-        for i in range(19 - tam_gela):
-            s += '|' + ' ' * 6 + '|' + ' ' * 29 + '|' + ' ' * 13 + '|' + ' ' * 13 + '|' + ' ' * 13 + '|\n'
-
-        s += '+' + '-' * 6 + '+' + '-' * 29 + '+' + '-' * 13 + '+' + '-' * 13 + '+' + '-' * 13 + '+'
-        print(s)
-        input('Pressione ENTER para continuar...')
-
-    else:
-        gela_str = str(gela).split('\n')[:-1]
-
-        for i in range(tam_gela // 19 + 1):
-            s = cabeca
-            for j in range(i * 19, 19 * (i + 1)):
-                try:
-                    s += gela_str[j]
-                except IndexError:
-                    s += '|' + ' ' * 6 + '|' + ' ' * 29 + '|' + ' ' * 13 + '|' + ' ' * 13 + '|' + ' ' * 13 + '|\n'
-            s += '+' + '-' * 6 + '+' + '-' * 29 + '+' + '-' * 13 + '+' + '-' * 13 + '+' + '-' * 13 + '+'
-            print(s)
-            input(f'(Pagina {i + 1}/{tam_gela // 19 + 1}) Pressione ENTER para continuar...')
-            cfunc.limpar_tela()
+    janela.mostrar_janela()
 
 
 def mostrar_bau(bau):
@@ -226,42 +195,14 @@ def mostrar_bau(bau):
     Tipos diferentes: ordem decrescente, por felicidade.
     Mesmo tipo: ordem crescente, por durabilidade."""
 
-    tam_bau = bau.numero_de_brinquedos()
+    janela = cjane.JanelaTable({'Nome': 32,'Felicidade': 22, 'Usos restaante': 22})
 
-    s = '+' + '-' * 32 + '+' + '-' * 22 + '+' + '-' * 22 + '+\n'
-    s += '|' + 'Nome'.center(32) + '|' + 'Felicidade'.center(22) + '|' + 'Usos restantes'.center(22) + '|\n'
-    s += '+' + '-' * 32 + '+' + '-' * 22 + '+' + '-' * 22 + '+\n'
+    for brinquedo in bau.brinquedosort():
+        for brinqs in sorted(bau[brinquedo.nome]):
+            brinq = [brinqs.nome, brinqs.feliz, brinqs.dura]
+            janela.add_linha(brinq)
 
-    cabeca = s
-
-    if tam_bau <= 19:  # verificar se vai precisar de mais de uma página
-
-        s += str(bau)
-
-        for i in range(19 - tam_bau):
-            s += '|' + ' ' * 32 + '|' + ' ' * 22 + '|' + ' ' * 22 + '|\n'
-
-        s += '+' + '-' * 32 + '+' + '-' * 22 + '+' + '-' * 22 + '+'
-        print(s)
-        input('Pressione ENTER para sair...')
-
-    else:
-        bau_str = str(bau).split('\n')[:-1]
-
-        for i in range(tam_bau // 19 + 1):
-            s = cabeca
-            for j in range(i * 19, 19 * (i + 1)):
-                try:
-                    s += bau_str[j] + '\n'
-                except IndexError:
-                    s += '|' + ' ' * 32 + '|' + ' ' * 22 + '|' + ' ' * 22 + '|\n'
-
-            s += '+' + '-' * 32 + '+' + '-' * 22 + '+' + '-' * 22 + '+'
-
-            print(s)
-            input(f'(Pagina {i + 1}/{tam_bau // 19 + 1}) Pressione ENTER para continuar...')
-
-            cfunc.limpar_tela()
+    janela.mostrar_janela()
 
 
 def brincar(cat, bau):
@@ -274,24 +215,20 @@ def brincar(cat, bau):
     for i in range(len(brinqs)):
         janela.add_linha([i+1, brinqs[i].nome, brinqs[i].feliz])
 
-    s += '+' + '-' * 4 + '+' + '-' * 58 + '+' + '-' * 14 + '+'
+    janela.mostrar_janela(show_input=False)
 
-    print(s)
-
-    brinq = input('Digite o número do brinquedo para jogar (ENTER para sair): ')
+    brinq = input('Digite o número do brinquedo para jogar (ENTER para voltar): ')
     while brinq != '' and (not brinq.isnumeric() or int(brinq) > len(brinqs)):
-        cfunc.limpar_tela()
-        print(s)
+        janela.mostrar_janela(show_input=False)
+
         if not brinq.isnumeric():
-            brinq = input('Digite um valor numérico (ENTER para sair): ')
+            brinq = input('Digite um valor numérico (ENTER para voltar): ')
         else:
-            brinq = input('Digite um número válido (ENTER para sair): ')
+            brinq = input('Digite um número válido (ENTER para voltar): ')
 
     if brinq != '':
-        cfunc.limpar_tela()
-
         # seleciona o brinquedo com menor durabilidade dentre os do tipo escolhido para brincar
-        menor_dura = min(bau.brinquedos[brinqs[int(brinq) - 1].nome])
+        menor_dura = min(bau[brinqs[int(brinq) - 1].nome])
 
         cat.brincar(bau, menor_dura)
 

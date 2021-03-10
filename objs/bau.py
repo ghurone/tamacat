@@ -22,6 +22,9 @@ class Bau:
 
         return s
 
+    def __getitem__(self, name):
+        return self.brinquedos[name]
+
     def add_brinquedo(self, brinquedo):
         """Insere um Brinquedo na lista de brinquedos de seu tipo ou adiciona um tipo de Brinquedo novo."""
         try:
