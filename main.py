@@ -1,6 +1,7 @@
 import config.funcoes as cfunc
 import config.saveload as csave
 import config.janela as cjane
+import config.gatos_ascii as cga
 import objs.gatinho as ogato
 import objs.geladeira as ogela
 import objs.bau as obau
@@ -33,9 +34,9 @@ def tela_inicial():
     janela = cjane.Janela()
 
     for i in range(len(fonte)):
-        janela.muda_linha(i+1, fonte[i])
+        janela.muda_linha(i + 1, fonte[i])
         try:
-            janela.muda_linha(i+16, botao[i])
+            janela.muda_linha(i + 16, botao[i])
         except IndexError:
             pass
 
@@ -126,56 +127,25 @@ def novo_gato():
     return ga, ge, ba
 
 
-def menu(cat):
+def menu(cat, gato_img):
     """Imprime as características do gato."""
 
     vac = 'Sim' if cat.vacinado else 'Não'
 
-    gato = [' ,_     _        ',
-            ' |\\\\_,-//        ',
-            ' / _  _ |    ,--. ',
-            '(  @  @ )   / ,-\'',
-            ' \  _T_/-._( (    ',
-            ' /         `. \\  ',
-            '|         _  \\ | ',
-            ' \ \ ,  /      |  ',
-            '  || |-_\__   /   ',
-            ' ((_/`(____,-\'   '
-            ]
-
-    acoes = ['(1) - Ver geladeira',
-             '(2) - Comer', '',
-             '(3) - Ver bau',
-             '(4) - Brincar', '',
-             '', '', '', '',
-             '(5) - Salvar o jogo',
-             '(6) - Abandonar o gato :(',
-             '(7) - Sair'
+    acoes = ['Ver geladeira',
+             'Comer', '',
+             'Ver bau',
+             'Brincar'
              ]
 
-    s = '+' + '-' * 29 + '+' + '-' * 48 + '+\n'
-    s += '|' + 'TAMACAT'.center(29) + '|' + ' ' * 48 + '|\n'
+    acoes_jogo = ['Salvar o jogo',
+                  'Abandonar o gato :(',
+                  'Sair'
+                  ]
 
-    for i in range(10):
-        s += '|' + acoes[i].ljust(29) + '|' + gato[i].center(48) + '|\n'  # geral
+    janela = cjane.JanelaMenu(gato_img, acoes, acoes_jogo, cat)
 
-    s += '|' + ' ' * 29 + '|' + ' ' * 48 + '|\n'
-    s += '|' + ' ' * 29 + '|' + ' ' * 48 + '|\n'
-    s += '|' + ' ' * 29 + '+' + '-' * 48 + '+\n'
-    s += '|' + ' ' * 29 + '|' + f'Nome: {cat.nome}'.ljust(48) + '|\n'
-    s += '|' + ' ' * 29 + '|' + f'Idade: {cat.mostrar_idade()}'.ljust(48) + '|\n'
-    s += '|' + ' ' * 29 + '|' + f'Vacinado: {vac}'.ljust(48) + '|\n'
-    s += '|' + '-' * 29 + '|' + ('Fome:       ' + '[' + ('■' * (cat.fome // 5)).ljust(20) + ']').ljust(48) + '|\n'
-    s += '|' + acoes[-3].ljust(29) + '|' + ('Energia:    ' + '[' + ('■' * (cat.energia // 5)).ljust(20) + ']').ljust(
-        48) + '|\n'
-    s += '|' + acoes[-2].ljust(29) + '|' + ('Saude:      ' + '[' + ('■' * (cat.saude // 5)).ljust(20) + ']').ljust(
-        48) + '|\n'
-    s += '|' + acoes[-1].ljust(29) + '|' + ('Felicidade: ' + '[' + ('■' * (cat.feliz // 5)).ljust(20) + ']').ljust(
-        48) + '|\n'
-
-    s += '+' + '-' * 29 + '+' + '-' * 48 + '+'
-
-    print(s)
+    print(janela)
 
 
 def mostra_gela(gela):
@@ -195,7 +165,7 @@ def mostrar_bau(bau):
     Tipos diferentes: ordem decrescente, por felicidade.
     Mesmo tipo: ordem crescente, por durabilidade."""
 
-    janela = cjane.JanelaTable({'Nome': 32,'Felicidade': 22, 'Usos restaante': 22})
+    janela = cjane.JanelaTable({'Nome': 32, 'Felicidade': 22, 'Usos restaante': 22})
 
     for brinquedo in bau.brinquedosort():
         for brinqs in sorted(bau[brinquedo.nome]):
@@ -213,7 +183,7 @@ def brincar(cat, bau):
     # imprime os brinquedos disponíveis para brincar em ordem de felicidade
     brinqs = bau.brinquedosort()
     for i in range(len(brinqs)):
-        janela.add_linha([i+1, brinqs[i].nome, brinqs[i].feliz])
+        janela.add_linha([i + 1, brinqs[i].nome, brinqs[i].feliz])
 
     janela.mostrar_janela(show_input=False)
 
@@ -252,7 +222,7 @@ if __name__ == '__main__':
 
     while True:
         cfunc.limpar_tela()
-        menu(gato)
+        menu(gato, gato_img=cga.gatitos['Padrão'])
 
         esc = input('>>> ')
 

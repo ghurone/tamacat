@@ -3,16 +3,15 @@
 	- Reformular o NOVO JOGADOR
 	- Fazer mini games para as ações
     - CTRL + C -> Fechar o jogo (msg)
-    - Classe JanelaMain
     - Reformular a janela dos jogos
 
 # FAZER DEPOIS
-	- Função comer
+	- Sistema de humor
 	- Sistema de dinheiro
-	- Raças de gato (Herança?) VERSAO 2.0 MT FODA-SE AGR
-	- Computador
-	- Comida favorita
-    - Corzinhas
+	- Função comer
+	- Corzinhas
+    - Comida favorita
+    - Computador
     - Interagir com outros gatos do jogo
 
  ,_     _
