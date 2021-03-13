@@ -38,6 +38,31 @@ class Janela:
 
         self.janela[i] = '|' + miolo + '|\n'
 
+    def muda_slice(self, linha, ini, fim, conteudo):
+        string = self[linha]
+        my_string = ''
+
+        for i in range(len(string)):
+            if ini <= i < fim:
+                my_string += conteudo[i-ini]
+            else:
+                my_string += string[i]
+
+        self.janela[linha] = my_string
+
+    def criar_janelinha(self, ponto_init, ponto_fim):
+        x0, y0 = ponto_init
+        x, y = ponto_fim
+
+        for i in range(x0, x+1):
+
+            if i == x0 or i == x:
+                string = '+' + '-'*(y-y0-1) + '+'
+                self.muda_slice(i, y0, y+1, string)
+            else:
+                string = '|' + ' '*(y-y0-1) + '|'
+                self.muda_slice(i, y0, y+1, string)
+
 
 class JanelaTable:
 
