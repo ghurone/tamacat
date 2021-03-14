@@ -17,7 +17,7 @@ def ajustes_iniciais():
 
 
 def verificar_nome(nome):
-    if len(nome) > 32 or nome == '_pE_dRo_':
+    if len(nome) > 32 or nome == '_pE_dRo_' or nome.isspace() or nome == '':
         return False
 
     return True

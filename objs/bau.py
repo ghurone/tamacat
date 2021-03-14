@@ -45,15 +45,6 @@ class Bau:
         """Verifica se o Brinquedo está no baú."""
         return brinquedo.nome in self.brinquedos.keys()
 
-    def numero_de_brinquedos(self):
-        n = 0
-
-        for i, k in enumerate(self.brinquedos):
-            for j in self.brinquedos[k]:
-                n += 1
-
-        return n
-
     def brinquedosort(self):
         """Retorna uma lista de brinquedos ordenados por felicidade."""
 

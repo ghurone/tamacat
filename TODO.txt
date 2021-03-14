@@ -1,9 +1,6 @@
 # FAZER AGORA!!!!!!
 	- Documentar o código!!!!
-	- Reformular o NOVO JOGADOR
 	- Fazer mini games para as ações
-    - CTRL + C -> Fechar o jogo (msg)
-    - Reformular a janela dos jogos
 
 # FAZER DEPOIS
 	- Sistema de humor

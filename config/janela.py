@@ -66,6 +66,9 @@ class Janela:
                 string = '|' + ' '*(y-y0-1) + '|'
                 self.muda_slice(i, y0, y+1, string)
 
+    def limpar_janela(self):
+        self.janela = Janela().janela
+
 
 class JanelaTable:
 
@@ -77,44 +80,24 @@ class JanelaTable:
         self.cabeca = self.__criar_cabeca()
 
     def mostrar_janela(self, show_input=True):
-        s = self.cabeca
 
-        if len(self.itens) <= 19:
-            for i in range(19):
+        for i in range(len(self.itens) // 19 + 1):
+            s = self.cabeca
+
+            for j in range(i * 19, 19 * (i + 1)):
                 try:
-                    j = 0
+                    y = 0
                     for v in self.cabeca_v.values():
-                        s += '|' + self.itens[i][j].center(v)
-                        j += 1
+                        s += '|' + self.itens[j][y].center(v)
+                        y += 1
                     s += '|\n'
-
                 except IndexError:
                     for v in self.cabeca_v.values():
                         s += '|' + ''.center(v)
                     s += '|\n'
 
             print(s + self.linha_top)
-
             if show_input:
-                input('Pressione ENTER para sair...')
-
-        else:
-            for i in range(len(self.itens) // 19 + 1):
-                s = self.cabeca
-
-                for j in range(i * 19, 19 * (i + 1)):
-                    try:
-                        y = 0
-                        for v in self.cabeca_v.values():
-                            s += '|' + self.itens[j][y].center(v)
-                            y += 1
-                        s += '|\n'
-                    except IndexError:
-                        for v in self.cabeca_v.values():
-                            s += '|' + ''.center(v)
-                        s += '|\n'
-
-                print(s + self.linha_top)
                 input(f'(Pagina {i + 1}/{len(self.itens) // 19 + 1}) Pressione ENTER para continuar...')
 
     def add_linha(self, lista):
@@ -178,10 +161,17 @@ class JanelaMenu:
     def __add_status(self):
         vac = 'Sim' if self.gato.vacinado else 'Não'
 
-        self.janela.muda_slice(15, 31, 79, f'Nome: {self.gato.nome}'.ljust(48))
-        self.janela.muda_slice(16, 31, 79, f'Idade: {self.gato.mostrar_idade()}'.ljust(48))
-        self.janela.muda_slice(17, 31, 79, ('Vacinado:   ' + vac).ljust(48))
-        self.janela.muda_slice(18, 31, 79, ('Fome:       ' + '[' + ('■' * (self.gato.fome // 5)).ljust(20) + ']').ljust(48))
-        self.janela.muda_slice(20, 31, 79, ('Saúde:      ' + '[' + ('■' * (self.gato.saude // 5)).ljust(20) + ']').ljust(48))
-        self.janela.muda_slice(19, 31, 79, ('Energia:    ' + '[' + ('■' * (self.gato.energia // 5)).ljust(20) + ']').ljust(48))
-        self.janela.muda_slice(21, 31, 79, ('Felicidade: ' + '[' + ('■' * (self.gato.feliz // 5)).ljust(20) + ']').ljust(48))
+        self.janela.muda_slice(15, 31, 79,
+                               f'Nome: {self.gato.nome}'.ljust(48))
+        self.janela.muda_slice(16, 31, 79,
+                               f'Idade: {self.gato.mostrar_idade()}'.ljust(48))
+        self.janela.muda_slice(17, 31, 79,
+                               ('Vacinado:   ' + vac).ljust(48))
+        self.janela.muda_slice(18, 31, 79,
+                               ('Fome:       ' + '[' + ('■' * (self.gato.fome // 5)).ljust(20) + ']').ljust(48))
+        self.janela.muda_slice(20, 31, 79,
+                               ('Saúde:      ' + '[' + ('■' * (self.gato.saude // 5)).ljust(20) + ']').ljust(48))
+        self.janela.muda_slice(19, 31, 79,
+                               ('Energia:    ' + '[' + ('■' * (self.gato.energia // 5)).ljust(20) + ']').ljust(48))
+        self.janela.muda_slice(21, 31, 79,
+                               ('Felicidade: ' + '[' + ('■' * (self.gato.feliz // 5)).ljust(20) + ']').ljust(48))

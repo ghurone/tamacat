@@ -1,9 +1,9 @@
+import brincadeiras as brinca
+
 import os
 import sys
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-
-import brincadeiras as brinca
 
 
 class Brinquedo:
@@ -128,10 +128,10 @@ class Nave(Brinquedo):
                 '  Os aparelhos de medida usados para medir M e R nem sempre estão calibrados,',
                 ' então podem haver divergências desses valores com os valores do Google.', '',
                 '  - Note e adote:'.center(78),
-                '          _______'.center(78),
-                '         / 2 G M |'.center(78),
-                ' v = _  / ―――――――'.center(78),
-                '                                    \\/     R',
+                '         _______ '.center(78),
+                '        / 2 G M |'.center(78),
+                'v = _  / ――――――― '.center(78),
+                '     \\/     R    '.center(78),
                 ]
         brinca.func.como_jogar('Jogo da Nave', cont)
 

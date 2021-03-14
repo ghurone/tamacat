@@ -50,26 +50,37 @@ def tela_inicial():
 def novo_gato():
     """Retorna um Gatinho, Geladeira e Bau para um gato inicial."""
 
+    textos1 = ['Você está pensando em ter um gato.',
+               'Um amigo seu conhece alguém que está vendendo um gato bonitininho.',
+               'Mas também tem um gato que sempre têm andado pela vizinhança,',
+               'e ele parece muito simpático.',
+               'Por outro lado, também existe um abrigo de gatos perto da sua casa.']
+
     cfunc.limpar_tela()
+    janela = cjane.Janela()
 
-    print('Você está pensando em ter um gato.')
-    sleep(2)
-    print('\nUm amigo seu conhece alguém que está vendendo um gato bonitininho.')
-    sleep(3)
-    print('Mas também tem um gato que sempre têm andado pela vizinhança, e ele parece muito simpático.')
-    sleep(3.5)
-    print('Por outro lado, também existe um abrigo de gatos perto da sua casa.')
-    sleep(3)
+    j = 1
+    for i in range(len(textos1)):
+        janela.muda_linha(j, textos1[i], 'ljust')
+        print(janela)
+        input('(pressione ENTER para continuar...)')
 
-    escolha = input('\nVocê deseja (C)omprar, (R)esgatar ou (A)dotar o gato?\n>>> ')
+        j += 2 if i != 2 else 1
+
+    janela.muda_linha(10, 'Você deseja (C)omprar, (R)esgatar ou (A)dotar o gato?', 'ljust')
+    print(janela)
+
+    escolha = input('>>> ')
     while escolha.lower() != 'c' and escolha.lower() != 'r' and escolha.lower() != 'a' \
             and escolha.lower() != 'comprar' and escolha.lower() != 'resgatar' and escolha.lower() != 'adotar':
-        escolha = input('Você deseja (C)omprar, (R)esgatar ou (A)dotar o gato?\n>>> ')
+        print(janela)
+        escolha = input('>>> ')
 
-    cfunc.limpar_tela()
+    janela.limpar_janela()
 
+    v = 0
     if escolha[0] in 'Cc':
-        print('Você conversou com o conhecido do seu amigo e comprou o gatinho!')
+        janela.muda_linha(1, 'Você conversou com o conhecido do seu amigo e comprou o gatinho!', 'ljust')
 
         idade = randint(2, 12)
         fome = 100
@@ -81,7 +92,7 @@ def novo_gato():
         ga = ogato.Comprado('', idade, fome, energia, saude, feliz, vac)
 
     elif escolha[0] in 'Rr':
-        print('Você resgatou o gatinho. Agora ele tem um dono!')
+        janela.muda_linha(1, 'Você resgatou o gatinho. Agora ele tem um dono!', 'ljust')
 
         idade = randint(0, 180)
         fome = randint(10, 100)
@@ -93,13 +104,17 @@ def novo_gato():
         ga = ogato.Resgatado('', idade, fome, energia, saude, feliz, vac)
 
     else:
-        i = input('Você vai adotar um gato (F)ilhote ou (A)dulto?\n>>> ')
+        v = 1
+        janela.muda_linha(1, 'Você vai adotar um gato (F)ilhote ou (A)dulto?', 'ljust')
+        print(janela)
+        i = input('>>> ')
 
         while i.lower() != 'f' and i.lower() != 'a' and i.lower() != 'filhote' and i.lower() != 'adulto':
-            i = input('Você vai adotar um gato (F)ilhote ou (A)dulto?\n>>> ')
-        sleep(1)
+            print(janela)
+            i = input('>>>')
 
-        print('Você foi até o abrigo e escolheu o seu gatinho. Ou será que foi ele quem te escolheu?')
+        janela.muda_linha(1, 'Você foi até o abrigo e escolheu o seu gatinho.', 'ljust')
+        janela.muda_linha(2, 'Ou será que foi ele quem te escolheu?', 'ljust')
 
         if i[0].lower() == 'f':
             idade = randint(3, 12)
@@ -114,11 +129,17 @@ def novo_gato():
 
         ga = ogato.Adotado('', idade, fome, energia, saude, feliz, vac)
 
-    sleep(2)
-    nome = input('Hora de uma decisão difícil... Qual vai ser o nome do seu gato?\n>>> ')
+    print(janela)
+    input('(pressione ENTER para continuar...)')
+
+    janela.muda_linha(3+v, 'Hora de uma decisão difícil... Qual vai ser o nome do seu gato?', 'ljust')
+    print(janela)
+    nome = input('>>> ')
 
     while not cfunc.verificar_nome(nome):
-        nome = input('Insira um nome com um tamanho menor que 43:\n>>> ')
+        janela.muda_linha(4+v, 'Insira um nome válido (e com tamanho menor que 32)!', 'ljust')
+        print(janela)
+        nome = input('>>> ')
 
     ga.nome = nome
     ge = ogela.Geladeira()
@@ -129,8 +150,6 @@ def novo_gato():
 
 def menu(cat, gato_img):
     """Imprime as características do gato."""
-
-    vac = 'Sim' if cat.vacinado else 'Não'
 
     acoes = ['Ver geladeira',
              'Comer', '',
@@ -148,40 +167,40 @@ def menu(cat, gato_img):
     print(janela)
 
 
-def mostra_gela(gela):
+def mostra_gela(geladita):
     """Mostra todos os alimentos da geladeira, em ordem decrescente de magnitude do saciamento."""
 
     janela = cjane.JanelaTable({'QTE.': 6, 'Nome': 29, 'Fome': 13, 'Saúde': 13, 'Felicidade': 13})
 
-    for name in gela.alimentos.keys():
-        comida = [gela[name][1], name, gela[name][0].saciar, gela[name][0].saude, gela[name][0].feliz]
+    for name in geladita.alimentos.keys():
+        comida = [geladita[name][1], name, geladita[name][0].saciar, geladita[name][0].saude, geladita[name][0].feliz]
         janela.add_linha(comida)
 
     janela.mostrar_janela()
 
 
-def mostrar_bau(bau):
+def mostrar_bau(bauzito):
     """Mostra todos os brinquedos do baú.
     Tipos diferentes: ordem decrescente, por felicidade.
     Mesmo tipo: ordem crescente, por durabilidade."""
 
-    janela = cjane.JanelaTable({'Nome': 32, 'Felicidade': 22, 'Usos restaante': 22})
+    janela = cjane.JanelaTable({'Nome': 32, 'Felicidade': 22, 'Usos restantes': 22})
 
-    for brinquedo in bau.brinquedosort():
-        for brinqs in sorted(bau[brinquedo.nome]):
+    for brinquedo in bauzito.brinquedosort():
+        for brinqs in sorted(bauzito[brinquedo.nome]):
             brinq = [brinqs.nome, brinqs.feliz, brinqs.dura]
             janela.add_linha(brinq)
 
     janela.mostrar_janela()
 
 
-def brincar(cat, bau):
+def brincar(cat, bauzito):
     """Ações principais da ação brincar no menu."""
 
     janela = cjane.JanelaTable({'##': 4, 'Nome': 58, 'Felicidade': 14})
 
     # imprime os brinquedos disponíveis para brincar em ordem de felicidade
-    brinqs = bau.brinquedosort()
+    brinqs = bauzito.brinquedosort()
     for i in range(len(brinqs)):
         janela.add_linha([i + 1, brinqs[i].nome, brinqs[i].feliz])
 
@@ -198,9 +217,9 @@ def brincar(cat, bau):
 
     if brinq != '':
         # seleciona o brinquedo com menor durabilidade dentre os do tipo escolhido para brincar
-        menor_dura = min(bau[brinqs[int(brinq) - 1].nome])
+        menor_dura = min(bauzito[brinqs[int(brinq) - 1].nome])
 
-        cat.brincar(bau, menor_dura)
+        cat.brincar(bauzito, menor_dura)
 
 
 if __name__ == '__main__':
@@ -242,6 +261,7 @@ if __name__ == '__main__':
         elif esc == '4':
             cfunc.limpar_tela()
             brincar(gato, bau)
+            salvo = False
 
         elif esc == '5':
             # Salvar jogo
