@@ -1,6 +1,7 @@
 # FAZER AGORA!!!!!!
 	- Documentar o código!!!!
 	- Fazer mini games para as ações
+	- Inserir janela no salvar gato / abandonar gato
 
 # FAZER DEPOIS
 	- Sistema de humor
@@ -8,6 +9,7 @@
 	- Função comer
 	- Corzinhas
     - Comida favorita
+    - Função creditos
     - Computador
     - Interagir com outros gatos do jogo
 

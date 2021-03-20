@@ -51,7 +51,7 @@ def novo_gato():
     """Retorna um Gatinho, Geladeira e Bau para um gato inicial."""
 
     textos1 = ['Você está pensando em ter um gato.',
-               'Um amigo seu conhece alguém que está vendendo um gato bonitininho.',
+               'Um amigo seu conhece alguém que está vendendo um gato bonitinho.',
                'Mas também tem um gato que sempre têm andado pela vizinhança,',
                'e ele parece muito simpático.',
                'Por outro lado, também existe um abrigo de gatos perto da sua casa.']
