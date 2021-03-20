@@ -2,6 +2,7 @@
 	- Documentar o código!!!!
 	- Fazer mini games para as ações
 	- Inserir janela no salvar gato / abandonar gato
+	- Melhorar os imports
 
 # FAZER DEPOIS
 	- Sistema de humor
