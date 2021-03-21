@@ -2,7 +2,6 @@ import brincadeiras.func as bfunc
 
 from os import system
 from random import randint, choice
-from time import time
 
 
 def printar_tela(gato_name, tipo, r, m):
@@ -113,29 +112,21 @@ def jogo_nave(gato_name):
 
     printar_tela(gato_name, 'parada', raio, massa)
 
-    t0 = time()
-
     try:
-        resp = float(input('>>> '))
+        resp = float(input('>>> ').replace(',', '.'))
     except ValueError:  # caso não seja possível converter para float
         resp = 0.0
 
-    t = time() - t0
-
     # o jogador ganha se responder com precisão de 0,001
-    if t <= 60 and (result - 0.001 <= resp <= result + 0.001):
+    if result - 0.001 <= resp <= result + 0.001:
         printar_tela(gato_name, 'voando', raio, massa)
         input('Pressione ENTER para sair...')
         system('color f0')  # volta a cor para branco
         return True
 
-    elif t <= 60 and not (result - 0.001 <= resp <= result + 0.001):
+    elif result - 0.001 <= resp <= result + 0.001:
         printar_tela(gato_name, 'falhou', raio, massa)
         input('Pressione ENTER para sair...')
-
-    else:
-        printar_tela(gato_name, 'parada', raio, massa)
-        input('Tempo esgotado! Pressione ENTER para sair...')
 
     system('color f0')  # volta a cor para branco
     return False

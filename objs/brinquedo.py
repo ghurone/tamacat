@@ -152,5 +152,10 @@ class Ratinho(Brinquedo):
         super().__init__(nome, feliz, dura)
 
     def brincadeira(self, gato):
-        # como jogar
-        pass
+        cont = ['Você capturou um rato e o seu objetivo é destruí-lo!',
+                '', 'Para isso, jogue o clássico jogo da forca.', '',
+                'A diferença é: a cada erro, o ratinho estará mais perto de fugir,',
+                'então não deixe que ele escape!'
+                ]
+        brinca.func.como_jogar('JOGO DA FORCA', cont)
+        return brinca.forca.jogar_forca()
