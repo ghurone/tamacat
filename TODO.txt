@@ -1,6 +1,4 @@
 # FAZER AGORA!!!!!!
-	- Melhorar os imports
-	- Inserir janela no salvar gato / abandonar gato
 	- Documentar o código!!!!
 	- Fazer mini games para as ações
 
@@ -24,7 +22,6 @@
  \ \ ,  /      |
   || |-_\__   /
  ((_/`(____,-'
-
 
                ____
           .-'""p 8o""`-.

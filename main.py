@@ -230,7 +230,7 @@ if __name__ == '__main__':
 
     if csave.carregar_jogo():
         gato, gela, bau = csave.carregar_jogo()
-        print('Jogo carregado! :)'.center(81))
+        cfunc.janela_carregar()
         sleep(1)
 
     else:
@@ -273,16 +273,14 @@ if __name__ == '__main__':
         elif esc == '6':
             # Deletar jogo (abandonar gato)
             cfunc.limpar_tela()
-            if cfunc.deletar():
+            if cfunc.janela_deletar():
                 break
 
         elif esc == '7':
             # Sair do jogo
             cfunc.limpar_tela()
-            if cfunc.sair(salvo):
+            if cfunc.janela_sair(salvo, gato, gela, bau):
                 break
 
         else:
             continue
-
-    print('Tchau!!')

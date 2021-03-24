@@ -1,5 +1,7 @@
 import config.saveload as csave
+import config.janela as cjane
 from os import name, system
+from time import sleep
 
 
 def limpar_tela():
@@ -23,33 +25,65 @@ def verificar_nome(nome):
     return True
 
 
-def sair(salvo):
-    if salvo:
-        esc = input('Deseja sair? (S)im / (N)ão\n>>> ')
+def janela_sair(salvo, gato, gela, bau):
+    janela = cjane.Janela()
 
-        while esc.lower() != 's' and esc.lower() != 'n':
-            esc = input('Deseja sair? (S)im / (N)ão\n>>> ')
+    if salvo:
+        janela.muda_linha(1, ' Deseja sair? (S)im / (N)ão', 'ljust')
+
+        print(janela)
+        esc = input('>>> ').lower()
+        while esc != 's' and esc != 'n' and esc != 'sim' and esc != 'não' and esc != 'nao':
+            print(janela)
+            esc = input('>>>').lower()
 
     else:
-        esc = input('Há alterações não salvas. Deseja sair sem salvar? (S)im / (N)ão\n>>> ')
+        janela.muda_linha(1, ' Há alterações não salvas. Digite a opção desejada:', 'ljust')
+        janela.muda_linha(2, '  (1) - Salvar e sair', 'ljust')
+        janela.muda_linha(3, '  (2) - Sair sem salvar', 'ljust')
+        janela.muda_linha(4, '  (3) - Voltar ao menu', 'ljust')
 
-        while esc.lower() != 's' and esc.lower() != 'n':
-            esc = input('Há alterações não salvas. Deseja sair sem salvar? (S)im / (N)ão\n>>> ')
+        print(janela)
+        esc = input('>>> ')
+        while int(esc) not in range(1, 4):
+            print(janela)
+            esc = input('>>>')
 
-    if esc.lower() == 's':
+        if int(esc) in range(1, 3):
+            esc = 's'
+            if esc == '1':
+                csave.salvar_jogo(gato, gela, bau)
+
+    if 's' in esc:
+        janela.limpar_janela()
+        janela.muda_linha(11, 'Tchau!!')
+        print(janela)
+        sleep(2)
+
         return True
 
     return False
 
 
-def deletar():
-    isc = input('Você quer mesmo abandonar o seu gato??? (S)im / (N)ão\n>>> ')
-    while isc.lower() != 's' and isc.lower() != 'n':
-        isc = input('Você quer mesmo abandonar o seu gato??? (S)im / (N)ão\n>>> ')
+def janela_deletar():
+    janela = cjane.Janela()
+    janela.muda_linha(1, ' Você quer mesmo abandonar o seu gato??? (S)im / (N)ão', 'ljust')
 
-    if isc.lower() == 's':
+    print(janela)
+    esc = input('>>>').lower()
+    while esc != 's' and esc != 'n' and esc != 'sim' and esc != 'não' and esc != 'nao':
+        print(janela)
+        esc = input('>>>').lower()
+
+    if 's' in esc:
         csave.deletar_jogo()
 
         return True
 
     return False
+
+
+def janela_carregar():
+    janela = cjane.Janela()
+    janela.muda_linha(11, 'Jogo carregado! :)')
+    print(janela)

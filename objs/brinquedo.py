@@ -1,9 +1,7 @@
-import brincadeiras as brinca
-
-import os
-import sys
-
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+import brincadeiras.func as bfunc
+import brincadeiras.forca as bforca
+import brincadeiras.bolinha as bbola
+import brincadeiras.navezinha as bnave
 
 
 class Brinquedo:
@@ -72,9 +70,9 @@ class Bola(Brinquedo):
                 ' rápido que puder! Isso acontecerá repetidas vezes, dependendo do',
                 ' tipo de bolinha escolhida.', '',
                 '  Caso digite o algarismo errado ou seja muito lento, perderá o jogo.']
-        brinca.func.como_jogar('Jogo da Bolinha', cont)
+        bfunc.como_jogar('Jogo da Bolinha', cont)
 
-        return brinca.bolinha.jogo_bolinhas(self.feliz)
+        return bbola.jogo_bolinhas(self.feliz)
 
 
 class Caixa(Brinquedo):
@@ -133,9 +131,9 @@ class Nave(Brinquedo):
                 'v = _  / ――――――― '.center(78),
                 '     \\/     R    '.center(78),
                 ]
-        brinca.func.como_jogar('Jogo da Nave', cont)
+        bfunc.como_jogar('Jogo da Nave', cont)
 
-        return brinca.navezinha.jogo_nave(gato.nome)
+        return bnave.jogo_nave(gato.nome)
 
 
 class Ioio(Brinquedo):
@@ -157,5 +155,6 @@ class Ratinho(Brinquedo):
                 'A diferença é: a cada erro, o ratinho estará mais perto de fugir,',
                 'então não deixe que ele escape!'
                 ]
-        brinca.func.como_jogar('JOGO DA FORCA', cont)
-        return brinca.forca.jogar_forca()
+        bfunc.como_jogar('JOGO DA FORCA', cont)
+        return bforca.jogar_forca()
+

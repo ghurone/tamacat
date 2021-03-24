@@ -2,8 +2,32 @@ import brincadeiras.func as bfunc
 import random
 
 
-palavras = {'Frutas': ['Laranja', 'Maça', 'Banana', 'Abacaxi', 'Acerola', 'Manga', 'Toranja', 'Mamão'],
-            'Animais': ['Gato', 'Cachorro', 'Vaca', 'Hipopótamo', 'Rinoceronte', 'Avestruz']}
+palavras = {'Frutas': ['Laranja', 'Maçã', 'Banana', 'Abacaxi', 'Acerola', 'Manga', 'Toranja', 'Mamão', 'Limão',
+                       'Morango', 'Maçã verde', 'Melancia', 'Kiwi', 'Ameixa', 'Goiaba', 'Pitanga', 'Lichia', 'Pêssego',
+                       'Pêra', 'Uva'],
+
+            'Animais': ['Gato', 'Cachorro', 'Vaca', 'Hipopótamo', 'Rinoceronte', 'Avestruz', 'Pato', 'Zebra', ],
+
+            'Objetos': ['Mesa', 'Computador', 'Cadeira', 'Quadro negro', 'Armário', 'Micro-ondas', 'Tapete', 'Skate',
+                        'Calculadora', 'Ábaco', 'Piano', 'Açucareiro', 'Bola', 'Bigorna', 'Caderno', 'Candelabro',
+                        'Despertador', 'Mangueira', 'Microscópio', 'Roteador', 'Binóculo', 'Navio', 'Avião', 'Picareta',
+                        'Quadriciclo', 'Quebra-cabeça', 'Revista', 'Relógio', 'Ratoeira', 'Buquê de flores', 'Telefone',
+                        'Tambor', 'Telescópio', 'Tobogã', 'Unha postiça', 'Umidificador', 'Vassoura', 'Violão',
+                        'Vuvuzela', 'Webcam', 'Walkie-talkie', 'Xadrez', 'Xilofone', 'Xícara', 'Zíper', 'Zinco',
+                        'Zarabatana', 'Secador', 'Saxofone', 'Sunga', 'Saca-rolhas', 'Sabonete', 'Ralador', 'Repelente',
+                        'Roleta', 'Rotor', 'Reco-reco', 'Paraquedas', 'Parafuso', 'Pêndulo', 'Óculos', 'Olho mágico',
+                        'Liquidificador', 'Lapiseira'],
+
+            'Comidas': ['Sorvete', 'Pizza', 'Arroz', 'Feijão', 'Bife', 'Alface', 'Cenoura', 'Batata', 'Chocolate',
+                        'Pudim', 'Bolo de morango', 'Couve', 'Cebola', 'Alho', 'Sopa de tomate', 'Chocolate branco',
+                        'Purê de batata', 'Rocambole', 'Cookie', 'Lasanha', 'Macarrão', 'Queijo'],
+
+            'Profissões': ['Professor', 'Astrônoma', 'Palhaço', 'Engenheira', 'Médica', 'Fotógrafo', 'Jornalista',
+                           'Jornalista esportivo', 'Programadora', 'Psicólogo', 'Porteiro', 'Vendedor', 'Advogada',
+                           'Juíza', 'Agricultor', 'Bombeiro', 'Enfermeiro', 'Paramédico', 'Policial', 'Cientista',
+                           'Atriz', 'Babá', 'Piloto'],
+
+            'Planetas': ['Plutão', 'Netuno', 'Urano', 'Saturno', 'Júpiter', 'Vênus', 'Terra', 'Marte', 'Mercúrio']}
 
 
 def ratinho(err, vivo=True):
@@ -78,6 +102,9 @@ def printar_forca(lista_char, tema, letras_desc, err=0, vivo=True):
 
 
 def jogar_forca():
+    letras_esp = {'a': ('a', 'ã', 'à', 'á', 'â'), 'c': ('c', 'ç'), 'e': ('e', 'é', 'ê'), 'o': ('o', 'ó', 'ô'),
+                  'i': ('i', 'í'), 'u': ('u', 'ú')}
+
     tema = random.choice(list(palavras.keys()))
     result = random.choice(palavras[tema])
     err = 0
@@ -95,21 +122,31 @@ def jogar_forca():
     while not acabou:
         printar_forca(palavra, tema, letras_desc, err, not ganhou)
 
-        esc = input('Insira uma letra >>> ')
-        while len(esc) != 1 or not esc.isalpha():
+        esc = input('Insira uma letra >>> ').lower()
+        while len(esc) != 1 or not esc.isalpha() or esc in letras_desc:
             printar_forca(palavra, tema, letras_desc, err)
-            esc = input('Ops, insira somente uma letra >>> ')
+            esc = input('Ops, insira somente uma letra >>> ').lower()
 
-        if esc.lower() in result.lower():
+        for key in letras_esp.keys():
+            if esc in letras_esp[key]:
+                esc = key
+
+        if esc in letras_esp.keys():
+            for letra in letras_esp[esc]:
+                for i, ltr in enumerate(result):
+                    if letra == ltr.lower():
+                        palavra[i] = ltr
+
+        elif esc in result.lower():
             for i, letra in enumerate(result):
-                if esc.lower() == letra.lower():
+                if esc == letra.lower():
                     palavra[i] = letra
 
             if palavra == list(result):
                 acabou = True
                 ganhou = True
 
-        else:
+        if esc not in result.lower():
             err += 1
             letras_desc.append(esc)
 
