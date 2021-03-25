@@ -2,6 +2,7 @@ import brincadeiras.func as bfunc
 import brincadeiras.forca as bforca
 import brincadeiras.bolinha as bbola
 import brincadeiras.navezinha as bnave
+import brincadeiras.caixa as bcai
 
 
 class Brinquedo:
@@ -80,8 +81,8 @@ class Caixa(Brinquedo):
         super().__init__(nome, feliz, dura)
 
     def brincadeira(self, gato):
-        # animação
-        pass
+        bcai.caixa_anima()
+        return True
 
 
 class Varinha(Brinquedo):

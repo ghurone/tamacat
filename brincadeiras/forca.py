@@ -6,7 +6,7 @@ palavras = {'Frutas': ['Laranja', 'Maçã', 'Banana', 'Abacaxi', 'Acerola', 'Man
                        'Morango', 'Maçã verde', 'Melancia', 'Kiwi', 'Ameixa', 'Goiaba', 'Pitanga', 'Lichia', 'Pêssego',
                        'Pêra', 'Uva'],
 
-            'Animais': ['Gato', 'Cachorro', 'Vaca', 'Hipopótamo', 'Rinoceronte', 'Avestruz', 'Pato', 'Zebra', ],
+            'Animais': ['Gato', 'Cachorro', 'Vaca', 'Hipopótamo', 'Rinoceronte', 'Avestruz', 'Pato', 'Zebra'],
 
             'Objetos': ['Mesa', 'Computador', 'Cadeira', 'Quadro negro', 'Armário', 'Micro-ondas', 'Tapete', 'Skate',
                         'Calculadora', 'Ábaco', 'Piano', 'Açucareiro', 'Bola', 'Bigorna', 'Caderno', 'Candelabro',
@@ -127,26 +127,27 @@ def jogar_forca():
             printar_forca(palavra, tema, letras_desc, err)
             esc = input('Ops, insira somente uma letra >>> ').lower()
 
-        for key in letras_esp.keys():
-            if esc in letras_esp[key]:
-                esc = key
+        entrou = False
 
-        if esc in letras_esp.keys():
-            for letra in letras_esp[esc]:
+        if esc in letras_esp.keys() or esc in result.lower():
+            try:
+                for letra in letras_esp[esc]:
+                    for i, ltr in enumerate(result):
+                        if letra == ltr.lower():
+                            palavra[i] = ltr
+                            entrou = True
+
+            except KeyError:
                 for i, ltr in enumerate(result):
-                    if letra == ltr.lower():
+                    if esc == ltr.lower():
                         palavra[i] = ltr
-
-        elif esc in result.lower():
-            for i, letra in enumerate(result):
-                if esc == letra.lower():
-                    palavra[i] = letra
+                        entrou = True
 
             if palavra == list(result):
                 acabou = True
                 ganhou = True
 
-        if esc not in result.lower():
+        if not entrou:
             err += 1
             letras_desc.append(esc)
 
@@ -159,3 +160,4 @@ def jogar_forca():
     input(msg + '(Pressione ENTER para sair)')
 
     return ganhou
+

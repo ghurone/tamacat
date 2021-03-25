@@ -87,3 +87,9 @@ def janela_carregar():
     janela = cjane.Janela()
     janela.muda_linha(11, 'Jogo carregado! :)')
     print(janela)
+
+
+def janela_salvar():
+    janela = cjane.Janela()
+    janela.muda_linha(11, 'Jogo salvo! :)')
+    print(janela)
