@@ -124,7 +124,7 @@ def jogo_nave(gato_name):
         system('color f0')  # volta a cor para branco
         return True
 
-    elif result - 0.001 <= resp <= result + 0.001:
+    else:
         printar_tela(gato_name, 'falhou', raio, massa)
         input('Pressione ENTER para sair...')
 

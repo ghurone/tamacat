@@ -2,7 +2,8 @@ import brincadeiras.func as bfunc
 import brincadeiras.forca as bforca
 import brincadeiras.bolinha as bbola
 import brincadeiras.navezinha as bnave
-import brincadeiras.caixa as bcai
+import brincadeiras.caixa as bcaixa
+import brincadeiras.velha as bvelha
 
 
 class Brinquedo:
@@ -80,8 +81,9 @@ class Caixa(Brinquedo):
     def __init__(self, nome, feliz, dura):
         super().__init__(nome, feliz, dura)
 
-    def brincadeira(self, gato):
-        bcai.caixa_anima()
+    @staticmethod
+    def brincadeira(gato):
+        bcaixa.caixa_anima()
         return True
 
 
@@ -98,9 +100,14 @@ class Arranhador(Brinquedo):
     def __init__(self, nome, feliz, dura):
         super().__init__(nome, feliz, dura)
 
-    def brincadeira(self, gato):
-        # como jogar
-        pass
+    @staticmethod
+    def brincadeira(gato):
+        cont = ['Enquanto você brincava no seu arranhador, o seu dono quis jogar uma',
+                'partida de jogo da velha.', '',
+                'Você vai arranhar e o seu dono irá colocar as bolinhas no tabuleiro.',
+                'É só teclar o número desejado!']
+        bfunc.como_jogar('Jogo da Velha', cont)
+        return bvelha.jogar_velha()
 
 
 class Torre(Brinquedo):
