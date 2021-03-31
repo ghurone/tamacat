@@ -1,7 +1,9 @@
 import brincadeiras.func as bfunc
 
 import random
-import time
+from time import sleep
+from math import inf
+
 
 ganhantes = [(0, 1, 2), (3, 4, 5), (6, 7, 8),
              (0, 4, 8), (6, 4, 2),
@@ -15,16 +17,11 @@ def check_vitoria(pos, figura):
     return False
 
 
-def fscore(pos):
-
-    if check_vitoria(pos, 'b'):
-        s = 1
-    elif check_vitoria(pos, 'g'):
-        s = -1
-    else:
-        s = 0
-
-    return s
+def check_vazios(pos):
+    for i in pos:
+        if i.isnumeric():
+            return True
+    return False
 
 
 def fim_jogo(pos):
@@ -32,38 +29,48 @@ def fim_jogo(pos):
 
 
 def minmax(pos, depth, player):
-    melhor = [-1, -100000] if player == 'b' else [-1, 100000]
+    max_player = 'b'
+    other_player = 'b' if player == 'g' else 'g'
+    novo_pos = pos[:]
 
-    if depth == 0 or fim_jogo(pos):
-        score = fscore(pos)
-        return [-1, score]
+    if check_vitoria(novo_pos, other_player):
+        return {'pos': None, 'score': depth if other_player == max_player else -depth}
+    elif not check_vazios(novo_pos) or depth == 0:
+        return {'pos': None, 'score': 0}
 
-    for i in pos:
+    melhor = {'position': None, 'score': -inf} if player == max_player else {'pos': None, 'score': inf}
+
+    for i in novo_pos:
         if i.isnumeric():
-            pos_agora = pos[int(i)-1]
-            pos[int(i)-1] = player
-            score = minmax(pos, depth - 1, 'b' if player == 'g' else 'g')
-            pos[int(i)-1] = pos_agora
-            score[0] = i
+            novo_pos[int(i)] = player
+            score = minmax(novo_pos, depth - 1, 'b' if player == 'g' else 'g')
 
-            if player == 'b':
-                if score[1] > melhor[1]:
+            novo_pos[int(i)] = str(i)
+            score['pos'] = i
+
+            if player == max_player:
+                if score['score'] > melhor['score']:
                     melhor = score
             else:
-                if score[1] < melhor[1]:
+                if score['score'] < melhor['score']:
                     melhor = score
 
     return melhor
 
 
 def bot_mov(pos, pos_ocup):
-    depth = 8 if 9 - len(pos_ocup) < 8 else 9 - len(pos_ocup)
+    if 9 - len(pos_ocup) >= 3:
+        depth = 3
 
+    else:
+        depth = 9 - len(pos_ocup)
+
+    print(depth)
     if depth == 0 or fim_jogo(pos):
         return
 
     move = minmax(pos, depth, 'b')
-    return move[0]
+    return move['pos']
 
 
 def quadrado(coisa):
@@ -108,7 +115,7 @@ def print_tabuleiro(lista, msg=''):
 
 
 def jogar_velha():
-    pos = ['1', '2', '3', '4', '5', '6', '7', '8', '9']
+    pos = ['0', '1', '2', '3', '4', '5', '6', '7', '8']
     pos_print = [quadrado(i) for i in pos]
     pos_ocup = []
 
@@ -124,7 +131,7 @@ def jogar_velha():
         if player_turno:
 
             esc = input('Selecione uma posição para jogar >>> ').lower()
-            while len(esc) != 1 or not esc.isnumeric() or int(esc) not in range(1, 10) or esc in pos_ocup:
+            while len(esc) != 1 or not esc.isnumeric() or int(esc) not in range(9) or esc in pos_ocup:
                 print_tabuleiro(pos_print, msg)
                 esc = input('Selecione uma posição para jogar >>> ').lower()
 
@@ -132,18 +139,18 @@ def jogar_velha():
 
         else:
             if len(pos_ocup) == 0:
-                esc = str(random.randint(1, 9))
+                esc = str(random.randint(0, 8))
                 while esc in pos_ocup:
-                    esc = str(random.randint(1, 9))
+                    esc = str(random.randint(0, 8))
             else:
                 esc = bot_mov(pos, pos_ocup)
 
             figura = 'b'
-            time.sleep(2)
+            sleep(2)
 
-        if str(esc) != '-1':
-            pos_print[int(esc) - 1] = quadrado(figura)
-            pos[int(esc) - 1] = figura
+        if esc is not None:
+            pos_print[int(esc)] = quadrado(figura)
+            pos[int(esc)] = figura
 
             pos_ocup.append(esc)
 
