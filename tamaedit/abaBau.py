@@ -6,7 +6,7 @@ from tkinter import messagebox
 class AbaBau:
 
     def __init__(self, app):
-        self.list_tipos = sorted(['Bola', 'Caixa', 'Varinha', 'Arranhador', 'Torre', 'Nave', 'Ioio', 'Ratinho'])
+        self.list_tipos = sorted(['Bola', 'Caixa', 'Varinha', 'Arranhador', 'Torre', 'Nave', 'Memoria', 'Ratinho'])
 
         self.frame = tk.Frame(app.window, background="#68BCED")
 

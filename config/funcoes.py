@@ -45,7 +45,7 @@ def janela_sair(salvo, gato, gela, bau):
 
         print(janela)
         esc = input('>>> ')
-        while int(esc) not in range(1, 4):
+        while esc not in ['1', '2', '3']:
             print(janela)
             esc = input('>>>')
 

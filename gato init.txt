@@ -62,7 +62,7 @@ BRINQUEDOS
     Bola de vôlei, basquete, futebol  | felicidade: 20, 25, 30 durabilidade: 2        | bolinha aleatoria na tela (FEITO)
     Caixa de papelão                  | felicidade: 50         durabilidade: 1        | animação (FEITO)
     Vara com cordinha                 | felicidade: 25         durabilidade: 2        | jogo da varinha
-    Arranhador pegueno, médio, grande | felicidade: 15         durabilidade: 2, 3, 4  | jogo da velha (FEITO 86.95%)
+    Arranhador pegueno, médio, grande | felicidade: 15         durabilidade: 2, 3, 4  | jogo da velha (FEITO)
     Torre pequena, média, grande      | felicidade: 10, 20, 30 durabilidade: 4, 3, 2  | escalada
     Nave espacial                     | felicidade: 40         durabilidade: 1        | calcular a v_escape (FEITO)
     Jogo da memória                   | felicidade: 15         durabilidade: 2        | jogo da memória

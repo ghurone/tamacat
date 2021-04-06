@@ -4,6 +4,7 @@ import brincadeiras.bolinha as bbola
 import brincadeiras.navezinha as bnave
 import brincadeiras.caixa as bcaixa
 import brincadeiras.velha as bvelha
+import brincadeiras.memoria as bmoria
 
 
 class Brinquedo:
@@ -144,13 +145,12 @@ class Nave(Brinquedo):
         return bnave.jogo_nave(gato.nome)
 
 
-class Ioio(Brinquedo):
+class Memoria(Brinquedo):
     def __init__(self, nome, feliz, dura):
         super().__init__(nome, feliz, dura)
 
     def brincadeira(self, gato):
-        # animação
-        pass
+        return bmoria.jogar_memoria()
 
 
 class Ratinho(Brinquedo):
