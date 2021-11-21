@@ -95,5 +95,3 @@ def jogar_memoria():
     #lista = animais + animais
     printar_jogo(lista)
     input('>>>')
-
-jogar_memoria()

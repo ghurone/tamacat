@@ -1,5 +1,6 @@
 # FAZER AGORA!!!!!!
 	- Documentar o código!!!!
+	- Terminar o jogo da memoria
 	- Fazer mini games para as ações
 
 # FAZER DEPOIS
