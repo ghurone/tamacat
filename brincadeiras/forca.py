@@ -154,10 +154,13 @@ def jogar_forca():
             if err == 6:
                 acabou = True
 
-    printar_forca(palavra, tema, letras_desc, err, not ganhou)
+    printar_forca(result, tema, letras_desc, err, not ganhou)
 
-    msg = 'Você ganhou, o ratinho está morto hehehe... ' if ganhou else 'Você perdeu, o ratinho fugiu. '
-    input(msg + '(Pressione ENTER para sair)')
+    if ganhou:
+        msg = 'Você ganhou, o ratinho está morto hehehe... '
+    else:
+        msg = 'Você perdeu, o ratinho fugiu. '
+    input(msg + '(Aperte ENTER para sair)')
 
     return ganhou
 

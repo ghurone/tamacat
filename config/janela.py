@@ -98,7 +98,7 @@ class JanelaTable:
 
             print(s + self.linha_top)
             if show_input:
-                input(f'(Pagina {i + 1}/{len(self.itens) // 19 + 1}) Pressione ENTER para continuar...')
+                input(f'(Página {i + 1}/{len(self.itens) // 19 + 1}) Aperte ENTER para continuar...')
 
     def add_linha(self, lista):
         lista = [str(i) for i in lista]

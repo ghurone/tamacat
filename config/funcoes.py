@@ -16,6 +16,8 @@ def ajustes_iniciais():
         system('color f0')  # define a cor do terminal (branco)
         system('mode con: cols=81 lines=24')  # ajuda o tamanho do terminal
         system('TITLE Tamacat')  # define o título do terminal como Tamacat
+    else: # Fazer para os outros SOs
+        pass
 
 
 def verificar_nome(nome):

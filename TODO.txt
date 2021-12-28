@@ -1,14 +1,14 @@
 # FAZER AGORA!!!!!!
+    - Função comer
 	- Documentar o código!!!!
-	- Terminar o jogo da memoria
 	- Fazer mini games para as ações
+	- Função creditos
 
 # FAZER DEPOIS
+    - Tempo
 	- Sistema de humor
 	- Sistema de dinheiro
-	- Função comer
 	- Corzinhas
     - Comida favorita
-    - Função creditos
     - Computador
     - Interagir com outros gatos do jogo

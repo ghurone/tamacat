@@ -65,5 +65,5 @@ BRINQUEDOS
     Arranhador pegueno, médio, grande | felicidade: 15         durabilidade: 2, 3, 4  | jogo da velha (FEITO)
     Torre pequena, média, grande      | felicidade: 10, 20, 30 durabilidade: 4, 3, 2  | escalada
     Nave espacial                     | felicidade: 40         durabilidade: 1        | calcular a v_escape (FEITO)
-    Jogo da memória                   | felicidade: 15         durabilidade: 2        | jogo da memória
+    Jogo da memória                   | felicidade: 15         durabilidade: 2        | jogo da memória (FEITO)
     Ratinho                           | felicidade: 10         durabilidade: 2        | forca de rato (FEITO)

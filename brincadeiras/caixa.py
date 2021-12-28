@@ -82,4 +82,4 @@ def caixa_anima():
         print_anima(animation[i % len(animation)], total=(len(animation) * 4)-1, momento=i)
         time.sleep(0.7)
 
-    input('Você terminou de brincar! Pressione ENTER para sair...')
+    input('Você terminou de brincar! Aperte ENTER para sair...')

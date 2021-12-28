@@ -43,7 +43,7 @@ class Main:
                  '  |____|  |__| |__||__| |_| |__||__| |__||______||__| |__|  |____|  ']
 
         botao = ['.-----------------------------.',
-                 '| Pressione ENTER para jogar! |',
+                 '|   Aperte ENTER para jogar!  |',
                  "'-----------------------------'"]
 
         janela = cjane.Janela()
@@ -51,7 +51,7 @@ class Main:
         for i in range(len(fonte)):
             janela.muda_linha(i + 1, fonte[i])
             try:
-                janela.muda_linha(i + 16, botao[i])
+                janela.muda_linha(i + 15, botao[i])
             except IndexError:
                 pass
 
@@ -78,7 +78,7 @@ class Main:
         for i in range(len(textos1)):
             janela.muda_linha(j, textos1[i], 'ljust')
             print(janela)
-            input('(pressione ENTER para continuar...)')
+            input('(Aperte ENTER para continuar...)')
 
             j += 2 if i != 2 else 1
 
@@ -145,7 +145,7 @@ class Main:
             ga = ogato.Adotado('', idade, fome, energia, saude, feliz, vac)
 
         print(janela)
-        input('(pressione ENTER para continuar...)')
+        input('(Aperte ENTER para continuar...)')
 
         janela.muda_linha(3+v, 'Hora de uma decisão difícil... Qual vai ser o nome do seu gato?', 'ljust')
         print(janela)

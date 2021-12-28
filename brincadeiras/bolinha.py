@@ -61,8 +61,8 @@ def jogo_bolinhas(feli):
         t = time() - t0
 
         if t > 1.5 or esc != str(n):
-            input('Você perdeu, lesminha kk. Pressione ENTER para sair...')
+            input('Você perdeu, lesminha kk. Aperte ENTER para sair...')
             return False
 
-    input('Vencedor! Você tem bons reflexos! Pressione ENTER para sair...')
+    input('Vencedor! Você tem bons reflexos! Aperte ENTER para sair...')
     return True
