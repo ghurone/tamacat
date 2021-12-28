@@ -103,10 +103,15 @@ class AppWindow:
         self.window.mainloop()
 
     def abrir_save(self):
-        save_path = filedialog.askopenfilename(defaultextension='.save', filetypes=[('Tamacat Save File', '*.save')])
+
+        tama_save_path = os.path.join(os.path.expanduser('~'), 'tamacat.save')
+
+        if not os.path.isfile(tama_save_path) or self.save_path != '':
+            save_path = filedialog.askopenfilename(defaultextension='.save', filetypes=[('Tamacat Save File', '*.save')])
+        else:
+            save_path = tama_save_path
 
         if save_path and save_path.endswith('tamacat.save'):
-
             with open(save_path, 'rb') as file:
                 objs = file.read()
                 objs = objs.split('_pE_dRo_'.encode('utf8'))
