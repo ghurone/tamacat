@@ -6,6 +6,8 @@ from tkinter import messagebox
 class AbaGeladeira:
 
     def __init__(self, app):
+        self.list_tipos = sorted(['Bebida', 'Salgado', 'Doce', 'Fruta'])
+
         self.frame = tk.Frame(app.window, background="#68BCED")
 
         self.ComidaFrame = tk.Frame(self.frame)
@@ -26,7 +28,7 @@ class AbaGeladeira:
         self.Table.column('#4', anchor=tk.CENTER, width=50)
         self.Table.heading('#4', text='Saúde')
         self.Table.column('#5', anchor=tk.CENTER, width=50)
-        self.Table.heading('#5', text='Feliz')
+        self.Table.heading('#5', text='Tipo')
 
         self.Table.bind('<<TreeviewSelect>>', self.row_select)
 
@@ -100,19 +102,6 @@ class AbaGeladeira:
         self.SaudeLabel.configure(highlightcolor="black")
         self.SaudeLabel.configure(text='''Saúde:''')
 
-        self.FelizLabel = tk.Label(self.ComidaEditFrame)
-        self.FelizLabel.place(x=10, y=170, height=22, width=64)
-        self.FelizLabel.configure(activebackground="#f9f9f9")
-        self.FelizLabel.configure(activeforeground="black")
-        self.FelizLabel.configure(anchor='w')
-        self.FelizLabel.configure(background="#60F7DD")
-        self.FelizLabel.configure(disabledforeground="#a3a3a3")
-        self.FelizLabel.configure(font="-family {Small Fonts} -size 14")
-        self.FelizLabel.configure(foreground="#5484d6")
-        self.FelizLabel.configure(highlightbackground="#d9d9d9")
-        self.FelizLabel.configure(highlightcolor="black")
-        self.FelizLabel.configure(text='''Feliz:''')
-
         self.NameInput = tk.Entry(self.ComidaEditFrame)
         self.NameInput.place(x=80, y=50, height=20, width=164)
         self.NameInput.configure(background="white")
@@ -155,22 +144,8 @@ class AbaGeladeira:
         self.SaudeInput.configure(selectbackground="blue")
         self.SaudeInput.configure(selectforeground="white")
 
-        self.FelizInput = tk.Entry(self.ComidaEditFrame)
-        self.FelizInput.place(x=80, y=170, height=20, width=64)
-        self.FelizInput.configure(background="white")
-        self.FelizInput.configure(disabledforeground="#a3a3a3")
-        self.FelizInput.configure(font="-family {Small Fonts} -size 8")
-        self.FelizInput.configure(foreground="#000000")
-        self.FelizInput.configure(highlightbackground="#d9d9d9")
-        self.FelizInput.configure(highlightcolor="black")
-        self.FelizInput.configure(insertbackground="black")
-        self.FelizInput.configure(readonlybackground="#f0f0f0f0f0f0")
-        self.FelizInput.configure(relief="flat")
-        self.FelizInput.configure(selectbackground="blue")
-        self.FelizInput.configure(selectforeground="white")
-
         self.QuantLabel = tk.Label(self.ComidaEditFrame)
-        self.QuantLabel.place(x=10, y=210, height=22, width=64)
+        self.QuantLabel.place(x=10, y=170, height=22, width=64)
         self.QuantLabel.configure(activebackground="#f9f9f9")
         self.QuantLabel.configure(activeforeground="black")
         self.QuantLabel.configure(anchor='w')
@@ -183,7 +158,7 @@ class AbaGeladeira:
         self.QuantLabel.configure(text='''Quant:''')
 
         self.QuantInput = tk.Entry(self.ComidaEditFrame)
-        self.QuantInput.place(x=80, y=210, height=20, width=64)
+        self.QuantInput.place(x=80, y=170, height=20, width=64)
         self.QuantInput.configure(background="white")
         self.QuantInput.configure(disabledforeground="#a3a3a3")
         self.QuantInput.configure(font="-family {Small Fonts} -size 8")
@@ -195,6 +170,26 @@ class AbaGeladeira:
         self.QuantInput.configure(relief="flat")
         self.QuantInput.configure(selectbackground="blue")
         self.QuantInput.configure(selectforeground="white")
+
+        self.TipoLabel = tk.Label(self.ComidaEditFrame)
+        self.TipoLabel.place(x=10, y=210, height=22, width=64)
+        self.TipoLabel.configure(activebackground="#f9f9f9")
+        self.TipoLabel.configure(activeforeground="black")
+        self.TipoLabel.configure(anchor='w')
+        self.TipoLabel.configure(background="#60F7DD")
+        self.TipoLabel.configure(disabledforeground="#a3a3a3")
+        self.TipoLabel.configure(font="-family {Small Fonts} -size 14")
+        self.TipoLabel.configure(foreground="#5484d6")
+        self.TipoLabel.configure(highlightbackground="#d9d9d9")
+        self.TipoLabel.configure(highlightcolor="black")
+        self.TipoLabel.configure(text='''Tipo:''')
+
+        self.Tipo = ttk.Combobox(self.ComidaEditFrame)
+        self.Tipo.place(x=80, y=210, height=21, width=143)
+        self.Tipo.configure(font="-family {Small Fonts} -size 10")
+        self.Tipo.configure(takefocus="")
+        self.Tipo.configure(values=self.list_tipos)
+        self.Tipo.configure(state='readonly')
 
         self.AddComida = tk.Button(self.frame)
         self.AddComida.place(relx=0.684, rely=0.825, height=54, width=177)
@@ -259,8 +254,8 @@ class AbaGeladeira:
         self.NameInput.insert(tk.INSERT, item[1])
         self.SaciarInput.insert(tk.INSERT, item[2])
         self.SaudeInput.insert(tk.INSERT, item[3])
-        self.FelizInput.insert(tk.INSERT, item[4])
         self.QuantInput.insert(tk.INSERT, item[0])
+        self.Tipo.current(self.list_tipos.index(item[4]))
 
         self.EditarComida['state'] = 'normal'
         self.DelComida['state'] = 'normal'
@@ -268,8 +263,8 @@ class AbaGeladeira:
     def button_row_edit(self):
         item = self.Table.selection()[0]
 
-        new_values = [self.QuantInput.get(), self.NameInput.get(), self.SaciarInput.get(), self.SaudeInput.get(),
-                      self.FelizInput.get()]
+        new_values = [self.QuantInput.get(), self.NameInput.get(), self.SaciarInput.get(),
+                      self.SaudeInput.get(), self.Tipo.get()]
 
         deboa = True
         for i in new_values:
@@ -292,8 +287,7 @@ class AbaGeladeira:
         self.DelComida['state'] = 'disable'
 
     def button_row_add(self):
-        values = [self.QuantInput.get(), self.NameInput.get(), self.SaciarInput.get(), self.SaudeInput.get(),
-                  self.FelizInput.get()]
+        values = [self.QuantInput.get(), self.NameInput.get(), self.SaciarInput.get(), self.SaudeInput.get(), self.Tipo.get()]
 
         podeadd = True
         for i in values:
@@ -309,5 +303,5 @@ class AbaGeladeira:
         self.NameInput.delete(0, tk.END)
         self.SaciarInput.delete(0, tk.END)
         self.SaudeInput.delete(0, tk.END)
-        self.FelizInput.delete(0, tk.END)
         self.QuantInput.delete(0, tk.END)
+        self.Tipo.delete(0, tk.END)

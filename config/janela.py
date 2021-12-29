@@ -161,17 +161,17 @@ class JanelaMenu:
     def __add_status(self):
         vac = 'Sim' if self.gato.vacinado else 'Não'
 
-        self.janela.muda_slice(15, 31, 79,
-                               f'Nome: {self.gato.nome}'.ljust(48))
-        self.janela.muda_slice(16, 31, 79,
-                               f'Idade: {self.gato.mostrar_idade()}'.ljust(48))
-        self.janela.muda_slice(17, 31, 79,
-                               ('Vacinado:   ' + vac).ljust(48))
-        self.janela.muda_slice(18, 31, 79,
-                               ('Fome:       ' + '[' + ('■' * (self.gato.fome // 5)).ljust(20) + ']').ljust(48))
-        self.janela.muda_slice(20, 31, 79,
-                               ('Saúde:      ' + '[' + ('■' * (self.gato.saude // 5)).ljust(20) + ']').ljust(48))
-        self.janela.muda_slice(19, 31, 79,
-                               ('Energia:    ' + '[' + ('■' * (self.gato.energia // 5)).ljust(20) + ']').ljust(48))
-        self.janela.muda_slice(21, 31, 79,
-                               ('Felicidade: ' + '[' + ('■' * (self.gato.feliz // 5)).ljust(20) + ']').ljust(48))
+        self.janela.muda_slice(15, 32, 79,
+                               f'Nome: {self.gato.nome}'.ljust(47))
+        self.janela.muda_slice(16, 32, 79,
+                               f'Idade: {self.gato.mostrar_idade()}'.ljust(47))
+        self.janela.muda_slice(17, 32, 79,
+                               ('Vacinado:   ' + vac).ljust(47))
+        self.janela.muda_slice(18, 32, 79,
+                               ('Fome:       ' + '[' + ('■' * (self.gato.fome // 5)).ljust(20) + ']').ljust(47))
+        self.janela.muda_slice(20, 32, 79,
+                               ('Saúde:      ' + '[' + ('■' * (self.gato.saude // 5)).ljust(20) + ']').ljust(47))
+        self.janela.muda_slice(19, 32, 79,
+                               ('Energia:    ' + '[' + ('■' * (self.gato.energia // 5)).ljust(20) + ']').ljust(47))
+        self.janela.muda_slice(21, 32, 79,
+                               ('Felicidade: ' + '[' + ('■' * (self.gato.feliz // 5)).ljust(20) + ']').ljust(47))

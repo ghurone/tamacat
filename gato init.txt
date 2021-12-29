@@ -16,7 +16,7 @@ GATOS
         energia: 10-90
         saude: 10-50
         humor: assustado
-        vacinado: True(50%)-False(50%)
+        vacinado: False
 
     Adotado:
 
@@ -30,31 +30,33 @@ GATOS
 COMIDAS
 
     Salgado:
-        Sardinha, atum, salmão     | saciar: 10, 20, 30 felicidade: 15, 20, 30 saude: 10, 15, 20
-        Ração comum                | saciar: 15         felicidade: 0          saude: 15
-        Ração carne, frango, peixe | saciar: 15         felicidade: 5, 10, 20  saude: 10
-        Sushi                      | saciar: 50         felicidade: 80         saude: 30
+        Sardinha, atum, salmão             | saciar: 10, 20, 30 saude: 10, 15, 20
+        Ração comum                        | saciar: 15         saude: 15
+        Ração carne, frango, peixe         | saciar: 15         saude: 10
+        Sushi                              | saciar: 50         saude: 30
 
-    Bebidas:
-        Água                             | saciar: 1  felicidade: 0          saude: 25
-        Leite                            | saciar: 10 felicidade: 20         saude: 0
-        Suco de limão, melancia, laranja | saciar: 5  felicidade: 10, 15, 25 saude: 10
-        Cerveja                          | saciar: 5  felicidade: 25         saude: -40
+    Bebida:
+        Água                               | saciar: 1  saude: 25
+        Leite                              | saciar: 10 saude: 0
+        Suco de limão, melancia, laranja   | saciar: 5  saude: 10
+        Cerveja                            | saciar: 10  saude: -40
 
     Doce:
-        Chocolate                          | saciar: 15 felicidade: 15         saude: -5
-        Bolo de coco, morango, chocolate   | saciar: 10 felicidade: 15, 20, 30 saude: -10
-        Torta de morango, limão, holandesa | saciar: 15 felicidade: 15, 20, 30 saude: -15
-        Sorvete chocolate, flocos, morango | saciar: 5  felicidade: 20, 25, 35 saude: -15
+        Chocolate                          | saciar: 15 saude: -5
+        Bolo de coco, morango, chocolate   | saciar: 10 saude: -10
+        Torta de morango, limão, holandesa | saciar: 15 saude: -15
+        Sorvete chocolate, flocos, morango | saciar: 5  saude: -15
+        Cookie                             | saciar: 20 saude: -15
 
-    Frutas:
-        Laranja   | saciar: 7  felicidade: 10 saude: 20
-        Maçã      | saciar: 5  felicidade: 0  saude: 40
-        Banana    | saciar: 10 felicidade: 0  saude: 20
-        Abacaxi   | saciar: 9  felicidade: 5  saude: 30
-        Uva       | saciar: 6  felicidade: 5  saude: 20
-        Morango   | saciar: 8  felicidade: 5  saude: 25
-        Tangerina | saciar: 7  felicidade: 10 saude: 30
+    Fruta:
+        Laranja                            | saciar: 7  saude: 20
+        Maçã                               | saciar: 5  saude: 40
+        Banana                             | saciar: 10 saude: 20
+        Abacaxi                            | saciar: 9  saude: 30
+        Uva                                | saciar: 6  saude: 20
+        Morango                            | saciar: 8  saude: 25
+        Tangerina                          | saciar: 7  saude: 30
+        Ameixa                             | saciar: 8  saude: 25
 
 BRINQUEDOS
 

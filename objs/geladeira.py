@@ -51,3 +51,25 @@ class Geladeira:
         else:
             f = self.alimentos[comida.nome]
             print(f'{f[1]}x {f[0]}')
+
+    def comida_por_classe(self):
+
+        c = {}
+        for val in self.alimentos.values():
+            comida = val[0]
+
+            try:
+                c[comida.__class__.__name__].append(comida)
+            except KeyError:
+                c[comida.__class__.__name__] = [comida]
+
+        return c
+
+    def comidasort(self):
+        c = self.comida_por_classe()
+
+        aux = []
+        for key in sorted(c.keys(), key=len, reverse=True):
+            aux += sorted(c[key], reverse=True)
+
+        return aux

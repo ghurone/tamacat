@@ -20,6 +20,10 @@ def ajustes_iniciais():
         pass
 
 
+def mudar_titulo(titulo):
+    system(f'TITLE Tamacat - {titulo}')
+
+
 def verificar_nome(nome):
     if len(nome) > 32 or nome == '_pE_dRo_' or nome.isspace() or nome == '':
         return False
@@ -28,6 +32,9 @@ def verificar_nome(nome):
 
 
 def janela_sair(salvo, gato, gela, bau):
+
+    mudar_titulo('Sair do jogo')
+
     janela = cjane.Janela()
 
     if salvo:
@@ -68,6 +75,9 @@ def janela_sair(salvo, gato, gela, bau):
 
 
 def janela_deletar():
+
+    mudar_titulo('Abandonar gato')
+
     janela = cjane.Janela()
     janela.muda_linha(1, ' Você quer mesmo abandonar o seu gato??? (S)im / (N)ão', 'ljust')
 
@@ -86,12 +96,18 @@ def janela_deletar():
 
 
 def janela_carregar():
+
+    mudar_titulo('Carregando jogo')
+
     janela = cjane.Janela()
     janela.muda_linha(11, 'Jogo carregado! :)')
     print(janela)
 
 
 def janela_salvar():
+
+    mudar_titulo('Salvar jogo')
+
     janela = cjane.Janela()
     janela.muda_linha(11, 'Jogo salvo! :)')
     print(janela)

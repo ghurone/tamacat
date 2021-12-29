@@ -65,7 +65,6 @@ def bot_mov(pos, pos_ocup):
     else:
         depth = 9 - len(pos_ocup)
 
-    print(depth)
     if depth == 0 or fim_jogo(pos):
         return
 

@@ -7,7 +7,7 @@ from objs.gatinho import Adotado, Resgatado, Comprado
 from objs.brinquedo import *
 from objs.bau import Bau
 from objs.geladeira import Geladeira
-from objs.comida import Comida
+from objs.comida import Salgado, Bebida, Doce, Fruta
 
 from tamaedit.abaGatinho import AbaGatinho
 from tamaedit.abaGeladeira import AbaGeladeira
@@ -153,7 +153,7 @@ class AppWindow:
         self.gato_aba.Tipo.current(self.gato_aba.list_gato.index(self.bau_aba.tipo_brinq(gato)))
 
     def set_gela(self, gela):
-        comidas = [(i[1], i[0].nome, i[0].saciar, i[0].saude, i[0].feliz) for i in gela.alimentos.values()]
+        comidas = [(i[1], i[0].nome, i[0].saciar, i[0].saude, i[0].__class__.__name__) for i in gela.alimentos.values()]
 
         # Deletando as coisas
 
@@ -211,7 +211,7 @@ class AppWindow:
 
         for i in self.gela_aba.Table.get_children():
             valores = self.gela_aba.Table.item(i)["values"]
-            comida = Comida(valores[1], int(valores[2]), int(valores[3]), int(valores[4]))
+            comida = eval(valores[4])(valores[1], int(valores[2]), int(valores[3]))
             gela.add_comida(comida, int(valores[0]))
 
         # Criando o objeto do baú

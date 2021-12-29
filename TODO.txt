@@ -1,13 +1,12 @@
 # FAZER AGORA!!!!!!
     - Função comer
 	- Documentar o código!!!!
-	- Fazer mini games para as ações
 	- Função creditos
 
 # FAZER DEPOIS
     - Tempo
+    - Sistema de dinheiro
 	- Sistema de humor
-	- Sistema de dinheiro
 	- Corzinhas
     - Comida favorita
     - Computador
