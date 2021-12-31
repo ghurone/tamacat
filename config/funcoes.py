@@ -111,3 +111,23 @@ def janela_salvar():
     janela = cjane.Janela()
     janela.muda_linha(11, 'Jogo salvo! :)')
     print(janela)
+
+
+def janela_creditos():
+    mudar_titulo('Créditos')
+    
+    janela = cjane.Janela()
+    
+    janela.muda_linha(1, 'CRÉDITOS')
+    
+    textos = ['  Desenvolvido por Érick Ghuron e Raquel durante a pandemia de COVID-19.',
+              ' Feito com amor e carinho <3', '',
+              '  Pitacos de PedroPedroPedro e TutoColossal.']
+    
+    for i in range(len(textos)):
+        janela.muda_linha(i+4, textos[i], 'ljust')
+    
+    janela.muda_linha(21, 'Equipe RaGhu ', 'rjust')
+    
+    print(janela)
+    input('(Aperte ENTER para voltar...)')

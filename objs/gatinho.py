@@ -13,10 +13,9 @@ class Gatinho:
 
     def comer(self, geladeira, comida):
         """Diminui a fome e altera a saúde dependendo dos níveis de saúde da Comida."""
-        geladeira.pegar_comida(comida.nome)
+        geladeira.pegar_comida(comida)
 
         self.fome = self.atualizar_attr(self.fome, comida.saciar)
-
         self.saude = self.atualizar_attr(self.saude, comida.saude)
 
     def brincar(self, bau, brinquedo):

@@ -1,3 +1,4 @@
+from pickle import FALSE
 import config.funcoes as cfunc
 import config.saveload as csave
 import config.janela as cjane
@@ -231,7 +232,7 @@ class Main:
         janela.mostrar_janela(show_input=False)
 
         brinq = input('Digite o número do brinquedo para jogar (ENTER para voltar): ')
-        while brinq != '' and (not brinq.isnumeric() or int(brinq) > len(brinqs)):
+        while brinq != '' and (not brinq.isnumeric() or int(brinq) not in range(1, len(brinqs)+1)):
             janela.mostrar_janela(show_input=False)
 
             if not brinq.isnumeric():
@@ -248,21 +249,67 @@ class Main:
 
             self.gato.brincar(self.bau, menor_dura)
             return True
+        
         else:
             return False
 
     def comer(self):
         cfunc.mudar_titulo('Escolher comida')
-
-        janela = cjane.JanelaTable({'##': 4, 'Nome': 41, 'Fome': 15, 'Saúde': 15})
-
-        comidas = self.gela.comidasort()
-        for i in range(len(comidas)):
-            janela.add_linha([i+1, comidas[i].nome, comidas[i].saciar, comidas[i].saude])
-
-        janela.mostrar_janela(show_input=False)
-        input()
-
+        
+        comidas_tipos = self.gela.comida_por_classe()
+        tipos = list(comidas_tipos.keys())
+        
+        janela_tipos = cjane.JanelaTable({'##': 4, 'Tipo': 73})
+        
+        for i in range(len(tipos)):
+            janela_tipos.add_linha([i+1, tipos[i]])
+        
+        janela_tipos.mostrar_janela(show_input=False)
+        
+        tipo_index = input('Digite o número do tipo de comida para comer (ENTER para voltar): ')
+        while tipo_index != '' and (not tipo_index.isnumeric() or int(tipo_index) not in range(1, len(tipos)+1)):
+            janela_tipos.mostrar_janela(show_input=False)
+            
+            if not tipo_index.isnumeric():
+                tipo_index = input('Digite um valor numérico (ENTER para voltar): ')
+            else:
+                tipo_index = input('Digite um número válido (ENTER para voltar): ')
+        
+        if tipo_index != '':
+            tipo = tipos[int(tipo_index)-1]
+            comidas = comidas_tipos[tipo]
+            
+            janela = cjane.JanelaTable({'##': 4, 'Nome': 50, 'Fome': 10, 'Saúde': 11})
+            
+            for i in range(len(comidas)):
+                janela.add_linha([i+1, comidas[i].nome, comidas[i].saciar, comidas[i].saude])
+                
+            janela.mostrar_janela(show_input=False)
+            
+            comida_index = input('Digite o número da comida para comer (ENTER para voltar ao menu): ')
+            while comida_index != '' and (not comida_index.isnumeric() or int(comida_index) not in range(1, len(comidas)+1)):
+                janela_tipos.mostrar_janela(show_input=False)
+                
+                if not comida_index.isnumeric():
+                    comida_index = input('Digite um valor numérico (ENTER para voltar ao menu): ')
+                else:
+                    comida_index = input('Digite um número válido (ENTER para voltar ao menu): ')
+            
+            if comida_index != '':
+                comida = comidas[int(comida_index)-1]
+                cfunc.mudar_titulo(f'Comendo {comida.nome}')
+                
+                self.gato.comer(self.gela, comida)
+                
+                return True
+                
+            else:
+                return False
+            
+        else:
+            return False
+        
+        
     def run_game(self):
 
         while True:
@@ -312,7 +359,11 @@ class Main:
                 cfunc.limpar_tela()
                 if cfunc.janela_sair(self.salvo, self.gato, self.gela, self.bau):
                     break
-
+            
+            elif esc.lower() == 'creditos' or esc.lower() == 'créditos':
+                cfunc.limpar_tela()
+                cfunc.janela_creditos()
+            
             else:
                 continue
 

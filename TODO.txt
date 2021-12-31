@@ -1,5 +1,5 @@
 # FAZER AGORA!!!!!!
-    - Função comer
+    - Animacao comida
 	- Documentar o código!!!!
 	- Função creditos
 
