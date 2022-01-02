@@ -1,4 +1,3 @@
-from pickle import FALSE
 import config.funcoes as cfunc
 import config.saveload as csave
 import config.janela as cjane
