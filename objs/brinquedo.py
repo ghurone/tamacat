@@ -73,7 +73,7 @@ class Bola(Brinquedo):
                 '  Pegue a bolinha ao teclar o algarismo contido nela, o mais',
                 ' rápido que puder! Isso acontecerá repetidas vezes, dependendo do',
                 ' tipo de bolinha escolhida.', '',
-                '  Caso digite o algarismo errado ou seja muito lento, perderá o jogo.']
+                f'  Caso digite o algarismo errado ou seja muito lent{gato.gens["letra"]}, perderá o jogo.']
         bfunc.como_jogar('Jogo da Bolinha', cont)
 
         return bbola.jogo_bolinhas(self.feliz)
@@ -127,7 +127,7 @@ class Nave(Brinquedo):
 
     @staticmethod
     def brincadeira(gato):
-        cont = ['  Você é um gatinho astronauta!', '',
+        cont = [f'  Você é um{gato.gens["um"]} gatinh{gato.gens["letra"]} astronauta!', '',
                 '  Para viajar à Lua, calcule corretamente a velocidade de escape necessária',
                 ' para a nave decolar, usando os seguintes dados fornecidos:', '',
                 '    Constante Gravitacional Universal (G)',

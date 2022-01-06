@@ -64,11 +64,32 @@ class Main:
     @staticmethod
     def novo_gato():
         """Retorna um Gatinho, Geladeira e Bau para um gato inicial."""
+        
+        gen_c = choice(['F', 'M'])
+        gen_r = choice(['F', 'M'])
+        
+        if gen_c == 'F':
+            um_c = 'a'
+            letra_c = um_c
+            pron_c = um_c
+        else:
+            um_c = ''
+            letra_c = 'o'
+            pron_c = 'e'
+        
+        if gen_r == 'F':
+            um_r = 'a'
+            letra_r = um_r
+            pron_r = um_r
+        else:
+            um_r = ''
+            letra_r = 'o'
+            pron_r = 'e'
 
         textos1 = ['  Você está pensando em ter um gato.',
-                   '  Um amigo seu conhece alguém que está vendendo um gato bonitinho.',
-                   '  Mas também tem um gato que sempre têm andado pela vizinhança,',
-                   ' e ele parece muito simpático.',
+                   f'  Um amigo seu conhece alguém que está vendendo um{um_c} gat{letra_c} bonitinh{letra_c}.',
+                   f'  Mas também tem um{um_r} gat{letra_r} que sempre têm andado pela vizinhança,',
+                   f' e el{pron_r} parece muito simpátic{letra_r}.',
                    '  Por outro lado, também existe um abrigo de gatos perto da sua casa.']
 
         cfunc.limpar_tela()
@@ -94,6 +115,8 @@ class Main:
         escolha = input('>>> ')
         while escolha.lower() != 'c' and escolha.lower() != 'r' and escolha.lower() != 'a' \
                 and escolha.lower() != 'comprar' and escolha.lower() != 'resgatar' and escolha.lower() != 'adotar':
+            
+            janela.muda_linha(11, '   Digite uma opção válida!', 'ljust')     
             print(janela)
             escolha = input('>>> ')
 
@@ -101,7 +124,7 @@ class Main:
 
         v = 0
         if escolha[0] in 'Cc':
-            janela.muda_linha(1, '  Você conversou com o conhecido do seu amigo e comprou o gatinho!', 'ljust')
+            janela.muda_linha(1, f'  Você conversou com o conhecido do seu amigo e comprou {letra_c} gatinh{letra_c}!', 'ljust')
 
             idade = randint(2, 12)
             fome = 100
@@ -110,10 +133,10 @@ class Main:
             feliz = randint(80, 100)
             vac = True
 
-            ga = ogato.Comprado('', idade, fome, energia, saude, feliz, vac)
+            ga = ogato.Comprado('', idade, fome, energia, saude, feliz, gen_c, vac)
 
         elif escolha[0] in 'Rr':
-            janela.muda_linha(1, '  Você resgatou o gatinho. Agora ele tem um dono!', 'ljust')
+            janela.muda_linha(1, f'  Você resgatou {letra_r} gatinh{letra_r}. Agora el{pron_r} tem um dono!', 'ljust')
 
             idade = randint(0, 180)
             fome = randint(10, 100)
@@ -122,25 +145,63 @@ class Main:
             feliz = randint(10, 90)
             vac = False
 
-            ga = ogato.Resgatado('', idade, fome, energia, saude, feliz, vac)
+            ga = ogato.Resgatado('', idade, fome, energia, saude, feliz, gen_r, vac)
 
         else:
             v = 1
-            janela.muda_linha(1, '  Você vai adotar um gato (F)ilhote ou (A)dulto?', 'ljust')
+            janela.muda_linha(1, '  Você quer adotar um gatinh(o) ou uma gatinh(a)?', 'ljust')
+            print(janela)
+            i = input('>>> ')
+            
+            while i.lower() != 'o' and i.lower() != 'a' and i.lower() != 'gatinho' and i.lower() != 'gatinha':
+                janela.muda_linha(2, '   Digite uma opção válida!', 'ljust')                
+                print(janela)
+                i = input('>>> ')
+            
+            if i[-1].lower() == 'a':
+                gen_a = 'F'
+                um_a = 'a'
+                letra_a = um_a
+                pron_a = um_a
+            elif i[-1].lower() == 'o':
+                gen_a = 'M'
+                um_a = ''
+                letra_a = 'o'
+                pron_a = 'e'
+            
+            janela.muda_linha(2, f'   - Gatinh{letra_a}', 'ljust')
+            print(janela)
+            
+            sleep(1)
+            
+            janela.muda_linha(4, f'  Você vai adotar um{um_a} gat{letra_a} (F)ilhote, (A)dult{letra_a} ou (I)dos{letra_a}?', 'ljust')
             print(janela)
             i = input('>>> ')
 
-            while i.lower() != 'f' and i.lower() != 'a' and i.lower() != 'filhote' and i.lower() != 'adulto':
+            while i.lower() != 'f' and i.lower() != 'a' and i.lower() != 'i' \
+                and i.lower() != 'filhote' and i.lower() != 'adulto' and i.lower() != 'idoso':
+                janela.muda_linha(5, '   Digite uma opção válida!', 'ljust')
                 print(janela)
                 i = input('>>>')
-
-            janela.muda_linha(1, '  Você foi até o abrigo e escolheu o seu gatinho.', 'ljust')
-            janela.muda_linha(2, '  Ou será que foi ele quem te escolheu?', 'ljust')
-
+                
             if i[0].lower() == 'f':
                 idade = randint(3, 12)
-            else:
+                janela.muda_linha(5, '   - Filhote', 'ljust')
+                
+            elif i[0].lower() == 'a':
                 idade = randint(13, 84)
+                janela.muda_linha(5, f'   - Adult{letra_a}', 'ljust')
+                
+            elif i[0].lower() == 'i':
+                idade = randint(85, 180)
+                janela.muda_linha(5, f'   - Idos{letra_a}', 'ljust')
+                
+            print(janela)
+            sleep(2)
+            
+            janela.limpar_janela()
+            janela.muda_linha(1, f'  Você foi até o abrigo e escolheu um{um_a} gatinh{letra_a}.', 'ljust')
+            janela.muda_linha(2, f' Ou será que foi el{pron_a} quem te escolheu?', 'ljust')
 
             fome = randint(60, 100)
             energia = randint(70, 100)
@@ -148,17 +209,18 @@ class Main:
             feliz = randint(80, 100)
             vac = choice([True, True, True, False, False])  # True: 60%, False: 40%
 
-            ga = ogato.Adotado('', idade, fome, energia, saude, feliz, vac)
+            ga = ogato.Adotado('', idade, fome, energia, saude, feliz, gen_a, vac)
 
         print(janela)
         input('(Aperte ENTER para continuar...)')
-
-        janela.muda_linha(3+v, '  Hora de uma decisão difícil... Qual vai ser o nome do seu gato?', 'ljust')
+        
+        l = ga.gens['letra']
+        janela.muda_linha(3+v, f'  Hora de uma decisão difícil... Qual vai ser o nome d{l} gat{l}?', 'ljust')
         print(janela)
         nome = input('>>> ')
 
         while not cfunc.verificar_nome(nome):
-            janela.muda_linha(5+v, '  Insira um nome válido (e com tamanho menor que 32)!', 'ljust')
+            janela.muda_linha(4+v, '   Digite um nome válido (e com tamanho menor que 32)!', 'ljust')
             print(janela)
             nome = input('>>> ')
 
@@ -178,7 +240,7 @@ class Main:
                  ]
 
         acoes_jogo = ['Salvar o jogo',
-                      'Abandonar o gato :(',
+                      f'Abandonar {self.gato.gens["letra"]} gat{self.gato.gens["letra"]} :(',
                       'Sair'
                       ]
 

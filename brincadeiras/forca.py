@@ -160,7 +160,7 @@ def jogar_forca():
         msg = 'Você ganhou, o ratinho está morto hehehe... '
     else:
         msg = 'Você perdeu, o ratinho fugiu. '
-    input(msg + '(Aperte ENTER para sair)')
+    input(msg + '(Aperte ENTER para sair...)')
 
     return ganhou
 

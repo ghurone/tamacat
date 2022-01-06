@@ -168,11 +168,11 @@ def jogar_velha():
     print_tabuleiro(pos_print)
 
     if player_venceu:
-        input('Você venceu seu dono! [Aperte ENTER para voltar...]')
+        input('Você venceu seu dono! (Aperte ENTER para voltar...)')
         return True
 
     elif comput_venceu:
-        input('O seu dono venceu... [Aperte ENTER para voltar...]')
+        input('O seu dono venceu... (Aperte ENTER para voltar...)')
     else:
-        input('Deu velha :/ [Aperte ENTER para voltar...]')
+        input('Deu velha :/ (Aperte ENTER para voltar...)')
     return False

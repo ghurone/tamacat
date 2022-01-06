@@ -108,19 +108,19 @@ def jogar_memoria():
     while cartas != animais_duplos and vidas != 0:
         printar_jogo(cartas, vidas)
         
-        pos_1 = input('Digite a primeira carta para virar >>> ')
+        pos_1 = input('Digite a primeira carta para virar: ')
         while not pos_1.isnumeric() or int(pos_1) not in mov_poss:
             printar_jogo(cartas, vidas)
-            pos_1 = input('Digite a primeira carta para virar >>> ')
+            pos_1 = input('Digite a primeira carta para virar: ')
         
         temp = cartas.copy()
         temp[int(pos_1)-1] = animais_duplos[int(pos_1)-1]
         printar_jogo(temp, vidas)
         
-        pos_2 = input('Digite a segunda carta para virar >>> ')
+        pos_2 = input('Digite a segunda carta para virar: ')
         while not pos_2.isnumeric() or int(pos_2) not in mov_poss or pos_2 == pos_1:
             printar_jogo(temp, vidas)
-            pos_2 = input('Digite a segunda carta para virar >>> ')
+            pos_2 = input('Digite a segunda carta para virar: ')
         
         temp[int(pos_2)-1] = animais_duplos[int(pos_2)-1]
         printar_jogo(temp, vidas)

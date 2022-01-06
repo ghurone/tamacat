@@ -120,13 +120,13 @@ def jogo_nave(gato_name):
     # o jogador ganha se responder com precisão de 0,001
     if result - 0.001 <= resp <= result + 0.001:
         printar_tela(gato_name, 'voando', raio, massa)
-        input('Aperte ENTER para sair...')
+        input('(Aperte ENTER para sair...)')
         system('color f0')  # volta a cor para branco
         return True
 
     else:
         printar_tela(gato_name, 'falhou', raio, massa)
-        input('Aperte ENTER para sair...')
+        input('(Aperte ENTER para sair...)')
 
     system('color f0')  # volta a cor para branco
     return False

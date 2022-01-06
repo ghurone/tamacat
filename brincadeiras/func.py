@@ -16,4 +16,4 @@ def como_jogar(titulo, conteudo):
             pass
 
     print(janela)
-    input('Aperte ENTER para jogar!')
+    input('(Aperte ENTER para jogar!)')

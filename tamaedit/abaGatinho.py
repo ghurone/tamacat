@@ -6,6 +6,7 @@ class AbaGatinho:
 
     def __init__(self, app):
         self.list_gato = ['Adotado', 'Comprado', 'Resgatado']
+        self.list_gen = ['F', 'M']
         self.frame = tk.Frame(app.window, background="#68BCED")
 
         self.secondFrame = tk.Frame(self.frame)
@@ -64,7 +65,7 @@ class AbaGatinho:
         self.Sono = tk.IntVar()
 
         self.SonoCheck = tk.Checkbutton(self.secondFrame)
-        self.SonoCheck.place(x=210, y=289, height=26, width=111)
+        self.SonoCheck.place(x=130, y=289, height=26, width=111)
         self.SonoCheck.configure(activebackground="#60F7DD")
         self.SonoCheck.configure(activeforeground="#5484d6")
         self.SonoCheck.configure(anchor='w')
@@ -217,6 +218,13 @@ class AbaGatinho:
         self.Tipo.configure(values=self.list_gato)
         self.Tipo.configure(state='readonly')
 
+        self.Gen = ttk.Combobox(self.secondFrame)
+        self.Gen.place(x=260, y=289, height=21, width=50)
+        self.Gen.configure(font="-family {Small Fonts} -size 10")
+        self.Gen.configure(takefocus="")
+        self.Gen.configure(values=self.list_gen)
+        self.Gen.configure(state='readonly')
+        
     def del_inputs(self):
         self.NameInput.delete(0, tk.END)
         self.IdadeInput.delete(0, tk.END)

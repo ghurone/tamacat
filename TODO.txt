@@ -1,10 +1,9 @@
 # FAZER AGORA!!!!!!
     - Animacao comida
 	- Documentar o código!!!!
-	- Função creditos
+	- Tempo
 
 # FAZER DEPOIS
-    - Tempo
     - Sistema de dinheiro
 	- Sistema de humor
 	- Corzinhas

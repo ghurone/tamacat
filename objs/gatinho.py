@@ -1,15 +1,22 @@
 class Gatinho:
 
-    def __init__(self, nome, idade, fome, energia, saude, feliz, vac=False):
+    def __init__(self, nome, idade, fome, energia, saude, feliz, gen, vac):
         self.nome = nome
-        self.vacinado = vac
-
-        self.dormindo = False
         self.idade = idade
         self.fome = fome
         self.energia = energia
         self.saude = saude
         self.feliz = feliz
+        self.vacinado = vac
+        self.dormindo = False
+        
+        self.gen = gen
+        
+        if gen == 'F':
+            self.gens = {'pron': 'a', 'um': 'a', 'letra': 'a'}
+        
+        elif gen == 'M':            
+            self.gens = {'pron': 'e', 'um': '', 'letra': 'o'}
 
     def comer(self, geladeira, comida):
         """Diminui a fome e altera a saúde dependendo dos níveis de saúde da Comida."""
@@ -106,19 +113,33 @@ class Gatinho:
 
 
 class Adotado(Gatinho):
-    def __init__(self, nome, idade, fome, energia, saude, feliz, vac):
-        super().__init__(nome, idade, fome, energia, saude, feliz, vac)
+    def __init__(self, nome, idade, fome, energia, saude, feliz, gen, vac):
+        super().__init__(nome, idade, fome, energia, saude, feliz, gen, vac)
 
 
 class Comprado(Gatinho):
-    def __init__(self, nome, idade, fome, energia, saude, feliz, vac):
-        super().__init__(nome, idade, fome, energia, saude, feliz, vac)
+    def __init__(self, nome, idade, fome, energia, saude, feliz, gen, vac):
+        super().__init__(nome, idade, fome, energia, saude, feliz, gen, vac)
 
 
 class Resgatado(Gatinho):
-    def __init__(self, nome, idade, fome, energia, saude, feliz, vac):
-        super().__init__(nome, idade, fome, energia, saude, feliz, vac)
+    def __init__(self, nome, idade, fome, energia, saude, feliz, gen, vac):
+        super().__init__(nome, idade, fome, energia, saude, feliz, gen, vac)
 
-    @staticmethod
-    def mostrar_idade():
-        return '?'
+    def mostrar_idade(self):
+        
+        if not self.vacinado:
+        
+            if self.idade <= 12:
+                return 'Filhote'
+            
+            elif 12 < self.idade < 84:
+                return 'Adult' + self.gens['letra']
+            
+            else:
+                return 'Idos' + self.gens['letra']
+        
+        else:
+            pass
+            
+            

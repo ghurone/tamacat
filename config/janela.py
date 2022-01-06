@@ -125,7 +125,7 @@ class JanelaMenu:
         self.acoes = acoes_gato
         self.acoes_jogo = acoes_jogo
 
-        self.janela = Janela()  # oi érick - oi richard :D
+        self.janela = Janela()  # oi érick - oi mo :D
         self.janela.criar_janelinha((0, 0), (22, 30))  # Janela das ações
         self.janela.criar_janelinha((0, 30), (14, 79))  # Janela do gatinho
 
@@ -162,11 +162,11 @@ class JanelaMenu:
         vac = 'Sim' if self.gato.vacinado else 'Não'
 
         self.janela.muda_slice(15, 32, 79,
-                               f'Nome: {self.gato.nome}'.ljust(47))
+                               f'Nome:       {self.gato.nome}'.ljust(47))
         self.janela.muda_slice(16, 32, 79,
-                               f'Idade: {self.gato.mostrar_idade()}'.ljust(47))
+                               f'Idade:      {self.gato.mostrar_idade()}'.ljust(47))
         self.janela.muda_slice(17, 32, 79,
-                               ('Vacinado:   ' + vac).ljust(47))
+                               (f'Vacinad{self.gato.gens["letra"]}:   ' + vac).ljust(47))
         self.janela.muda_slice(18, 32, 79,
                                ('Fome:       ' + '[' + ('■' * (self.gato.fome // 5)).ljust(20) + ']').ljust(47))
         self.janela.muda_slice(20, 32, 79,

@@ -151,6 +151,7 @@ class AppWindow:
             self.gato_aba.SonoCheck.deselect()
 
         self.gato_aba.Tipo.current(self.gato_aba.list_gato.index(self.bau_aba.tipo_brinq(gato)))
+        self.gato_aba.Gen.current(self.gato_aba.list_gen.index(gato.gen))
 
     def set_gela(self, gela):
         comidas = [(i[1], i[0].nome, i[0].saciar, i[0].saude, i[0].__class__.__name__) for i in gela.alimentos.values()]
@@ -201,8 +202,9 @@ class AppWindow:
         saude = int(self.gato_aba.SaudeScale.get())
         feliz = int(self.gato_aba.FelizScale.get())
         vac = True if self.gato_aba.Vac.get() == 1 else False
-
-        gato = eval(self.gato_aba.Tipo.get())(nome, idade, fome, energ, saude, feliz, vac)
+        gen = self.gato_aba.Gen.get()
+        
+        gato = eval(self.gato_aba.Tipo.get())(nome, idade, fome, energ, saude, feliz, gen, vac)
 
         if self.gato_aba.Sono.get() == 1:
             gato.dormindo = True
