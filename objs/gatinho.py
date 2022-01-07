@@ -93,10 +93,10 @@ class Gatinho:
 
         mes = self.idade % 12
         ano = self.idade // 12
-
+        
         if ano == 0:
             return f'{mes} meses'
-
+        
         elif mes == 0:
             if ano == 1:
                 return '1 ano'
@@ -108,6 +108,9 @@ class Gatinho:
                 return f'1 ano e 1 mês'
             else:
                 return f'{ano} anos e 1 mês'
+        
+        elif ano == 1:
+            return f'1 ano e {mes} meses'
 
         return f'{ano} anos e {mes} meses'
 

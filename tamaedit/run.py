@@ -14,7 +14,7 @@ from tamaedit.abaGeladeira import AbaGeladeira
 from tamaedit.abaBau import AbaBau
 
 import tkinter as tk
-from tkinter.messagebox import showinfo
+from tkinter.messagebox import showerror, showinfo
 
 from pickle import loads, dump
 from tkinter import ttk
@@ -104,14 +104,14 @@ class AppWindow:
 
     def abrir_save(self):
 
-        tama_save_path = os.path.join(os.path.expanduser('~'), 'tamacat.save')
+        tama_save_path = os.path.join(os.path.expanduser('~'), '.tamacat','save.tamacat')
 
         if not os.path.isfile(tama_save_path) or self.save_path != '':
-            save_path = filedialog.askopenfilename(defaultextension='.save', filetypes=[('Tamacat Save File', '*.save')])
+            save_path = filedialog.askopenfilename(defaultextension='.save', filetypes=[('Tamacat Save File', '*.tamacat')])
         else:
             save_path = tama_save_path
 
-        if save_path and save_path.endswith('tamacat.save'):
+        if save_path and save_path.endswith('save.tamacat'):
             with open(save_path, 'rb') as file:
                 objs = file.read()
                 objs = objs.split('_pE_dRo_'.encode('utf8'))
@@ -190,50 +190,54 @@ class AppWindow:
         self.bau_aba.AddBrinq['state'] = 'normal'
 
     def salvar(self):
-        gela = Geladeira()
-        bau = Bau()
+        try:
+            
+            gela = Geladeira()
+            bau = Bau()
 
-        # Criando o objeto Gato
+            # Criando o objeto Gato
 
-        nome = self.gato_aba.NameInput.get()
-        idade = int(self.gato_aba.IdadeInput.get())
-        fome = int(self.gato_aba.FomeScale.get())
-        energ = int(self.gato_aba.EnergiaScale.get())
-        saude = int(self.gato_aba.SaudeScale.get())
-        feliz = int(self.gato_aba.FelizScale.get())
-        vac = True if self.gato_aba.Vac.get() == 1 else False
-        gen = self.gato_aba.Gen.get()
-        
-        gato = eval(self.gato_aba.Tipo.get())(nome, idade, fome, energ, saude, feliz, gen, vac)
+            nome = self.gato_aba.NameInput.get()
+            idade = int(self.gato_aba.IdadeInput.get())
+            fome = int(self.gato_aba.FomeScale.get())
+            energ = int(self.gato_aba.EnergiaScale.get())
+            saude = int(self.gato_aba.SaudeScale.get())
+            feliz = int(self.gato_aba.FelizScale.get())
+            vac = True if self.gato_aba.Vac.get() == 1 else False
+            gen = self.gato_aba.Gen.get()
+            
+            gato = eval(self.gato_aba.Tipo.get())(nome, idade, fome, energ, saude, feliz, gen, vac)
 
-        if self.gato_aba.Sono.get() == 1:
-            gato.dormindo = True
+            if self.gato_aba.Sono.get() == 1:
+                gato.dormindo = True
 
-        # Criando o objeto da geladeira
+            # Criando o objeto da geladeira
 
-        for i in self.gela_aba.Table.get_children():
-            valores = self.gela_aba.Table.item(i)["values"]
-            comida = eval(valores[4])(valores[1], int(valores[2]), int(valores[3]))
-            gela.add_comida(comida, int(valores[0]))
+            for i in self.gela_aba.Table.get_children():
+                valores = self.gela_aba.Table.item(i)["values"]
+                comida = eval(valores[4])(valores[1], int(valores[2]), int(valores[3]))
+                gela.add_comida(comida, int(valores[0]))
 
-        # Criando o objeto do baú
+            # Criando o objeto do baú
 
-        for i in self.bau_aba.Table.get_children():
-            valores = self.bau_aba.Table.item(i)["values"]
-            brinq = eval(valores[3])(valores[0], int(valores[1]), int(valores[2]))
-            bau.add_brinquedo(brinq)
+            for i in self.bau_aba.Table.get_children():
+                valores = self.bau_aba.Table.item(i)["values"]
+                brinq = eval(valores[3])(valores[0], int(valores[1]), int(valores[2]))
+                bau.add_brinquedo(brinq)
 
-        objs = [gato, gela, bau]
-        for i in range(len(objs)):
-            t = 'ab'
-            if i == 0:
-                t = 'wb'
+            objs = [gato, gela, bau]
+            for i in range(len(objs)):
+                t = 'ab'
+                if i == 0:
+                    t = 'wb'
 
-            with open(self.save_path, t) as file:
-                dump(objs[i], file)
-                file.write(bytes('_pE_dRo_'.encode('utf8')))
+                with open(self.save_path, t) as file:
+                    dump(objs[i], file)
+                    file.write(bytes('_pE_dRo_'.encode('utf8')))
 
-        showinfo('Sucesso', 'Arquivo salvo.')
+            showinfo('Sucesso!', 'Arquivo salvo.')
+        except Exception as e:
+            showerror('Ops, deu ruim...', e)
 
 
 if __name__ == '__main__':

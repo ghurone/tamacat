@@ -5,6 +5,7 @@ from time import sleep
 
 
 def limpar_tela():
+    
     if 'nt' in name:
         system('cls')
     else:
@@ -12,6 +13,7 @@ def limpar_tela():
 
 
 def ajustes_iniciais():
+    
     if 'nt' in name:
         system('color f0')  # define a cor do terminal (branco)
         system('mode con: cols=81 lines=24')  # ajuda o tamanho do terminal
@@ -24,15 +26,19 @@ def mudar_titulo(titulo):
     system(f'TITLE Tamacat - {titulo}')
 
 
+def existe_save(nome):
+    return nome in [save.split('.')[0] for save in csave.listar_saves()]
+
+
 def verificar_nome(nome):
-    if len(nome) > 32 or nome == '_pE_dRo_' or nome.isspace() or nome == '':
+    
+    if len(nome) > 32 or nome == '_pE_dRo_' or nome.isspace() or nome == '' or existe_save(nome):
         return False
 
     return True
 
 
 def janela_sair(salvo, gato, gela, bau):
-
     mudar_titulo('Sair do jogo')
 
     janela = cjane.Janela()
@@ -61,7 +67,7 @@ def janela_sair(salvo, gato, gela, bau):
         if int(esc) in range(1, 3):
             esc = 's'
             if esc == '1':
-                csave.salvar_jogo(gato, gela, bau)
+                csave.salvar_jogo([gato, gela, bau])
 
     if 's' in esc:
         janela.limpar_janela()
@@ -75,7 +81,6 @@ def janela_sair(salvo, gato, gela, bau):
 
 
 def janela_deletar():
-
     mudar_titulo('Abandonar gato')
 
     janela = cjane.Janela()
@@ -96,7 +101,6 @@ def janela_deletar():
 
 
 def janela_carregar():
-
     mudar_titulo('Carregando jogo')
 
     janela = cjane.Janela()
@@ -105,7 +109,6 @@ def janela_carregar():
 
 
 def janela_salvar():
-
     mudar_titulo('Salvar jogo')
 
     janela = cjane.Janela()

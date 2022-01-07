@@ -1,7 +1,8 @@
 # FAZER AGORA!!!!!!
-    - Animacao comida
 	- Documentar o código!!!!
+    - Tirar classe Main para poder voltar ao menu
 	- Tempo
+    - Mudar tamaedit para save
 
 # FAZER DEPOIS
     - Sistema de dinheiro
@@ -10,3 +11,4 @@
     - Comida favorita
     - Computador
     - Interagir com outros gatos do jogo
+    - Animacao comida

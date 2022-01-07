@@ -1,17 +1,19 @@
+import config.caminhos as cpath
+
 from pickle import dump, loads
-from os import remove, path
+from os import remove, path, listdir
+    
 
-path_save = path.join(path.expanduser('~'), 'tamacat.save')
-
-
-def salvar_jogo(*objs):
+def salvar_jogo(objs:list):
     try:
+        save_file = path.join(cpath.path_save, objs[0].nome + '.tamacat')
+        
         for i in range(len(objs)):
             t = 'ab'
             if i == 0:
                 t = 'wb'
 
-            with open(path_save, t) as file:
+            with open(save_file, t) as file:
                 dump(objs[i], file)
                 file.write(bytes('_pE_dRo_'.encode('utf8')))
 
@@ -19,9 +21,11 @@ def salvar_jogo(*objs):
         print(e)
 
 
-def carregar_jogo():
+def carregar_jogo(nome):
     try:
-        with open(path_save, 'rb') as file:
+        save_file = path.join(cpath.path_save, nome + '.tamacat')
+        
+        with open(save_file, 'rb') as file:
             objs = file.read()
             objs = objs.split('_pE_dRo_'.encode('utf8'))
 
@@ -31,12 +35,16 @@ def carregar_jogo():
 
         return list_objs
 
-    except FileNotFoundError:
+    except Exception:
         return False
 
 
-def deletar_jogo():
+def deletar_jogo(nome):
     try:
-        remove(path_save)
+        remove(path.join(cpath.path_save, nome + '.tamacat'))
     except Exception as e:
         print(e)
+
+
+def listar_saves():
+    return [file for file in listdir(cpath.path_save) if file.endswith('.tamacat')]

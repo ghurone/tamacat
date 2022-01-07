@@ -13,19 +13,26 @@ humores = ['feliz', 'triste', 'quieto', 'brincalhão', 'carinhoso', 'assustado',
 
 
 class Main:
+    
     def __init__(self):
         cfunc.ajustes_iniciais()
-        self.tela_inicial()
-
-        if csave.carregar_jogo():
-            self.gato, self.gela, self.bau = csave.carregar_jogo()
-            cfunc.janela_carregar()
-            sleep(1)
-
+        op = self.tela_inicial()
+        self.voltar = False
+        
+        if op == '1':
+            objs = self.novo_gato()
+        elif op == '2':
+            objs = self.tela_carregar_gato()
+        elif op == '3':
+            exit()
+        
+        if objs:
+            self.gato, self.gela, self.bau = objs
+            csave.salvar_jogo([self.gato, self.gela, self.bau])
+        
         else:
-            self.gato, self.gela, self.bau = self.novo_gato()
-            csave.salvar_jogo(self.gato, self.gela, self.bau)
-
+            self.voltar = True
+        
         self.salvo = True
 
     @staticmethod
@@ -56,11 +63,69 @@ class Main:
                 pass
 
         janela.muda_linha(11, 'O MELHOR JOGO DO MUNDO!')
-        janela.muda_linha(20, '© RaGhu 2021 ', alin='rjust')
+        janela.muda_linha(21, '© RaGhu 2021 ', alin='rjust')
 
         print(janela)
         input()  # para não dar para digitar nada no input além de enter
-
+        
+        janela.muda_linha(15, '(1) Novo Jogo         ')
+        janela.muda_linha(16, '(2) Carregar Jogo     ')
+        janela.muda_linha(17, '(3) Sair              ')
+        
+        print(janela)
+        op = input('Digite a opção desejada: ')
+        
+        while op not in ['1', '2', '3']:
+            print(janela)
+            op = input('Digite uma opção válida: ')
+        
+        return op
+    
+    def tela_carregar_gato(self):
+        gatos = csave.listar_saves()
+        
+        if len(gatos) == 0:
+            janela = cjane.Janela()
+            janela.muda_linha(11, 'Você não possui nenhum gato, deseja criar um? (S)im ou (N)ão')
+            
+            print(janela)
+            
+            esc = input('>>> ').lower()
+            while esc != 's' and esc != 'n' and esc != 'sim' and esc != 'não' and esc != 'nao':
+                janela.muda_linha(12, 'Digite uma opção válida!')
+                print(janela)
+                esc = input('>>> ').lower()    
+            
+            if 's' in esc:
+                return self.novo_gato()
+            elif 'n':
+                return None
+            
+        elif len(gatos) == 1:
+            save = csave.carregar_jogo(gatos[0].split(".")[0])
+            return save
+        
+        elif len(gatos) > 1:
+            janela = cjane.JanelaTable({'##': 4, 'Gato': 54, 'Idade': 18})
+            gatitos = []
+            
+            for i in range(len(gatos)):
+                ga, ge, ba = csave.carregar_jogo(gatos[i].split(".")[0])
+                gatitos.append([ga, ge, ba])
+                janela.add_linha([i+1, ga.nome, ga.mostrar_idade()])
+            
+            janela.mostrar_janela(False)
+            esc = input('Digite o número do gato para carregar (ENTER para voltar): ').lower()
+            
+            while esc != '' and (not esc.isnumeric() or int(esc) not in range(1, len(gatos)+1)):
+                janela.mostrar_janela(False)
+                esc = input('Digite uma opção válida: ').lower()
+            
+            if esc != '':
+                return gatitos[int(esc)-1]
+            else:
+                return None
+            
     @staticmethod
     def novo_gato():
         """Retorna um Gatinho, Geladeira e Bau para um gato inicial."""
@@ -215,15 +280,24 @@ class Main:
         input('(Aperte ENTER para continuar...)')
         
         l = ga.gens['letra']
-        janela.muda_linha(3+v, f'  Hora de uma decisão difícil... Qual vai ser o nome d{l} gat{l}?', 'ljust')
+        p = ga.gens['pron']
+        janela.muda_linha(3+v, f'  Hora de uma decisão difícil... Qual vai ser o nome del{p}?', 'ljust')
         print(janela)
         nome = input('>>> ')
 
         while not cfunc.verificar_nome(nome):
-            janela.muda_linha(4+v, '   Digite um nome válido (e com tamanho menor que 32)!', 'ljust')
+            
+            if cfunc.existe_save(nome):
+                gatolino = csave.carregar_jogo(nome)[0]
+                l_antigo = gatolino.gens['letra']
+                p_antigo = gatolino.gens['pron']
+                janela.muda_linha(4+v, f'   Ess{p_antigo} gatinh{l_antigo} já existe! Escolha outro nome.', 'ljust')
+            else:
+                janela.muda_linha(4+v, '   Digite um nome válido (e com tamanho menor que 32)!', 'ljust')
+                
             print(janela)
             nome = input('>>> ')
-
+       
         ga.nome = nome
         ge = ogela.Geladeira()
         ba = obau.Bau()
@@ -403,7 +477,7 @@ class Main:
             elif esc == '5':
                 # Salvar jogo
                 cfunc.limpar_tela()
-                csave.salvar_jogo(self.gato, self.gela, self.bau)
+                csave.salvar_jogo([self.gato, self.gela, self.bau])
 
                 self.salvo = True
                 cfunc.janela_salvar()
@@ -432,4 +506,7 @@ class Main:
 if __name__ == '__main__':
 
     game = Main()
+    while game.voltar:
+        game = Main()
+        
     game.run_game()
