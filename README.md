@@ -1,5 +1,4 @@
 # Tamacat 🐱
-=============
 
 Jogo muito fofo
 
