@@ -1,13 +1,19 @@
 class Janela:
 
-    def __init__(self):
-        self.linha_top = ['+' + '-'*78 + '+\n']
+    def __init__(self, nlin=23, ncol=80):
+        self.nlin = nlin
+        self.ncol = ncol
+
+        self.tam_hor = self.ncol - 2  # Tamanho da linha horizontal
+        self.tam_ver = self.nlin - 2  # Tamanho da linha vertical
+
+        self.linha_top = ['+' + '-'*self.tam_hor + '+\n']
 
         self.corpo = []
-        for _ in range(21):
-            self.corpo.append('|' + ' '*78 + '|\n')
+        for _ in range(self.tam_ver):
+            self.corpo.append('|' + ' '*self.tam_hor + '|\n')
 
-        self.linha_bot = ['+' + '-'*78 + '+']
+        self.linha_bot = ['+' + '-'*self.tam_hor + '+']
 
         self.janela = self.linha_top + self.corpo + self.linha_bot
 
@@ -19,7 +25,7 @@ class Janela:
         return s
 
     def __setitem__(self, linha, conteudo):
-        self.janela[linha] = conteudo + '\n' if linha != 22 else conteudo
+        self.janela[linha] = conteudo + '\n' if linha != self.nlin-1 else conteudo
 
     def __getitem__(self, item):
         return self.janela[item]
@@ -33,11 +39,11 @@ class Janela:
     def muda_linha(self, i, miolo, alin='center'):
 
         if alin == 'center':
-            miolo = miolo.center(78)
+            miolo = miolo.center(self.tam_hor)
         elif alin == 'rjust':
-            miolo = miolo.rjust(78)
+            miolo = miolo.rjust(self.tam_hor)
         elif alin == 'ljust':
-            miolo = miolo.ljust(78)
+            miolo = miolo.ljust(self.tam_hor)
 
         self.janela[i] = '|' + miolo + '|\n'
 
