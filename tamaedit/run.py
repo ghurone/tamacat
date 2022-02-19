@@ -8,6 +8,7 @@ from objs.brinquedo import *
 from objs.bau import Bau
 from objs.geladeira import Geladeira
 from objs.comida import Salgado, Bebida, Doce, Fruta
+from config.caminhos import path_save
 
 from tamaedit.abaGatinho import AbaGatinho
 from tamaedit.abaGeladeira import AbaGeladeira
@@ -104,26 +105,26 @@ class AppWindow:
 
     def abrir_save(self):
 
-        tama_save_path = os.path.join(os.path.expanduser('~'), '.tamacat','save.tamacat')
+        save_path = filedialog.askopenfilename(initialdir = path_save,
+                                               defaultextension='.save',
+                                               filetypes=[('Tamacat Save File', '*.tamacat')])
 
-        if not os.path.isfile(tama_save_path) or self.save_path != '':
-            save_path = filedialog.askopenfilename(defaultextension='.save', filetypes=[('Tamacat Save File', '*.tamacat')])
-        else:
-            save_path = tama_save_path
+        if save_path and save_path.endswith('.tamacat'):
+            try:
+                with open(save_path, 'rb') as file:
+                    objs = file.read()
+                    objs = objs.split('_pE_dRo_'.encode('utf8'))
 
-        if save_path and save_path.endswith('save.tamacat'):
-            with open(save_path, 'rb') as file:
-                objs = file.read()
-                objs = objs.split('_pE_dRo_'.encode('utf8'))
+                list_objs = [loads(obj) for obj in objs[:-1]]
 
-            list_objs = [loads(obj) for obj in objs[:-1]]
+                self.set_gatinho(list_objs[0])
+                self.set_gela(list_objs[1])
+                self.set_bau(list_objs[2])
 
-            self.set_gatinho(list_objs[0])
-            self.set_gela(list_objs[1])
-            self.set_bau(list_objs[2])
-
-            self.save_path = save_path
-            self.SalvarSave.configure(state='normal')
+                self.save_path = save_path
+                self.SalvarSave.configure(state='normal')
+            except Exception as e:
+                showerror('Erro ao abrir o save', f'{e}')
 
     def set_gatinho(self, gato):
 
