@@ -274,9 +274,12 @@ def tela_carregar_gato() -> tuple:
         gatitos = []
         
         for i in range(len(gatos)):
-            ga, ge, ba = csave.carregar_jogo(gatos[i].split(".")[0])
-            gatitos.append((ga, ge, ba))
-            janela.add_linha([i+1, ga.nome, ga.mostrar_idade()])
+            objs = csave.carregar_jogo(gatos[i].split(".")[0])
+            
+            if objs:
+                ga, ge, ba = objs
+                gatitos.append((ga, ge, ba))
+                janela.add_linha([i+1, ga.nome, ga.mostrar_idade()])
         
         janela.mostrar_janela(False)
         esc = input('Digite o número do gato para carregar (ENTER para voltar): ').lower()
