@@ -38,7 +38,7 @@ def verificar_nome(nome):
     return True
 
 
-def janela_sair(salvo, gato, gela, bau):
+def janela_voltar(salvo, gato, gela, bau):
     mudar_titulo('Sair do jogo')
 
     janela = cjane.Janela()
@@ -70,17 +70,12 @@ def janela_sair(salvo, gato, gela, bau):
                 csave.salvar_jogo([gato, gela, bau])
 
     if 's' in esc:
-        janela.limpar_janela()
-        janela.muda_linha(11, 'Tchau!!')
-        print(janela)
-        sleep(2)
-
         return True
 
     return False
 
 
-def janela_deletar():
+def janela_deletar(gato_nome):
     mudar_titulo('Abandonar gato')
 
     janela = cjane.Janela()
@@ -93,7 +88,7 @@ def janela_deletar():
         esc = input('>>>').lower()
 
     if 's' in esc:
-        csave.deletar_jogo()
+        csave.deletar_jogo(gato_nome)
 
         return True
 
@@ -134,3 +129,12 @@ def janela_creditos():
     
     print(janela)
     input('(Aperte ENTER para voltar...)')
+    
+
+def janela_sair():
+    janela = cjane.Janela()
+    janela.limpar_janela()
+    janela.muda_linha(11, 'Tchau!!')
+    print(janela)
+    sleep(2)
+    

@@ -4,7 +4,7 @@ from pickle import dump, loads
 from os import remove, path, listdir
     
 
-def salvar_jogo(objs:list):
+def salvar_jogo(objs:tuple) -> None:
     try:
         save_file = path.join(cpath.path_save, objs[0].nome + '.tamacat')
         
@@ -21,7 +21,7 @@ def salvar_jogo(objs:list):
         print(e)
 
 
-def carregar_jogo(nome):
+def carregar_jogo(nome:str) -> tuple:
     try:
         save_file = path.join(cpath.path_save, nome + '.tamacat')
         
@@ -33,18 +33,18 @@ def carregar_jogo(nome):
         for obj in objs[:-1]:
             list_objs.append(loads(obj))
 
-        return list_objs
+        return tuple(list_objs)
 
     except Exception:
-        return False
+        return ()
 
 
-def deletar_jogo(nome):
+def deletar_jogo(nome:str) -> None:
     try:
         remove(path.join(cpath.path_save, nome + '.tamacat'))
     except Exception as e:
         print(e)
 
 
-def listar_saves():
+def listar_saves() -> list:
     return [file for file in listdir(cpath.path_save) if file.endswith('.tamacat')]

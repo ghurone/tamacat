@@ -1,6 +1,5 @@
 # FAZER AGORA!!!!!!
 	- Documentar o código!!!!
-    - Tirar classe Main para poder voltar ao menu
 	- Tempo
     - Mudar tamaedit para save
 
