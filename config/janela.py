@@ -78,8 +78,16 @@ class Janela:
 
 class JanelaTable:
 
-    def __init__(self, cabeca: dict = None):
-        self.cabeca_v = {'': 78} if not cabeca else cabeca
+    def __init__(self, cabeca: dict = None, nlin=23, ncol=80):
+        self.nlin = nlin
+        self.ncol = ncol
+        
+        self.tam_hor = self.ncol - 2  # Tamanho da linha horizontal
+        self.tam_ver = self.nlin - 2  # Tamanho da linha vertical
+        
+        self.tam_item = self.nlin - 4  
+        
+        self.cabeca_v = {'': self.tam_hor} if not cabeca else cabeca
         self.itens = []
 
         self.linha_top = ''
@@ -87,10 +95,10 @@ class JanelaTable:
 
     def mostrar_janela(self, show_input=True):
 
-        for i in range(len(self.itens) // 19 + 1):
+        for i in range(len(self.itens) // self.tam_item + 1):
             s = self.cabeca
 
-            for j in range(i * 19, 19 * (i + 1)):
+            for j in range(i * self.tam_item, self.tam_item * (i + 1)):
                 try:
                     y = 0
                     for v in self.cabeca_v.values():
@@ -104,7 +112,7 @@ class JanelaTable:
 
             print(s + self.linha_top)
             if show_input:
-                input(f'Página {i + 1}/{len(self.itens) // 19 + 1} (Aperte ENTER para continuar...)')
+                input(f'Página {i + 1}/{len(self.itens) // self.tam_item + 1} (Aperte ENTER para continuar...)')
 
     def add_linha(self, lista):
         lista = [str(i) for i in lista]
