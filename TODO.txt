@@ -2,7 +2,6 @@
 	- Documentar o código!!!!
     - Problema de save corrompido
 	- Tempo
-    - Mudar tamaedit para save
 
 # FAZER DEPOIS
     - Sistema de dinheiro
