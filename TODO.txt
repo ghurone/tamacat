@@ -1,6 +1,6 @@
 # FAZER AGORA!!!!!!
 	- Documentar o código!!!!
-    - Problema de save corrompido
+    - Janelas especiais
 	- Tempo
 
 # FAZER DEPOIS
