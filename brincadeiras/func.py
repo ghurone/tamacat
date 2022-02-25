@@ -1,10 +1,10 @@
-import config.janela as cjane
+import janelas
 
 
 def como_jogar(titulo, conteudo):
     """Cria a tela de "como jogar" para um jogo, recebendo o título e as instruções daquele jogo."""
 
-    janela = cjane.Janela()
+    janela = janelas.Janela()
     janela.muda_linha(1, titulo.upper())
     janela.muda_linha(3, '  - INSTRUÇÕES:', alin='ljust')
 

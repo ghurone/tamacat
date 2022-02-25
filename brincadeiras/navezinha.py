@@ -1,4 +1,4 @@
-import brincadeiras.func as bfunc
+import janelas
 
 from os import system
 from random import randint, choice
@@ -79,7 +79,7 @@ def printar_tela(gato_name, tipo, r, m):
     nave = tipos_nave[tipo]
     col = len(nave[0])
 
-    janela = bfunc.cjane.Janela()
+    janela = janelas.Janela()
 
     for i in range(21):
         janela.muda_slice(i+1, 1, col+1, nave[i])

@@ -1,4 +1,4 @@
-import brincadeiras.func as bfunc
+import janelas
 import config.funcoes as cfunc
 
 import time
@@ -57,7 +57,7 @@ def gato(n):
 
 
 def print_anima(gato_frame, total, momento):
-    janela = bfunc.cjane.Janela()
+    janela = janelas.Janela()
     porc = (momento / total)
 
     for i in range(23):

@@ -1,5 +1,4 @@
-from os import lseek
-import config.janela as cjane
+import janelas
 import random
 
 animais = [['         ',
@@ -71,7 +70,7 @@ def gerador(num):
 
 
 def printar_jogo(lista, vidas=''):
-    janela = cjane.Janela()
+    janela = janelas.Janela()
 
     if vidas != '':
         janela.muda_linha(1, f'vidas: {vidas} ', 'rjust')

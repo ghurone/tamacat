@@ -1,4 +1,4 @@
-import brincadeiras.func as bfunc
+import janelas
 import random
 
 
@@ -72,7 +72,7 @@ def ratinho(err, vivo=True):
 def printar_forca(lista_char, tema, letras_desc, err=0, vivo=True):
 
     # Janela
-    janela = bfunc.cjane.Janela()
+    janela = janelas.Janela()
     janela.muda_slice(1,10,40, f'TEMA: {tema}'.ljust(30))
 
     # Letras descartadas

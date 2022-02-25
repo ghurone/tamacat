@@ -1,4 +1,4 @@
-import brincadeiras.func as bfunc
+import janelas
 
 from time import time
 from random import randint
@@ -21,7 +21,7 @@ def print_tela(n):
 
     bolinha = criar_bola(n)
 
-    janela = bfunc.cjane.Janela()
+    janela = janelas.Janela()
 
     janela.muda_slice(meio_x-1, meio_y - 2, meio_y + 3, bolinha[0])
     janela.muda_slice(meio_x, meio_y - 2, meio_y + 3, bolinha[1])

@@ -1,4 +1,4 @@
-import brincadeiras.func as bfunc
+import janelas
 
 import random
 from time import sleep
@@ -94,7 +94,7 @@ def quadrado(coisa):
 
 
 def print_tabuleiro(lista, msg=''):
-    janela = bfunc.cjane.Janela()
+    janela = janelas.Janela()
 
     k, c = 0, 0
     for i in range(3, 20):

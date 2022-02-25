@@ -189,3 +189,4 @@ class JanelaMenu:
                                ('Energia:    ' + '[' + ('■' * (self.gato.energia // 5)).ljust(20) + ']').ljust(47))
         self.janela.muda_slice(21, 32, 79,
                                ('Felicidade: ' + '[' + ('■' * (self.gato.feliz // 5)).ljust(20) + ']').ljust(47))
+        

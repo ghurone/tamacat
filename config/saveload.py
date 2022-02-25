@@ -48,3 +48,7 @@ def deletar_jogo(nome:str) -> None:
 
 def listar_saves() -> list:
     return [file for file in listdir(cpath.path_save) if file.endswith('.tamacat')]
+
+
+def existe_save(nome):
+    return nome in [save.split('.')[0] for save in listar_saves()]
