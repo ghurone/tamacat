@@ -1,6 +1,5 @@
 # FAZER AGORA!!!!!!
 	- Documentar o código!!!!
-    - Janelas especiais
 	- Tempo
 
 # FAZER DEPOIS
