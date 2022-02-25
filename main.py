@@ -47,17 +47,18 @@ def tela_inicial() -> None:
     
     
 def menu_principal() -> str:
-
+    cfunc.mudar_titulo('Menu principal')
     janela = janela_titulo()
     
     janela.muda_linha(15, '(1) Novo Jogo         ')
     janela.muda_linha(16, '(2) Carregar Jogo     ')
-    janela.muda_linha(17, '(3) Sair              ')
+    janela.muda_linha(17, '(3) Deletar Jogo      ')
+    janela.muda_linha(18, '(4) Sair              ')
     
     print(janela)
     op = input('Digite a opção desejada: ')
     
-    while op not in ['1', '2', '3']:
+    while op not in ['1', '2', '3', '4']:
         print(janela)
         op = input('Digite uma opção válida: ')
     
@@ -70,6 +71,7 @@ def novo_gato() -> tuple:
     
     Retorna uma tupla (Gatinho, Geladeira, Baú) de um novo gato.
     """
+    cfunc.mudar_titulo('Novo jogo')
     
     gen_c = choice(['F', 'M'])
     gen_r = choice(['F', 'M'])
@@ -246,6 +248,7 @@ def novo_gato() -> tuple:
 
 
 def tela_carregar_gato() -> tuple:
+    cfunc.mudar_titulo('Carregar jogo')
     gatos = csave.listar_saves()
     
     if len(gatos) == 0:
@@ -267,24 +270,37 @@ def tela_carregar_gato() -> tuple:
         
     elif len(gatos) == 1:
         save = csave.carregar_jogo(gatos[0].split(".")[0])
-        return save
-    
-    elif len(gatos) > 1:
-        janela = cjane.JanelaTable({'##': 4, 'Gato': 54, 'Idade': 18})
-        gatitos = []
+        if save:
+            return save
+
+        janela = cjane.Janela()
+        janela.muda_linha(11, 'Jogo corrompido!!')
+        print(janela)
+        input('(Aperte ENTER para voltar...)')
         
-        for i in range(len(gatos)):
-            objs = csave.carregar_jogo(gatos[i].split(".")[0])
+    elif len(gatos) > 1:
+        janela = cjane.JanelaTable({'##': 4, 'Gato': 52, 'Idade': 20})
+        gatitos = []
+        pos = []
+        
+        v = 1
+        for gato in gatos:
+            nome = gato.split(".")[0]
+            save = csave.carregar_jogo(nome)
             
-            if objs:
-                ga, ge, ba = objs
+            if save:
+                ga, ge, ba = save
                 gatitos.append((ga, ge, ba))
-                janela.add_linha([i+1, ga.nome, ga.mostrar_idade()])
+                janela.add_linha([v, ga.nome, ga.mostrar_idade()])
+                pos.append(v)
+                v += 1
+            else:
+                janela.add_linha(['X', f'{nome} (CORROMPIDO)', 'X'])
         
         janela.mostrar_janela(False)
         esc = input('Digite o número do gato para carregar (ENTER para voltar): ').lower()
         
-        while esc != '' and (not esc.isnumeric() or int(esc) not in range(1, len(gatos)+1)):
+        while esc != '' and (not esc.isnumeric() or int(esc) not in pos):
             janela.mostrar_janela(False)
             esc = input('Digite uma opção válida (ENTER para voltar): ').lower()
         
@@ -293,6 +309,73 @@ def tela_carregar_gato() -> tuple:
         else:
             return ()
     
+
+def tela_deletar_gato() -> None:
+    cfunc.mudar_titulo('Deletar jogo')
+    gatos = csave.listar_saves()
+    
+    if len(gatos) == 0:
+        janela = cjane.Janela()
+        janela.muda_linha(11, 'Você não possui nenhum gato para deletar!!')
+        
+        print(janela)
+        input('(Aperte ENTER para voltar...)')
+        
+    elif len(gatos) == 1:
+        nome = gatos[0].split(".")[0]
+
+        janela = cjane.Janela()
+        janela.muda_linha(11, f'Deseja deletar o jogo ({nome})? (S)im ou (N)ão')
+        
+        print(janela)
+        
+        esc = input('>>> ').lower()
+        while esc != 's' and esc != 'n' and esc != 'sim' and esc != 'não' and esc != 'nao':
+            janela.muda_linha(12, 'Digite uma opção válida!')
+            print(janela)
+            esc = input('>>> ').lower()    
+        
+        if 's' in esc:
+            csave.deletar_jogo(nome)
+        
+    elif len(gatos) > 1:
+        janela = cjane.JanelaTable({'##': 4, 'Gato': 52, 'Idade': 20})
+        nomes = []
+        
+        for i in range(len(gatos)):
+            nome = gatos[i].split(".")[0]
+            nomes.append(nome)
+            save = csave.carregar_jogo(nome)
+            
+            if save:
+                ga = save[0]
+                janela.add_linha([i+1, ga.nome, ga.mostrar_idade()])
+            else:
+                janela.add_linha([str(i+1), f'{nome} (CORROMPIDO)', 'X'])
+        
+        janela.mostrar_janela(False)
+        esc = input('Digite o número do gato para DELETAR (ENTER para voltar): ').lower()
+        
+        while esc != '' and (not esc.isnumeric() or int(esc) not in range(1, len(gatos)+1)):
+            janela.mostrar_janela(False)
+            esc = input('Digite uma opção válida (ENTER para voltar): ').lower()
+        
+        if esc != '':
+            nome = nomes[int(esc)-1]
+            janela = cjane.Janela()
+            janela.muda_linha(11, f'Deseja deletar o jogo ({nome})? (S)im ou (N)ão')
+            
+            print(janela)
+            
+            esc = input('>>> ').lower()
+            while esc != 's' and esc != 'n' and esc != 'sim' and esc != 'não' and esc != 'nao':
+                janela.muda_linha(12, 'Digite uma opção válida!')
+                print(janela)
+                esc = input('>>> ').lower()    
+            
+            if 's' in esc:
+                csave.deletar_jogo(nome)
+ 
         
 def menu_jogo(gato:ogato.Gatinho, gato_img:list) -> None:
     """
@@ -519,6 +602,9 @@ if __name__ == '__main__':
         elif op == '2':
             objs = tela_carregar_gato()
         elif op == '3':
+            tela_deletar_gato()
+            objs = ()
+        elif op == '4':
             objs = ()
             running = False
         
