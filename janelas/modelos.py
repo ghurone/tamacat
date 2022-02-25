@@ -96,7 +96,7 @@ def janela_msg(msg:str, lin:int = 11, alin:str = 'center', titulo:str = '') -> j
 
 
 def janela_simnao(msg:str, lin:int = 11, alin:str = 'center', titulo:str = '') -> bool:
-    janela = janela_msg(msg+' (S)im / (N)ão', lin, alin, titulo)
+    janela = janela_msg(msg+' (S)im ou (N)ão', lin, alin, titulo)
     print(janela)
     
     esc = input('>>>').lower()

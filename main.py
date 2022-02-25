@@ -1,6 +1,7 @@
+import janelas
+import janelas.modelos as jmod
 import config.funcoes as cfunc
 import config.saveload as csave
-import config.janela as cjane
 import config.gatos_ascii as cga
 import objs.gatinho as ogato
 import objs.geladeira as ogela
@@ -10,8 +11,8 @@ from random import randint, choice
 from time import sleep
 
 
-def janela_titulo() -> cjane.Janela:
-    janela = cjane.Janela()
+def janela_titulo() -> janelas.Janela:
+    janela = janelas.Janela()
     
     fonte = ['                                    /)                              ',
              '                            |\\---/|((                              ',
@@ -47,7 +48,7 @@ def tela_inicial() -> None:
     
     
 def menu_principal() -> str:
-    cfunc.mudar_titulo('Menu principal')
+    jmod.mudar_titulo('Menu principal')
     janela = janela_titulo()
     
     janela.muda_linha(15, '(1) Novo Jogo         ')
@@ -71,7 +72,7 @@ def novo_gato() -> tuple:
     
     Retorna uma tupla (Gatinho, Geladeira, Baú) de um novo gato.
     """
-    cfunc.mudar_titulo('Novo jogo')
+    jmod.mudar_titulo('Novo jogo')
     
     gen_c = choice(['F', 'M'])
     gen_r = choice(['F', 'M'])
@@ -101,7 +102,7 @@ def novo_gato() -> tuple:
                '  Por outro lado, também existe um abrigo de gatos perto da sua casa.']
 
     cfunc.limpar_tela()
-    janela = cjane.Janela()
+    janela = janelas.Janela()
 
     j = 1
     i = 0
@@ -229,7 +230,7 @@ def novo_gato() -> tuple:
 
     while not cfunc.verificar_nome(nome):
         
-        if cfunc.existe_save(nome):
+        if csave.existe_save(nome):
             gatolino = csave.carregar_jogo(nome)[0]
             l_existe = gatolino.gens['letra']
             p_existe = gatolino.gens['pron']
@@ -248,24 +249,14 @@ def novo_gato() -> tuple:
 
 
 def tela_carregar_gato() -> tuple:
-    cfunc.mudar_titulo('Carregar jogo')
     gatos = csave.listar_saves()
     
     if len(gatos) == 0:
-        janela = cjane.Janela()
-        janela.muda_linha(11, 'Você não possui nenhum gato, deseja criar um? (S)im ou (N)ão')
+        resp = jmod.janela_simnao('Você não possui nenhum gato, deseja criar um?', titulo='Carregar jogo')    
         
-        print(janela)
-        
-        esc = input('>>> ').lower()
-        while esc != 's' and esc != 'n' and esc != 'sim' and esc != 'não' and esc != 'nao':
-            janela.muda_linha(12, 'Digite uma opção válida!')
-            print(janela)
-            esc = input('>>> ').lower()    
-        
-        if 's' in esc:
+        if resp:
             return novo_gato()
-        elif 'n' in esc:
+        else:
             return ()
         
     elif len(gatos) == 1:
@@ -273,13 +264,13 @@ def tela_carregar_gato() -> tuple:
         if save:
             return save
 
-        janela = cjane.Janela()
-        janela.muda_linha(11, 'Jogo corrompido!!')
+        janela = jmod.janela_msg('Jogo corrompido!!', titulo='Carregar jogo')
         print(janela)
         input('(Aperte ENTER para voltar...)')
         
     elif len(gatos) > 1:
-        janela = cjane.JanelaTable({'##': 4, 'Gato': 52, 'Idade': 20})
+        jmod.mudar_titulo('Carregar jogo')
+        janela = janelas.JanelaTable({'##': 4, 'Gato': 52, 'Idade': 20})
         gatitos = []
         pos = []
         
@@ -311,35 +302,22 @@ def tela_carregar_gato() -> tuple:
     
 
 def tela_deletar_gato() -> None:
-    cfunc.mudar_titulo('Deletar jogo')
     gatos = csave.listar_saves()
     
     if len(gatos) == 0:
-        janela = cjane.Janela()
-        janela.muda_linha(11, 'Você não possui nenhum gato para deletar!!')
-        
+        janela = jmod.janela_msg('Você não possui nenhum gato para deletar!!', titulo='Deletar jogo')        
         print(janela)
         input('(Aperte ENTER para voltar...)')
         
     elif len(gatos) == 1:
         nome = gatos[0].split(".")[0]
-
-        janela = cjane.Janela()
-        janela.muda_linha(11, f'Deseja deletar o jogo ({nome})? (S)im ou (N)ão')
-        
-        print(janela)
-        
-        esc = input('>>> ').lower()
-        while esc != 's' and esc != 'n' and esc != 'sim' and esc != 'não' and esc != 'nao':
-            janela.muda_linha(12, 'Digite uma opção válida!')
-            print(janela)
-            esc = input('>>> ').lower()    
-        
-        if 's' in esc:
+        resp = jmod.janela_simnao(f'Deseja deletar o jogo ({nome})?', titulo='Deletar jogo')    
+        if resp:
             csave.deletar_jogo(nome)
         
     elif len(gatos) > 1:
-        janela = cjane.JanelaTable({'##': 4, 'Gato': 52, 'Idade': 20})
+        jmod.mudar_titulo('Deletar jogo')
+        janela = janelas.JanelaTable({'##': 4, 'Gato': 52, 'Idade': 20})
         nomes = []
         
         for i in range(len(gatos)):
@@ -362,18 +340,8 @@ def tela_deletar_gato() -> None:
         
         if esc != '':
             nome = nomes[int(esc)-1]
-            janela = cjane.Janela()
-            janela.muda_linha(11, f'Deseja deletar o jogo ({nome})? (S)im ou (N)ão')
-            
-            print(janela)
-            
-            esc = input('>>> ').lower()
-            while esc != 's' and esc != 'n' and esc != 'sim' and esc != 'não' and esc != 'nao':
-                janela.muda_linha(12, 'Digite uma opção válida!')
-                print(janela)
-                esc = input('>>> ').lower()    
-            
-            if 's' in esc:
+            resp = jmod.janela_simnao(f'Deseja deletar o jogo ({nome})?', titulo='Deletar jogo')    
+            if resp:
                 csave.deletar_jogo(nome)
  
         
@@ -393,7 +361,7 @@ def menu_jogo(gato:ogato.Gatinho, gato_img:list) -> None:
                   f'Abandonar {gato.gens["letra"]} gat{gato.gens["letra"]} :(',
                   'Voltar ao menu']
 
-    janela = cjane.JanelaMenu(gato_img, acoes, acoes_jogo, gato)
+    janela = janelas.JanelaMenu(gato_img, acoes, acoes_jogo, gato)
 
     print(janela)
 
@@ -403,9 +371,9 @@ def mostrar_geladeira(gela:ogela.Geladeira) -> None:
     Mostra todos os alimentos da geladeira, em ordem decrescente de magnitude do saciamento.
     """
 
-    cfunc.mudar_titulo('Geladeira')
+    jmod.mudar_titulo('Geladeira')
 
-    janela = cjane.JanelaTable({'QTE.': 6, 'Nome': 36, 'Tipo': 15, 'Fome': 8, 'Saúde': 9})
+    janela = janelas.JanelaTable({'QTE.': 6, 'Nome': 36, 'Tipo': 15, 'Fome': 8, 'Saúde': 9})
 
     for comida in gela.comidasort():
         linha = [gela[comida.nome][1], comida.nome, comida.__class__.__name__, comida.saciar, comida.saude]
@@ -421,9 +389,9 @@ def mostrar_bau(bau:obau.Bau) -> None:
     Mesmo tipo: ordem crescente, por durabilidade.
     """
 
-    cfunc.mudar_titulo('Baú')
+    jmod.mudar_titulo('Baú')
 
-    janela = cjane.JanelaTable({'Nome': 32, 'Felicidade': 22, 'Usos restantes': 22})
+    janela = janelas.JanelaTable({'Nome': 32, 'Felicidade': 22, 'Usos restantes': 22})
 
     for brinquedo in bau.brinquedosort():
         for brinqs in sorted(bau[brinquedo.nome]):
@@ -438,8 +406,8 @@ def brincar(gato:ogato.Gatinho, bau:obau.Bau) -> bool:
     Ações principais da ação brincar no menu.
     """
 
-    cfunc.mudar_titulo('Escolher brinquedo')
-    janela = cjane.JanelaTable({'##': 4, 'Nome': 58, 'Felicidade': 14})
+    jmod.mudar_titulo('Escolher brinquedo')
+    janela = janelas.JanelaTable({'##': 4, 'Nome': 58, 'Felicidade': 14})
 
     # imprime os brinquedos disponíveis para brincar em ordem de felicidade
     brinqs = bau.brinquedosort()
@@ -462,7 +430,7 @@ def brincar(gato:ogato.Gatinho, bau:obau.Bau) -> bool:
         brinq_nome = brinqs[int(brinq) - 1].nome
         menor_dura = min(bau[brinq_nome])
 
-        cfunc.mudar_titulo(f'Brincando com {brinq_nome}')
+        jmod.mudar_titulo(f'Brincando com {brinq_nome}')
 
         gato.brincar(bau, menor_dura)
         return True
@@ -472,12 +440,12 @@ def brincar(gato:ogato.Gatinho, bau:obau.Bau) -> bool:
 
 
 def comer(gato:ogato.Gatinho, gela:ogela.Geladeira) -> bool:
-    cfunc.mudar_titulo('Escolher comida')
+    jmod.mudar_titulo('Escolher comida')
     
     comidas_tipos = gela.comida_por_classe()
     tipos = list(comidas_tipos.keys())
     
-    janela_tipos = cjane.JanelaTable({'##': 4, 'Tipo': 73})
+    janela_tipos = janelas.JanelaTable({'##': 4, 'Tipo': 73})
     
     for i in range(len(tipos)):
         janela_tipos.add_linha([i+1, tipos[i]])
@@ -497,7 +465,7 @@ def comer(gato:ogato.Gatinho, gela:ogela.Geladeira) -> bool:
         tipo = tipos[int(tipo_index)-1]
         comidas = comidas_tipos[tipo]
         
-        janela = cjane.JanelaTable({'##': 4, 'Nome': 50, 'Fome': 10, 'Saúde': 11})
+        janela = janelas.JanelaTable({'##': 4, 'Nome': 50, 'Fome': 10, 'Saúde': 11})
         
         for i in range(len(comidas)):
             janela.add_linha([i+1, comidas[i].nome, comidas[i].saciar, comidas[i].saude])
@@ -515,7 +483,7 @@ def comer(gato:ogato.Gatinho, gela:ogela.Geladeira) -> bool:
         
         if comida_index != '':
             comida = comidas[int(comida_index)-1]
-            cfunc.mudar_titulo(f'Comendo {comida.nome}')
+            jmod.mudar_titulo(f'Comendo {comida.nome}')
             
             gato.comer(gela, comida)
             
@@ -534,56 +502,49 @@ def run_game(gato:ogato.Gatinho, gela:ogela.Geladeira, bau:obau.Bau) -> None:
     running = True
     
     while running:
-        cfunc.mudar_titulo('Menu')
+        jmod.mudar_titulo('Menu')
         cfunc.limpar_tela()
         menu_jogo(gato, gato_img=cga.gatitos['Padrão'])
 
         esc = input('>>> ').lower()
-
+        cfunc.limpar_tela()
+        
         if esc == '1':
             # Ver geladeira
-            cfunc.limpar_tela()
             mostrar_geladeira(gela)
 
         elif esc == '2':
-            cfunc.limpar_tela()
             if comer(gato, gela):
                 salvo = False
 
         elif esc == '3':
             # Ver bau
-            cfunc.limpar_tela()
             mostrar_bau(bau)
 
         elif esc == '4':
-            cfunc.limpar_tela()
             if brincar(gato, bau):
                 salvo = False
 
         elif esc == '5':
             # Salvar jogo
-            cfunc.limpar_tela()
             csave.salvar_jogo((gato, gela, bau))
 
             salvo = True
-            cfunc.janela_salvar()
+            jmod.janela_salvar()
             sleep(1)
 
         elif esc == '6':
             # Deletar jogo (abandonar gato)
-            cfunc.limpar_tela()
-            if cfunc.janela_deletar(gato.nome):
+            if jmod.janela_deletar(gato.nome):
                 running = False
 
         elif esc == '7':
             # Sair do jogo
-            cfunc.limpar_tela()
-            if cfunc.janela_voltar(salvo, gato, gela, bau):
+            if jmod.janela_voltar(salvo, gato, gela, bau):
                 running = False
         
         elif esc == 'creditos' or esc == 'créditos':
-            cfunc.limpar_tela()
-            cfunc.janela_creditos()
+            jmod.janela_creditos()
         
         else:
             continue
@@ -613,4 +574,4 @@ if __name__ == '__main__':
             csave.salvar_jogo((gato, gela, bau))
             run_game(gato, gela, bau)
 
-    cfunc.janela_sair()
+    jmod.janela_sair()
