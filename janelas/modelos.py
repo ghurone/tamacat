@@ -29,7 +29,7 @@ def janela_voltar(salvo, gato, gela, bau) -> bool:
         esc = input('>>> ')
         while esc not in ['1', '2', '3']:
             print(janela)
-            esc = input('>>>')
+            esc = input('>>> ')
 
         resp = True
         if esc == '1':
@@ -99,10 +99,10 @@ def janela_simnao(msg:str, lin:int = 11, alin:str = 'center', titulo:str = '') -
     janela = janela_msg(msg+' (S)im ou (N)ão', lin, alin, titulo)
     print(janela)
     
-    esc = input('>>>').lower()
+    esc = input('>>> ').lower()
     while esc != 's' and esc != 'n' and esc != 'sim' and esc != 'não' and esc != 'nao':
         janela.muda_linha(lin+1, 'Digite uma opção válida!', alin)
         print(janela)
-        esc = input('>>>').lower()
+        esc = input('>>> ').lower()
     
     return 's' in esc

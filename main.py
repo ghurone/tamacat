@@ -191,7 +191,7 @@ def novo_gato() -> tuple:
         while i != 'f' and i != 'a' and i != 'i' and i != 'filhote' and i != 'adulto' and i != 'idoso':
             janela.muda_linha(5, '   Digite uma opção válida!', 'ljust')
             print(janela)
-            i = input('>>>').lower()
+            i = input('>>> ').lower()
             
         if i[0] == 'f':
             idade = randint(3, 12)
