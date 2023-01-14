@@ -9,9 +9,11 @@ import objs.bau as obau
 
 from random import randint, choice
 from time import sleep
+from datetime import date
 
 
 def janela_titulo() -> janelas.Janela:
+    ano = date.today().year
     janela = janelas.Janela()
     
     fonte = ['                                    /)                              ',
@@ -28,7 +30,7 @@ def janela_titulo() -> janelas.Janela:
         janela.muda_linha(i + 1, fonte[i])
 
     janela.muda_linha(11, 'O MELHOR JOGO DO MUNDO!')
-    janela.muda_linha(21, '© RaGhu 2021 ', alin='rjust')
+    janela.muda_linha(21, f'© RaGhu {ano} ', alin='rjust')
     
     return janela
 
