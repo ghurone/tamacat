@@ -1,6 +1,6 @@
 class Janela:
 
-    def __init__(self, nlin=23, ncol=80):
+    def __init__(self, nlin:int=23, ncol:int=80) -> None:
         self.nlin = nlin
         self.ncol = ncol
 
@@ -17,27 +17,27 @@ class Janela:
 
         self.janela = self.linha_top + self.corpo + self.linha_bot
 
-    def __str__(self):
+    def __str__(self) -> str:
         s = ''
         for linha in self.janela:
             s += linha
 
         return s
 
-    def __setitem__(self, linha, conteudo):
+    def __setitem__(self, linha:int, conteudo:str):
         self.janela[linha] = conteudo + '\n' if linha != self.nlin-1 else conteudo
 
-    def __getitem__(self, item):
+    def __getitem__(self, item:int):
         return self.janela[item]
 
-    def muda_topo(self, conteudo):
+    def muda_topo(self, conteudo:str):
         self.janela[0] = '+' + conteudo + '+\n'
 
-    def muda_base(self, conteudo):
+    def muda_base(self, conteudo:str):
         self.janela[-1] = '+' + conteudo + '+'
 
-    def muda_linha(self, i, miolo, alin='center'):
-
+    def muda_linha(self, i:int, miolo:str, alin:str='center'):
+        
         if alin == 'center':
             miolo = miolo.center(self.tam_hor)
         elif alin == 'rjust':
@@ -47,38 +47,28 @@ class Janela:
 
         self.janela[i] = '|' + miolo + '|\n'
 
-    def muda_slice(self, linha, ini, fim, conteudo):
-        string = self[linha]
-        my_string = ''
+    def muda_slice(self, idx_linha:int, ini:int, fim:int, conteudo:str):
+        line_str = self[idx_linha]
+        self.janela[idx_linha] = line_str[:ini] + conteudo + line_str[fim:]
 
-        for i in range(len(string)):
-            if ini <= i < fim:
-                my_string += conteudo[i-ini]
-            else:
-                my_string += string[i]
-
-        self.janela[linha] = my_string
-
-    def criar_janelinha(self, ponto_init, ponto_fim):
+    def criar_janelinha(self, ponto_init:tuple, ponto_fim:tuple):
         x0, y0 = ponto_init
         x, y = ponto_fim
 
         for i in range(x0, x+1):
-
+            string = '|' + ' '*(y-y0-1) + '|'
             if i == x0 or i == x:
                 string = '+' + '-'*(y-y0-1) + '+'
-                self.muda_slice(i, y0, y+1, string)
-            else:
-                string = '|' + ' '*(y-y0-1) + '|'
-                self.muda_slice(i, y0, y+1, string)
+
+            self.muda_slice(i, y0, y+1, string)
 
     def limpar_janela(self):
-        self.janela = Janela().janela
+        self = Janela()
 
 
 class JanelaTable:
 
-    def __init__(self, cabeca: dict = None, nlin=23, ncol=80):
+    def __init__(self, cabeca: dict = None, nlin:int=23, ncol:int=80):
         self.nlin = nlin
         self.ncol = ncol
         
@@ -93,7 +83,7 @@ class JanelaTable:
         self.linha_top = ''
         self.cabeca = self.__criar_cabeca()
 
-    def mostrar_janela(self, show_input=True):
+    def mostrar_janela(self, show_input:bool=True):
 
         for i in range(len(self.itens) // self.tam_item + 1):
             s = self.cabeca
