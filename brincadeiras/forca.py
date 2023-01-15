@@ -73,30 +73,30 @@ def printar_forca(lista_char, tema, letras_desc, err=0, vivo=True):
 
     # Janela
     janela = janelas.Janela()
-    janela.muda_slice(1,10,40, f'TEMA: {tema}'.ljust(30))
+    janela.muda_slice(1,10, f'TEMA: {tema}'.ljust(30))
 
     # Letras descartadas
     janela.criar_janelinha((0,40), (5,79))
-    janela.muda_slice(1, 41, 79, 'LETRAS DESCARTADAS'.center(38))
-    janela.muda_slice(3, 41, 79, ' '.join(letras_desc).center(38))
+    janela.muda_slice(1, 41, 'LETRAS DESCARTADAS'.center(38))
+    janela.muda_slice(3, 41, ' '.join(letras_desc).center(38))
 
     # Forca
-    janela.muda_slice(5, 10, 24, '┌'+ '─'*12 +'┐')
-    janela.muda_slice(6, 10, 24, '│            │')
+    janela.muda_slice(5, 10, '┌'+ '─'*12 +'┐')
+    janela.muda_slice(6, 10, '│            │')
     for i in range(7,19):
-        janela.muda_slice(i, 10, 11, '│')
-    janela.muda_slice(19, 5, 16, '─────┴─────')
+        janela.muda_slice(i, 10, '│')
+    janela.muda_slice(19, 5, '─────┴─────')
 
     # Palavra
     k = 0
     for i in range(len(lista_char)):
-        janela.muda_slice(16, i + k + 40, i + k + 42, f'{lista_char[i]} ')
+        janela.muda_slice(16, i + k + 40, f'{lista_char[i]} ')
         k += 1
 
     # Ratinho
     rato = ratinho(err, vivo)
     for i in range(len(rato)):
-        janela.muda_slice(7+i, 20, 27, rato[i])
+        janela.muda_slice(7+i, 20, rato[i])
 
     print(janela)
 

@@ -101,12 +101,12 @@ def print_tabuleiro(lista, msg=''):
         if i == 3:
             janela.muda_linha(1, msg, 'ljust')
         elif i == 8 or i == 14:
-            janela.muda_slice(i, 23, 58, '-' * 11 + '+' + '-' * 11 + '+' + '-' * 11)
+            janela.muda_slice(i, 23, '-' * 11 + '+' + '-' * 11 + '+' + '-' * 11)
 
             k = 0
             c += 3
         else:
-            janela.muda_slice(i, 23, 58, lista[c][k] + '|' + lista[c + 1][k] + '|' + lista[c + 2][k])
+            janela.muda_slice(i, 23, lista[c][k] + '|' + lista[c + 1][k] + '|' + lista[c + 2][k])
 
             k += 1
 

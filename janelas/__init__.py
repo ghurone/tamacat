@@ -8,21 +8,13 @@ class Janela:
         self.tam_ver = self.nlin - 2  # Tamanho da linha vertical
 
         self.linha_top = ['+' + '-'*self.tam_hor + '+\n']
-
-        self.corpo = []
-        for _ in range(self.tam_ver):
-            self.corpo.append('|' + ' '*self.tam_hor + '|\n')
-
+        self.corpo = ['|' + ' '*self.tam_hor + '|\n' for _ in range(self.tam_ver)]
         self.linha_bot = ['+' + '-'*self.tam_hor + '+']
 
         self.janela = self.linha_top + self.corpo + self.linha_bot
 
     def __str__(self) -> str:
-        s = ''
-        for linha in self.janela:
-            s += linha
-
-        return s
+        return ''.join(self.janela)
 
     def __setitem__(self, linha:int, conteudo:str):
         self.janela[linha] = conteudo + '\n' if linha != self.nlin-1 else conteudo
@@ -47,9 +39,9 @@ class Janela:
 
         self.janela[i] = '|' + miolo + '|\n'
 
-    def muda_slice(self, idx_linha:int, ini:int, fim:int, conteudo:str):
+    def muda_slice(self, idx_linha:int, ini:int, conteudo:str):
         line_str = self[idx_linha]
-        self.janela[idx_linha] = line_str[:ini] + conteudo + line_str[fim:]
+        self.janela[idx_linha] = line_str[:ini] + conteudo + line_str[ini+len(conteudo):]
 
     def criar_janelinha(self, ponto_init:tuple, ponto_fim:tuple):
         x0, y0 = ponto_init
@@ -60,7 +52,7 @@ class Janela:
             if i == x0 or i == x:
                 string = '+' + '-'*(y-y0-1) + '+'
 
-            self.muda_slice(i, y0, y+1, string)
+            self.muda_slice(i, y0, string)
 
     def limpar_janela(self):
         self = Janela()
@@ -133,7 +125,7 @@ class JanelaMenu:
         self.janela.criar_janelinha((0, 0), (22, 30))  # Janela das ações
         self.janela.criar_janelinha((0, 30), (14, 79))  # Janela do gatinho
 
-        self.janela.muda_slice(1, 1, 30,  'TAMACAT'.center(29))
+        self.janela.muda_slice(1, 1, 'TAMACAT'.center(29))
 
         self.__add_acoes()
         self.__add_gato()
@@ -147,36 +139,39 @@ class JanelaMenu:
         i = 1
         for k in range(len(self.acoes)):
             if self.acoes[k] != '':
-                self.janela.muda_slice(k+2, 1, 30, f'({i}) - {self.acoes[k]}'.ljust(29))
+                self.janela.muda_slice(k+2, 1, f'({i}) - {self.acoes[k]}'.ljust(29))
                 i += 1
             else:
-                self.janela.muda_slice(k+2, 1, 30, ''.ljust(29))
+                self.janela.muda_slice(k+2, 1, ''.ljust(29))
 
-        self.janela.muda_slice(21-len(self.acoes_jogo), 1, 30, '-' * 29)
+        self.janela.muda_slice(21-len(self.acoes_jogo), 1,'-' * 29)
 
         for j in range(len(self.acoes_jogo)):
-            self.janela.muda_slice(22-len(self.acoes_jogo)+j, 1, 30, f'({i}) - {self.acoes_jogo[j]}'.ljust(29))
+            self.janela.muda_slice(22-len(self.acoes_jogo)+j, 1, f'({i}) - {self.acoes_jogo[j]}'.ljust(29))
             i += 1
 
     def __add_gato(self):
         for i in range(len(self.gato_img)):
-            self.janela.muda_slice(i+1, 31, 79, self.gato_img[i].center(48))
+            self.janela.muda_slice(i+1, 31, self.gato_img[i].center(48))
 
     def __add_status(self):
         vac = 'Sim' if self.gato.vacinado else 'Não'
 
-        self.janela.muda_slice(15, 32, 79,
+        self.janela.muda_slice(15, 32,
                                f'Nome:       {self.gato.nome}'.ljust(47))
-        self.janela.muda_slice(16, 32, 79,
+        self.janela.muda_slice(16, 32,
                                f'Idade:      {self.gato.mostrar_idade()}'.ljust(47))
-        self.janela.muda_slice(17, 32, 79,
+        self.janela.muda_slice(17, 32,
                                (f'Vacinad{self.gato.gens["letra"]}:   ' + vac).ljust(47))
-        self.janela.muda_slice(18, 32, 79,
-                               ('Fome:       ' + '[' + ('■' * (self.gato.fome // 5)).ljust(20) + ']').ljust(47))
-        self.janela.muda_slice(20, 32, 79,
-                               ('Saúde:      ' + '[' + ('■' * (self.gato.saude // 5)).ljust(20) + ']').ljust(47))
-        self.janela.muda_slice(19, 32, 79,
-                               ('Energia:    ' + '[' + ('■' * (self.gato.energia // 5)).ljust(20) + ']').ljust(47))
-        self.janela.muda_slice(21, 32, 79,
-                               ('Felicidade: ' + '[' + ('■' * (self.gato.feliz // 5)).ljust(20) + ']').ljust(47))
+        self.janela.muda_slice(18, 32, 
+                               ('Fome:       ' + f'{self.bar_status(self.gato.fome)}').ljust(47))
+        self.janela.muda_slice(19, 32, 
+                               ('Energia:    ' + f'{self.bar_status(self.gato.energia)}').ljust(47))
+        self.janela.muda_slice(20, 32, 
+                               ('Saúde:      ' + f'{self.bar_status(self.gato.saude)}').ljust(47))
+        self.janela.muda_slice(21, 32, 
+                               ('Felicidade: ' + f'{self.bar_status(self.gato.feliz)}').ljust(47))
         
+    @staticmethod
+    def bar_status(val:int) -> str:
+        return '[' + ('■' * (val // 5)).ljust(20) + ']'

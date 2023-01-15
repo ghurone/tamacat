@@ -79,7 +79,7 @@ def printar_jogo(lista, vidas=''):
     lin = 0
     for i in range(2, 21):
         if i == 2 or i == 10 or i == 12 or i == 20:
-            janela.muda_slice(i, 4, 75, ('+' + '-' * 9) * 7 + '+')
+            janela.muda_slice(i, 4, ('+' + '-' * 9) * 7 + '+')
         elif i == 11:
             k = 7
             lin = 0
@@ -88,7 +88,7 @@ def printar_jogo(lista, vidas=''):
             for j in range(7):
                 conteudo += '|' + lista[k + j][lin]
             conteudo += '|'
-            janela.muda_slice(i, 4, 75, conteudo)
+            janela.muda_slice(i, 4, conteudo)
             lin += 1
 
     print(janela)

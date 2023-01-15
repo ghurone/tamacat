@@ -23,9 +23,9 @@ def print_tela(n):
 
     janela = janelas.Janela()
 
-    janela.muda_slice(meio_x-1, meio_y - 2, meio_y + 3, bolinha[0])
-    janela.muda_slice(meio_x, meio_y - 2, meio_y + 3, bolinha[1])
-    janela.muda_slice(meio_x + 1, meio_y - 2, meio_y + 3, bolinha[2])
+    janela.muda_slice(meio_x-1, meio_y - 2, bolinha[0])
+    janela.muda_slice(meio_x, meio_y - 2,  bolinha[1])
+    janela.muda_slice(meio_x + 1, meio_y - 2, bolinha[2])
 
     # coloca os algarismos de 0 a 9 no miolo, diferentes do algarismo dentro da bolinha
     k = 0

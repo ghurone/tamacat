@@ -82,11 +82,11 @@ def printar_tela(gato_name, tipo, r, m):
     janela = janelas.Janela()
 
     for i in range(21):
-        janela.muda_slice(i+1, 1, col+1, nave[i])
+        janela.muda_slice(i+1, 1, nave[i])
 
-    janela.muda_slice(17, 47, 76, g)
-    janela.muda_slice(18, 47, 76, raio)
-    janela.muda_slice(19, 47, 76, massa)
+    janela.muda_slice(17, 47, g)
+    janela.muda_slice(18, 47, raio)
+    janela.muda_slice(19, 47, massa)
 
     # posiciona as estrelinhas aleatórias no miolo
     for _ in range(20):
@@ -95,7 +95,7 @@ def printar_tela(gato_name, tipo, r, m):
         while janela[xn][yn] != ' ' or (xn == 1 and yn == 26):
             xn, yn = randint(1, 15), randint(2, 77)
 
-        janela.muda_slice(xn, yn, yn+1, choice(['*', '*', '.']))
+        janela.muda_slice(xn, yn, choice(['*', '*', '.']))
 
     print(janela)
 
